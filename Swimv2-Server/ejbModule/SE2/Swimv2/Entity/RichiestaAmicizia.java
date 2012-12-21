@@ -28,23 +28,16 @@ public class RichiestaAmicizia implements Serializable {
 	@JoinColumn(name="DESTINATARIO", nullable=false)
 	private User destinatario;
 
-	/**
-	 * @return the id
-	 */
+	//Getters and setters
+
 	public long getId() {
 		return id;
 	}
 
-	/**
-	 * @return the mittente
-	 */
 	public User getMittente() {
 		return mittente;
 	}
 
-	/**
-	 * @return the destinatario
-	 */
 	public User getDestinatario() {
 		return destinatario;
 	}

@@ -28,24 +28,20 @@ public class Admin implements Serializable{
 	@Column(name="PASSWORD",unique=true,nullable=false)
 	private String password;
 	
-	/**
-	 * @return the email
-	 */
+	//Getters and setters
+
 	public String getEmail() {
 		return email;
 	}
-	/**
-	 * @param email the email to set
-	 */
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	/**
-	 * @return the password hashed in md5
-	 */
+
 	public String getPassword() {
 		return password;
 	}
+	
 	/**
 	 * Utilizza l'algoritmo md5 per codificare la password.
 	 * @param password the password to set
@@ -53,9 +49,7 @@ public class Admin implements Serializable{
 	public void setPassword(String password) {
 		this.password = md5(password);
 	}
-	/**
-	 * @return the id
-	 */
+
 	public long getId() {
 		return id;
 	}

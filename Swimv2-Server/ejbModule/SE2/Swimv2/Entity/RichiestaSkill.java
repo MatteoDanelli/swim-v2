@@ -18,6 +18,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="RICHIESTA_SKILL")
 public class RichiestaSkill implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -35,51 +36,32 @@ public class RichiestaSkill implements Serializable {
 	@JoinColumn(name="MITTENTE", nullable=false)
 	private User mittente;
 
-	/**
-	 * @return the richiestaLetta
-	 */
+	//Getters and setters
+
 	public boolean isRichiestaLetta() {
 		return richiestaLetta;
 	}
 
-	/**
-	 * @param richiestaLetta the richiestaLetta to set
-	 */
 	public void setRichiestaLetta(boolean richiestaLetta) {
 		this.richiestaLetta = richiestaLetta;
 	}
 
-	/**
-	 * @return the skillRichiesta
-	 */
 	public String getSkillRichiesta() {
 		return skillRichiesta;
 	}
 
-	/**
-	 * @param skillRichiesta the skillRichiesta to set
-	 */
 	public void setSkillRichiesta(String skillRichiesta) {
 		this.skillRichiesta = skillRichiesta;
 	}
 
-	/**
-	 * @return the mittente
-	 */
 	public User getMittente() {
 		return mittente;
 	}
 
-	/**
-	 * @param mittente the mittente to set
-	 */
 	public void setMittente(User mittente) {
 		this.mittente = mittente;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public long getId() {
 		return id;
 	}
