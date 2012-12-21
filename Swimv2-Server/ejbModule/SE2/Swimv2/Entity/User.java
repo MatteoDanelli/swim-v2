@@ -12,8 +12,9 @@ import javax.persistence.*;
 /**
  * @author Matteo Danelli
  * Questa classe modella l'user del sistema.
- * E' in relazione con le richieste skill, messaggio, Skill, feedback, richieste amicizie e amicizie.
+ * E' in relazione con le richieste skill, messaggio, skill, feedback, richieste amicizie.
  * E' l'entità centrale del sistema.
+ * NOTA: la relazione amicizia è modellata con una relazione N:N con sè stessa.
  */
 
 @Entity
@@ -66,6 +67,13 @@ public class User implements Serializable {
 	@ManyToMany (mappedBy="userCheLaPossiedono")
 	private Set<Skill> skillPossedute;
 
+	@ManyToMany 
+	@JoinTable(name="AMICIZIA",
+				joinColumns=@JoinColumn(name="USER_1",referencedColumnName="ID_USER"),
+				inverseJoinColumns=@JoinColumn(name="USER_2", referencedColumnName="ID_USER")
+            )   
+	private Set<User> amici;
+	
 	//Getters and setters
 
 	public String getEmail() {
@@ -146,5 +154,13 @@ public class User implements Serializable {
 
 	public Set<Feedback> getFeedbackRicevuti() {
 		return feedbackRicevuti;
+	}
+
+	public Set<User> getAmici() {
+		return amici;
+	}
+
+	public void setAmici(Set<User> amici) {
+		this.amici = amici;
 	}
 }
