@@ -4,7 +4,12 @@
 package SE2.Swimv2.Entity;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,12 +22,19 @@ import javax.persistence.Table;
 
 /**
  * @author Matteo Danelli
- * Tale classi modella i feddback ricevuti e assegnati dagli/agli user.
+ * Tale classi modella i feedback ricevuti e assegnati dagli/agli user.
  */
 @Entity
 @Table(name="FEEDBACK")
 public class Feedback implements Serializable {
 	
+	public static final String DATE_FORMAT = "dd-MM-yyyy";
+	
+	public Feedback(int stelle, String commento) {
+		this.StelleAssegnate=stelle;
+		this.commento=commento;
+		this.dataPubblicazione=new Date();
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID_FEEDBACK")
@@ -68,7 +80,7 @@ public class Feedback implements Serializable {
 	}
 
 	public void setDataPubblicazione(Date dataPubblicazione) {
-		this.dataPubblicazione = dataPubblicazione;
+		this.dataPubblicazione=dataPubblicazione;
 	}
 
 	public long getId() {

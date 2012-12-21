@@ -23,6 +23,16 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	public User(String mail, String password, String nome, String cognome, String provincia, String sesso, Date data) {
+		this.email=mail;
+		this.nome=nome;
+		this.cognome=cognome;
+		setPassword(password);
+		this.provincia=provincia;
+		this.sesso=sesso;
+		this.dataDiNascita=data;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID_USER")
