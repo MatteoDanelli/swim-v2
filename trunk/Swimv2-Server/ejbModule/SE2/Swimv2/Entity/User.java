@@ -23,7 +23,7 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public User(String mail, String password, String nome, String cognome, String provincia, String sesso, Date data) {
+	public User(String mail, String password, String nome, String cognome, String provincia, char sesso, Date data) {
 		this.email=mail;
 		this.nome=nome;
 		this.cognome=cognome;
@@ -54,7 +54,7 @@ public class User implements Serializable {
 	private String provincia;
 	
 	@Column(name="SESSO", nullable=true)
-	private String sesso;
+	private char sesso;
 	
 	@Column(name="DATA_DI_NASCITA", nullable=true)
 	private Date dataDiNascita;
@@ -126,11 +126,11 @@ public class User implements Serializable {
 		this.provincia = provincia;
 	}
 
-	public String getSesso() {
+	public char getSesso() {
 		return sesso;
 	}
 
-	public void setSesso(String sesso) {
+	public void setSesso(char sesso) {
 		this.sesso = sesso;
 	}
 
