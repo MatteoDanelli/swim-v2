@@ -23,6 +23,9 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	public User(){
+		
+	};
 	public User(String mail, String password, String nome, String cognome, String provincia, char sesso, Date data) {
 		this.email=mail;
 		this.nome=nome;
@@ -59,6 +62,7 @@ public class User implements Serializable {
 	@Column(name="DATA_DI_NASCITA", nullable=true)
 	private Date dataDiNascita;
 	
+	
 	@OneToMany(mappedBy="mittente")
 	private Set<RichiestaSkill> richiesteSkill;
 	
@@ -74,13 +78,16 @@ public class User implements Serializable {
 	@OneToMany (mappedBy="destinatario")
 	private Set<Feedback> feedbackRicevuti;
 	
-	@ManyToMany (mappedBy="userCheLaPossiedono")
+	@ManyToMany
+	@JoinTable(name="USER_SKILL", 
+				joinColumns=@JoinColumn(name="USER_ID",referencedColumnName="ID_USER"),
+				inverseJoinColumns=@JoinColumn(name="SKILL_ID", referencedColumnName="ID_SKILL"))
 	private Set<Skill> skillPossedute;
-
+	
 	@ManyToMany 
 	@JoinTable(name="AMICIZIA",
-				joinColumns=@JoinColumn(name="USER_1",referencedColumnName="ID_USER"),
-				inverseJoinColumns=@JoinColumn(name="USER_2", referencedColumnName="ID_USER")
+				joinColumns=@JoinColumn(name="USER_1_ID",referencedColumnName="ID_USER"),
+				inverseJoinColumns=@JoinColumn(name="USER_2_ID", referencedColumnName="ID_USER")
             )   
 	private Set<User> amici;
 	
@@ -145,7 +152,7 @@ public class User implements Serializable {
 	public long getId() {
 		return id;
 	}
-
+	
 	public Set<RichiestaSkill> getRichiesteSkill() {
 		return richiesteSkill;
 	}
@@ -165,7 +172,7 @@ public class User implements Serializable {
 	public Set<Feedback> getFeedbackRicevuti() {
 		return feedbackRicevuti;
 	}
-
+	
 	public Set<User> getAmici() {
 		return amici;
 	}
@@ -173,4 +180,12 @@ public class User implements Serializable {
 	public void setAmici(Set<User> amici) {
 		this.amici = amici;
 	}
+	
+	public Set<Skill> getSkillPossedute() {
+		return skillPossedute;
+	}
+	public void setSkillPossedute(Set<Skill> skillPossedute) {
+		this.skillPossedute = skillPossedute;
+	}
+
 }
