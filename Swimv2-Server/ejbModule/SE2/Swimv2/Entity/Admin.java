@@ -14,11 +14,11 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name="admin")
+@Table(name="ADMIN")
 public class Admin implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID_ADMIN")
@@ -76,6 +76,7 @@ public class Admin implements Serializable{
              e.printStackTrace();
         }
         return md5;
-    }	
+    }
+	
 }
 

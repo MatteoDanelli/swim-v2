@@ -4,13 +4,7 @@
 package SE2.Swimv2.Entity;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Logger;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +22,8 @@ import javax.persistence.Table;
 @Table(name="FEEDBACK")
 public class Feedback implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	public static final String DATE_FORMAT = "dd-MM-yyyy";
 	
 	public Feedback(int stelle, String commento) {
@@ -54,7 +50,7 @@ public class Feedback implements Serializable {
 	private User mittente;
 	
 	@ManyToOne
-	@Column(name="DESTINATARIO")
+	@JoinColumn(name="DESTINATARIO")
 	private User destinatario;
 
 	//Getters and setters
@@ -94,5 +90,4 @@ public class Feedback implements Serializable {
 	public User getDestinatario() {
 		return destinatario;
 	}
-
 }

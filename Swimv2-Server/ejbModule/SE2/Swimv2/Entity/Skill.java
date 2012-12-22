@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="SKILL")
 public class Skill implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public Skill(String nome) {
@@ -29,12 +29,10 @@ public class Skill implements Serializable {
 	@Column(name="NOME")
 	private String nome;
 
-	@ManyToMany
-	@JoinTable(name="USER_SKILL", 
-				joinColumns=@JoinColumn(name="SKILL_ID"),
-				inverseJoinColumns=@JoinColumn(name="USER_ID"))
+	@ManyToMany (mappedBy="skillPossedute")				
 	private Set<User> UserCheLaPossiedono;
-
+	 
+	
 	//Getters and setters
 	public long getId() {
 		return id;
@@ -43,9 +41,10 @@ public class Skill implements Serializable {
 	public String getNome() {
 		return nome;
 	}
-
+	
 	public Set<User> getUserCheLaPossiedono() {
 		return UserCheLaPossiedono;
 	}
+	
 
 }

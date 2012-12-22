@@ -3,6 +3,8 @@ package SE2.Swimv2.Session;
 import java.util.Set;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import SE2.Swimv2.Entity.Messaggio;
 import SE2.Swimv2.Entity.User;
@@ -12,7 +14,9 @@ import SE2.Swimv2.Entity.User;
  */
 @Stateless
 public class GestoreRichiesteAiuto implements GestoreRichiesteAiutoRemote {
-
+	@PersistenceContext(unitName = "Swimv2")
+	EntityManager database;
+	
     /**
      * Default constructor. 
      */

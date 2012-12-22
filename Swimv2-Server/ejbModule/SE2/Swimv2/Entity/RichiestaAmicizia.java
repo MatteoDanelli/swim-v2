@@ -15,6 +15,11 @@ import javax.persistence.*;
 @Table(name="RICHIESTE_AMICIZIA")
 public class RichiestaAmicizia implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID_RICHIESTA_SKILL")
@@ -41,4 +46,5 @@ public class RichiestaAmicizia implements Serializable {
 	public User getDestinatario() {
 		return destinatario;
 	}
+	
 }

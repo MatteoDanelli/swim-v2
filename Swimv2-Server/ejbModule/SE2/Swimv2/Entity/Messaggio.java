@@ -26,7 +26,6 @@ public class Messaggio implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID_MESSAGGIO")
@@ -117,5 +116,4 @@ public class Messaggio implements Serializable {
 	public long getId() {
 		return id;
 	}
-
 }
