@@ -11,6 +11,7 @@ import javax.persistence.*;
  * Questa classe modella l'entità relativa all'admin del sistema.
  * Ad essa farà riferimento una ttabella "admin" nel database.
  * La tabella avrà due colonne: un nome e una password, codificata in md5.
+ * 
  */
 
 @Entity
@@ -28,8 +29,12 @@ public class Admin implements Serializable{
 	@Column(name="PASSWORD",unique=true,nullable=false)
 	private String password;
 	
+	public Admin(String email, String password) {
+		this.email=email;
+		this.password=password;
+	}
+	
 	//Getters and setters
-
 	public String getEmail() {
 		return email;
 	}
@@ -41,13 +46,9 @@ public class Admin implements Serializable{
 	public String getPassword() {
 		return password;
 	}
-	
-	/**
-	 * Utilizza l'algoritmo md5 per codificare la password.
-	 * @param password the password to set
-	 */
+
 	public void setPassword(String password) {
-		this.password = md5(password);
+		this.password = password;
 	}
 
 	public long getId() {
