@@ -7,7 +7,10 @@ import javax.ejb.Remote;
 
 import SE2.Swimv2.Entity.Skill;
 import SE2.Swimv2.Entity.User;
-
+/**
+ * @author Daniel Cantoni
+ * Interfaccia per la gestione degli user
+ */
 @Remote
 public interface GestoreUserRemote {
 

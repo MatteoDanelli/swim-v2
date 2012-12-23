@@ -6,7 +6,10 @@ import javax.ejb.Remote;
 
 import SE2.Swimv2.Entity.Messaggio;
 import SE2.Swimv2.Entity.User;
-
+/**
+ * @author Daniel Cantoni
+ * Interfaccia per la gestione delle richieste di aiuto
+ */
 @Remote
 public interface GestoreRichiesteAiutoRemote {
 
