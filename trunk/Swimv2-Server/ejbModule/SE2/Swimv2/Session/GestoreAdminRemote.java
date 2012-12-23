@@ -11,5 +11,6 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface GestoreAdminRemote {
+	void createAdmin(String email, String password);
 	void modificaPassword(String nuovaPassword);
 }
