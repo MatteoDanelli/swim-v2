@@ -2,8 +2,10 @@ package SE2.Swimv2.Session;
 
 import java.util.Date;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
@@ -13,20 +15,13 @@ import SE2.Swimv2.Entity.Skill;
 import SE2.Swimv2.Entity.User;
 
 /**
- * Session Bean implementation class GestoreUser
+ * Session Bean che implementa l'interfaccia GestoreUserRemote.
  */
 @Stateless
 public class GestoreUser implements GestoreUserRemote {
 	@PersistenceContext(unitName = "Swimv2")
 	EntityManager database;
 	
-    /**
-     * Costruttore di Default 
-     */
-    public GestoreUser() {
-        // TODO Auto-generated constructor stub
-    }
-
     /**
      * Inserisce un nuovo utente 
      */
@@ -37,7 +32,8 @@ public class GestoreUser implements GestoreUserRemote {
 			
     	try{
     		database.persist(new User(email, password, nome, cognome, provincia, sesso, datanascita));
-    	}catch(PersistenceException e){
+    	}catch(EntityExistsException e){
+    		//Entità già presente. Non verrà inserita ma la sua id verrà saltata.
     	}
 		return null;
 	}
