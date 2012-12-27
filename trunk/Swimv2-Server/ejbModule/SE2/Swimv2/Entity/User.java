@@ -1,12 +1,10 @@
 package SE2.Swimv2.Entity;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -100,8 +98,15 @@ public class User implements Serializable {
 	@JoinTable(name="AMICIZIA",
 				joinColumns=@JoinColumn(name="USER_1_ID",referencedColumnName="ID_USER"),
 				inverseJoinColumns=@JoinColumn(name="USER_2_ID", referencedColumnName="ID_USER")
-            )   
-	private Set<User> amici;
+            )
+	private Set<User> amici1;
+		
+	@ManyToMany 
+	@JoinTable(name="AMICIZIA",
+				joinColumns=@JoinColumn(name="USER_2_ID",referencedColumnName="ID_USER"),
+				inverseJoinColumns=@JoinColumn(name="USER_1_ID", referencedColumnName="ID_USER")
+            )
+	private Set<User> amici2;
 	
 	//Getters and setters
 
@@ -202,10 +207,24 @@ public class User implements Serializable {
 	public void setSkillPossedute(Set<Skill> skillPossedute) {
 		this.skillPossedute = skillPossedute;
 	}
-	public Set<User> getAmici() {
-		return amici;
+	public Set<User> getAmici1() {
+		return amici1;
 	}
-	public void setAmici(Set<User> amici) {
-		this.amici = amici;
+
+	public void setAmici1(Set<User> amici1) {
+		this.amici1 = amici1;
+	}
+
+	public Set<User> getAmici2() {
+		return amici2;
+	}
+
+	public void setAmici2(Set<User> amici2) {
+		this.amici2 = amici2;
+	}
+	
+	// ADD per relazione many to many
+	public void addAmico(User user){
+		this.amici1.add(user);
 	}
 }

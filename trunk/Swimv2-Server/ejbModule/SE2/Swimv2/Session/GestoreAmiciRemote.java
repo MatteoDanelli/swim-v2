@@ -11,7 +11,7 @@ import SE2.Swimv2.Entity.User;
  */
 @Remote
 public interface GestoreAmiciRemote {
-	public void aggiungiAmicizia(User user1,User user2);
-	public Set<User> elencoAmici(User user);
-	public Boolean verificaAmicizia(User user1,User user2);
+	public void aggiungiAmicizia(long idUser1,long idUser2);
+	public Set<User> elencoAmici(long idUser);
+	public Boolean verificaAmicizia(long idUser1,long idUser2);
 }
