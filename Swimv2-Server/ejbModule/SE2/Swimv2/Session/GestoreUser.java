@@ -29,13 +29,13 @@ public class GestoreUser implements GestoreUserRemote {
 	public User addUser(String email, String password, String nome,
 			String cognome, String provincia, char sesso, Date datanascita,
 			Set<Skill> personalSkill) {
-			
+			User u = new User(email, password, nome, cognome, provincia, sesso, datanascita);
     	try{
-    		database.persist(new User(email, password, nome, cognome, provincia, sesso, datanascita));
+    		database.persist(u);
     	}catch(EntityExistsException e){
     		//Entità già presente. Non verrà inserita ma la sua id verrà saltata.
     	}
-		return null;
+		return u;
 	}
 
 	/**
@@ -58,6 +58,12 @@ public class GestoreUser implements GestoreUserRemote {
 			String provincia, char sesso, Date datanascita) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public User getById(long id) {
+		User u = database.find(User.class, id);
+		return u;
 	}
 
 }
