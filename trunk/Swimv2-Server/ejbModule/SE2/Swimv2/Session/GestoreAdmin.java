@@ -9,8 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.hibernate.Transaction;
-
 import SE2.Swimv2.Entity.Admin;
 
 /**
@@ -39,16 +37,9 @@ public class GestoreAdmin implements GestoreAdminRemote {
 	 */	
 	@Override
 	public void modificaPassword(String email, String nuovaPassword) {
-		Query q = database.createQuery("UPDATE ADMIN a SET a.PASSWORD=:password WHERE a.EMAIL=:email");
+		Query q = database.createQuery("UPDATE Admin a SET a.password=:password WHERE a.email=:email");
 		q.setParameter("email", email);
 		q.setParameter("password", nuovaPassword);
 		q.executeUpdate();
 		}
-
-	@Override
-	public void modificaEmail(String vecchiaEmail, String nuovaEmail) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
