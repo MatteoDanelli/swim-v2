@@ -26,6 +26,11 @@ public class Admin implements Serializable{
 	@Column(name="PASSWORD",unique=true,nullable=false)
 	private String password;
 	
+	
+	//Default constructor
+	public Admin () {		
+	}
+	
 	public Admin(String email, String password) {
 		this.email=email;
 		this.password=password;
