@@ -18,4 +18,5 @@ public interface GestoreUserRemote {
 	public void modificaEmail(User user, String email);
 	public void modificaPassword(User user, String password);
 	public void modificaAnagrafica(String nome, String cognome, String provincia, char sesso, Date datanascita);
+	public User getById(long id);
 }

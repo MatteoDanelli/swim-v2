@@ -1,9 +1,21 @@
 package SE2.Swimv2.Entity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 
 /**
  * 
@@ -24,8 +36,8 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public User(){
-		
 	};
+	
 	public User(String mail, String password, String nome, String cognome, String provincia, char sesso, Date data) {
 		this.email=mail;
 		this.nome=nome;
@@ -152,40 +164,48 @@ public class User implements Serializable {
 	public long getId() {
 		return id;
 	}
-	
 	public Set<RichiestaSkill> getRichiesteSkill() {
 		return richiesteSkill;
 	}
-
+	public void setRichiesteSkill(Set<RichiestaSkill> richiesteSkill) {
+		this.richiesteSkill = richiesteSkill;
+	}
 	public Set<RichiestaAmicizia> getRichiesteAmiciziaInviate() {
 		return richiesteAmiciziaInviate;
 	}
-
+	public void setRichiesteAmiciziaInviate(
+			Set<RichiestaAmicizia> richiesteAmiciziaInviate) {
+		this.richiesteAmiciziaInviate = richiesteAmiciziaInviate;
+	}
 	public Set<RichiestaAmicizia> getRichiesteAmiciziaRicevute() {
 		return richiesteAmiciziaRicevute;
 	}
-
+	public void setRichiesteAmiciziaRicevute(
+			Set<RichiestaAmicizia> richiesteAmiciziaRicevute) {
+		this.richiesteAmiciziaRicevute = richiesteAmiciziaRicevute;
+	}
 	public Set<Feedback> getFeedbackInviati() {
 		return feedbackInviati;
 	}
-
+	public void setFeedbackInviati(Set<Feedback> feedbackInviati) {
+		this.feedbackInviati = feedbackInviati;
+	}
 	public Set<Feedback> getFeedbackRicevuti() {
 		return feedbackRicevuti;
 	}
-	
-	public Set<User> getAmici() {
-		return amici;
+	public void setFeedbackRicevuti(Set<Feedback> feedbackRicevuti) {
+		this.feedbackRicevuti = feedbackRicevuti;
 	}
-
-	public void setAmici(Set<User> amici) {
-		this.amici = amici;
-	}
-	
 	public Set<Skill> getSkillPossedute() {
 		return skillPossedute;
 	}
 	public void setSkillPossedute(Set<Skill> skillPossedute) {
 		this.skillPossedute = skillPossedute;
 	}
-
+	public Set<User> getAmici() {
+		return amici;
+	}
+	public void setAmici(Set<User> amici) {
+		this.amici = amici;
+	}
 }

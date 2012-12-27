@@ -26,11 +26,17 @@ public class Feedback implements Serializable {
 
 	public static final String DATE_FORMAT = "dd-MM-yyyy";
 	
-	public Feedback(int stelle, String commento) {
+	public Feedback(){
+		
+	}
+	public Feedback(User mittente, User destinatario,int stelle, String commento) {
+		this.mittente = mittente;
+		this.destinatario= destinatario;
 		this.StelleAssegnate=stelle;
 		this.commento=commento;
 		this.dataPubblicazione=new Date();
 	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID_FEEDBACK")
@@ -90,4 +96,5 @@ public class Feedback implements Serializable {
 	public User getDestinatario() {
 		return destinatario;
 	}
+	
 }
