@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import SE2.Swimv2.Entity.Admin;
@@ -26,7 +27,7 @@ public class GestoreAdmin implements GestoreAdminRemote {
 		try {
 			database.persist(new Admin(email, password));
 		}
-		catch (EntityExistsException e)
+		catch (PersistenceException e)
 		{
 			//Admin già presente! Deve essere unico, per cui non dovrebbe mai arrivare qui!
 		}
