@@ -5,34 +5,50 @@ import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import SE2.Swimv2.Entity.LoginStatus;
+import SE2.Swimv2.Entity.Admin;
+import SE2.Swimv2.Entity.User;
 
 /**
  * Session Bean implementation class GestoreLogin
  */
 @Stateless
 public class GestoreLogin implements GestoreLoginRemote {
+	
 	@PersistenceContext(unitName = "Swimv2")
 	EntityManager database;
 	
+	private static long NOT_FIND = -1;
+	
+	/**
+	 * @param email dell'user che vuole fare il login
+	 * @param password dell'user che vuole fare il login
+	 * @return l'id dell'user trovato, se presente; -1 altrimenti.
+	 */
 	@Override
-	public LoginStatus loginUser(String email, String password) {
+	public long loginUser(String email, String password) {
 		Query q = database.createQuery("FROM User u WHERE u.email=:email AND u.password=:password");
 		q.setParameter("email", email);
 		q.setParameter("password", password);
-		if (q.getSingleResult()!=null) 
-			return LoginStatus.Login_OK;	
-		return LoginStatus.Login_KO;
+		User result = (User) q.getSingleResult();
+		if (result!=null) 
+			return result.getId();	
+		return NOT_FIND;
 	}
 
+	/**
+	 * @param email dell'user che vuole fare il login
+	 * @param password dell'user che vuole fare il login
+	 * @return l'id dell'admin trovato, se presente; -1 altrimenti.
+	 */
 	@Override
-	public LoginStatus loginAdmin(String email, String password) {
+	public long loginAdmin(String email, String password) {
 		Query q = database.createQuery("FROM Admin a WHERE a.email=:email AND a.password=:password");
 		q.setParameter("email", email);
 		q.setParameter("password", password);
-		if (q.getSingleResult()!=null) 
-			return LoginStatus.Login_OK;	
-		return LoginStatus.Login_KO;	
+		Admin result = (Admin) q.getSingleResult();
+		if (result!=null) 
+			return result.getId();	
+		return NOT_FIND;	
 	}		
 }
 
