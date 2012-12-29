@@ -1,11 +1,10 @@
 package SE2.Swimv2.Session;
 
-import java.util.Set;
-
+import java.util.List;
 import javax.ejb.Remote;
 
 import SE2.Swimv2.Entity.Messaggio;
-import SE2.Swimv2.Entity.User;
+
 /**
  * @author Daniel Cantoni
  * Interfaccia per la gestione dei messaggi
@@ -13,9 +12,9 @@ import SE2.Swimv2.Entity.User;
 @Remote
 public interface GestoreMessaggiRemote {
 	
-	public void inviaMessaggio(User mittente, User destinatario, String testo);
-	public Set<Messaggio> elencoMessaggi(User user);
-	public Boolean verificaNuoviMessaggi(User user);
-	public void settaMessaggioLetto(Messaggio messaggio);
+	public void inviaMessaggio(long mittente, long destinatario, String testo);
+	public List<Messaggio> elencoMessaggi(long user);
+	public Boolean verificaNuoviMessaggi(long user);
+	public void settaMessaggioLetto(long messaggio);
 	public Messaggio getById(long id);
 }
