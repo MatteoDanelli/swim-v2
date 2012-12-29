@@ -1,6 +1,8 @@
 package SE2.Swimv2.Session;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,7 +19,7 @@ public class GestoreLogin implements GestoreLoginRemote {
 	@PersistenceContext(unitName = "Swimv2")
 	EntityManager database;
 	
-	private static long NOT_FIND = -1;
+	private static long NOT_FOUND = -1;
 	
 	/**
 	 * @param email dell'user che vuole fare il login
@@ -26,13 +28,19 @@ public class GestoreLogin implements GestoreLoginRemote {
 	 */
 	@Override
 	public long loginUser(String email, String password) {
+		try{
 		Query q = database.createQuery("FROM User u WHERE u.email=:email AND u.password=:password");
 		q.setParameter("email", email);
 		q.setParameter("password", password);
 		User result = (User) q.getSingleResult();
 		if (result!=null) 
 			return result.getId();	
-		return NOT_FIND;
+		
+		}catch (EntityNotFoundException exc) { 
+    	} catch (javax.persistence.NoResultException exc) { 
+    	} catch (NonUniqueResultException exc) {
+    	}
+    	return NOT_FOUND;
 	}
 
 	/**
@@ -48,7 +56,7 @@ public class GestoreLogin implements GestoreLoginRemote {
 		Admin result = (Admin) q.getSingleResult();
 		if (result!=null) 
 			return result.getId();	
-		return NOT_FIND;	
+		return NOT_FOUND;	
 	}		
 }
 
