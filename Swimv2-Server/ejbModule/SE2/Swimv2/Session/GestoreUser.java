@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 
 import SE2.Swimv2.Entity.Skill;
 import SE2.Swimv2.Entity.User;
@@ -21,18 +22,19 @@ public class GestoreUser implements GestoreUserRemote {
 	EntityManager database;
 	
     /**
-     * Inserisce un nuovo utente, assegnandoli tutti i suoi attributi.
+     * Inserisce un nuovo utente,  assegnandoli tutti i suoi attributi.
      */
 	@Override
-	public User addUser(String email, String password, String nome,String cognome, String provincia, char sesso, Date datanascita,
+	public long addUser(String email, String password, String nome,String cognome, String provincia, char sesso, Date datanascita,
 			Set<Skill> personalSkill) {
 			User newUser = new User(email, password, nome, cognome, provincia, sesso, datanascita);
     	try{
     		database.persist(newUser);
-    	}catch(EntityExistsException e){
-    		//Entità già presente. Non verrà inserita ma la sua id verrà saltata.
+    	}catch(PersistenceException e){
+    		//Entità già presente.
+    		return -1;
     	}
-		return newUser;
+		return newUser.getId();
 	}
 
 	/**
