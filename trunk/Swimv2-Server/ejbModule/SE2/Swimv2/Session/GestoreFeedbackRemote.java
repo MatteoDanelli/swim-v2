@@ -3,12 +3,10 @@
  */
 package SE2.Swimv2.Session;
 
-import java.util.Set;
-
+import java.util.List;
 import javax.ejb.Remote;
-
 import SE2.Swimv2.Entity.Feedback;
-import SE2.Swimv2.Entity.User;
+import SE2.Swimv2.Exceptions.FeedbackException;
 
 /**
  * @author Matteo Danelli
@@ -16,8 +14,8 @@ import SE2.Swimv2.Entity.User;
  */
 @Remote
 public interface GestoreFeedbackRemote {
-	void creaFeedback(long idMittente, long idDestinatario, int stelleDaAssegnare, String commento);
-	Set<Feedback> elencoFeedback(long userId);
-	int mediaVotiFeedback(long userId);
+	void creaFeedback(long idMittente, long idDestinatario, int stelleDaAssegnare, String commento) throws FeedbackException;
+	List<Feedback> elencoFeedback(long userId);
+	double mediaVotiFeedback(long userId);
 	Feedback getById(long userId);
 }
