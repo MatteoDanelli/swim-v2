@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import SE2.Swimv2.Entity.Messaggio;
 import SE2.Swimv2.Entity.User;
+import SE2.Swimv2.Exceptions.MessaggiException;
 
 /**
  * Session Bean implementation class GestoreMessaggi
@@ -26,15 +27,18 @@ public class GestoreMessaggi implements GestoreMessaggiRemote {
     }
 
 	@Override
-	public void inviaMessaggio(long mittente, long destinatario, String testo) {
-		Messaggio nuovoMessaggio = new Messaggio();
-		User userMittente = database.find(User.class, mittente);
-		User UserDestinatario = database.find(User.class, destinatario);
-		nuovoMessaggio.setMittente(userMittente);
-		nuovoMessaggio.setDestinatario(UserDestinatario);
-		nuovoMessaggio.setTesto(testo);
-		nuovoMessaggio.setDataInvio(new Date());
-		database.persist(nuovoMessaggio);
+	public void inviaMessaggio(long mittente, long destinatario, String testo) throws MessaggiException {
+		if (mittente != destinatario) {
+			Messaggio nuovoMessaggio = new Messaggio();
+			User userMittente = database.find(User.class, mittente);
+			User UserDestinatario = database.find(User.class, destinatario);
+			nuovoMessaggio.setMittente(userMittente);
+			nuovoMessaggio.setDestinatario(UserDestinatario);
+			nuovoMessaggio.setTesto(testo);
+			nuovoMessaggio.setDataInvio(new Date());
+			database.persist(nuovoMessaggio);
+		}
+		else throw new MessaggiException("Mittente e destinario coincidenti!");
 	}
 	
 	@SuppressWarnings("unchecked")
