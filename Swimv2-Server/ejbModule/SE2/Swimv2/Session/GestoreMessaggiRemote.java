@@ -14,7 +14,7 @@ import SE2.Swimv2.Exceptions.MessaggiException;
 public interface GestoreMessaggiRemote {
 	
 	public void inviaMessaggio(long mittente, long destinatario, String testo) throws MessaggiException;
-	public List<Messaggio> elencoMessaggi(long user);
+	public List<Messaggio> elencoMessaggi(long user) throws MessaggiException;
 	public Boolean verificaNuoviMessaggi(long user);
 	public void settaMessaggioLetto(long messaggio);
 	public Messaggio getById(long id);
