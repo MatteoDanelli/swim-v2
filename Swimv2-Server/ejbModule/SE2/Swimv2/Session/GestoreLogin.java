@@ -38,15 +38,9 @@ public class GestoreLogin implements GestoreLoginRemote {
 			q.setParameter("password", password);
 			User result = (User) q.getSingleResult();
 			return result.getId();
-	
 		} catch (EntityNotFoundException e) {
-			e.printStackTrace();
-		}
-		catch (NoResultException e) {
-			e.printStackTrace();
-		}
-		catch (NonUniqueResultException e) {
-			e.printStackTrace();
+		} catch (NoResultException e) {
+		} catch (NonUniqueResultException e) {
 		}
 		throw new LoginException("L'utente non esiste!");
 	}
