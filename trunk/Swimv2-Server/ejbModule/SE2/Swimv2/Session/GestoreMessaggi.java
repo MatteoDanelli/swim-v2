@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -43,12 +46,21 @@ public class GestoreMessaggi implements GestoreMessaggiRemote {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Messaggio> elencoMessaggi(long user) {
+	public List<Messaggio> elencoMessaggi(long user) throws MessaggiException {
 		User userCercato = database.find(User.class, user);
 		Query q = database.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario ORDER BY m.dataInvio desc, m.isMessaggioLetto desc");
 		q.setParameter("userDestinatario", userCercato);
-		List<Messaggio> elenco = (List<Messaggio>) q.getResultList();
-		return elenco;
+		try {
+			List<Messaggio> elenco = (List<Messaggio>) q.getResultList();
+			return elenco;
+		}
+		catch (EntityNotFoundException e){
+		}
+		catch (NoResultException e) {
+		}
+		catch (NonUniqueResultException e) {
+		}
+		throw new MessaggiException("Non esistono messaggi!");
 	}
 
 	@SuppressWarnings("unchecked")
