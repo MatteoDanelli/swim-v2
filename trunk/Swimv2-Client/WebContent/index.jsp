@@ -33,7 +33,7 @@
 	  height: 25px;
 	  font-size: 14px;
 	}
-	.denied_access{
+	.error, .message{
 		color:#AA2424; 
 		font-weight:bold;
 		text-align: center;
@@ -82,11 +82,11 @@
 			  <h1 class="title">Swimv2</h1>
 			  <br> 		  
 			  				
-				<h2>Hai bisogno di aiuto? Swimv2 allora è quello che ti serve!</h2> <br>
+				<h2>Hai bisogno di aiuto? Swimv2 è quello che ti serve!</h2> <br>
 				
 				<div class="long_link">
 				<img alt="Find people" src="/Swimv2-Client/img/find2.png" width="20" height="20" align="left"> 
-				<p align="left"><h3> <a href="./cerca.jsp"> Puoi cercare aiuto anche senza essere autenticato! </a> </h3> </p>
+				<p align="left"><h3> <a href="#"> Cerca aiuto </a> </h3> </p>
 				
 				</div>
 
@@ -99,9 +99,14 @@
 				<div class="box_contents">
 					<form action="LoginServlet" method="post">
 					<%
-					String logout = (String) request.getAttribute("Errore");
-					if(logout!= null && logout.equals("logError")) {
-						out.println("<p class=\"denied_access\">ACCESSO NEGATO!</p>");
+					String error= (String) request.getAttribute("Errore");
+					if(error!= null && error.equals("logError")) {
+						out.println("<p class=\"error\">ACCESSO NEGATO!</p>");
+					}
+					
+					String message = (String) request.getAttribute("Messaggio");
+					if(message!= null && message.equals("logoutOk")) {
+						out.println("<p class=\"message\">LOGOUT ESEGUITO CORRETTAMENTE!</p>");
 					}
 					%>
 						<label>E-Mail: </label>
@@ -109,7 +114,8 @@
 						<label>Password: </label>
 						<input type="password" name="password">
 						<input type="submit" value="Accedi">
-					</form>		Non sei ancora registrato? Fallo <a href="registrati.html">qui! </a>
+					</form>		
+					Non sei ancora registrato?<a href="#">Registrati! </a>
 			</div> 
 
 
@@ -120,7 +126,7 @@
    
   <div class="footer">
   		<div class="line1">
-  			2012 Swimv2 - Cantoni Daniel & Danelli Matteo - <a href="http://code.google.com/p/swim-v2">Here on Google Code</a>
+  			2013 Swimv2 - Cantoni Daniel & Danelli Matteo - <a href="http://code.google.com/p/swim-v2">Here on Google Code</a>
   		</div>
   		<div class="line2">
   		</div>

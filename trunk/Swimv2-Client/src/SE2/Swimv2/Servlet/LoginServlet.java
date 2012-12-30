@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet {
 	//valori attributi
 	private static final String LOGIN_ERROR= "logError";
 	private static final String USER_ID= "userId";
+	private static final String ADMIN_ID= "adminId";
 	private static final String EMAIL= "email";
 	private static final String PSW= "password";
 	
