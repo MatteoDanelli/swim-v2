@@ -7,7 +7,7 @@
 	<meta name="description" content="">
 	 
 	<style type="text/css">
-	@import url(css/main.css);
+	@import url(../css/main.css);
 	.iscriviti{
 	  width: 400px;
 	  float: right;
