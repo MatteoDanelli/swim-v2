@@ -37,7 +37,7 @@
 		<link>
 			<name>WebContent/img/logo.gif</name>
 			<type>1</type>
-			<location>/home/matteo/workspace/Swimv2-Client/WebContent/img/logo.gif</location>
+			<locationURI>PROJECT_LOC/WebContent/img/logo.gif</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
