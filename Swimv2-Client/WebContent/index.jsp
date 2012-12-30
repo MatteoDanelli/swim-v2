@@ -95,9 +95,9 @@
 				<div class="box_contents">
 					<form action="LoginServlet" method="post">
 					<%
-					String messaggio = (String) request.getAttribute("messaggio");
-					if(messaggio != null) {
-						out.println("<p>" + messaggio + "</p>");
+					String logout = request.getParameter("loginError");
+					if(logout!= null && logout.equals("1")) {
+						out.println("<p class=\"denied_access\">ACCESSO NEGATO!</p>");
 					}
 					%>
 						<label>E-Mail: </label>

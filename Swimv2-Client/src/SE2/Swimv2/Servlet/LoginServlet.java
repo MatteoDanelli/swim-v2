@@ -50,18 +50,14 @@ public class LoginServlet extends HttpServlet {
 			
 			id=l.loginUser(email, password);
 			
-			
-			RequestDispatcher disp;
 			if(id == -1) {
 				request.setAttribute("messaggio", "Accesso Negato");
-				disp = request.getRequestDispatcher("index.jsp");
+				response.sendRedirect("index.jsp?loginError=1");
 			} else {
 				request.getSession().setAttribute("user_id", id);
-				disp = request.getRequestDispatcher("User/user.jsp");
+				response.sendRedirect("User/user.jsp");
 			}
-			
-			disp.forward(request, response);
-			
+		
 			}catch (NamingException e) {
 				e.printStackTrace();
 			}
