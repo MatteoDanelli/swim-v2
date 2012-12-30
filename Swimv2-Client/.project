@@ -33,4 +33,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>WebContent/img/logo.gif</name>
+			<type>1</type>
+			<location>/home/daniel/Documents/swimv2/workspace/Swimv2-Client/WebContent/img/logo.gif</location>
+		</link>
+	</linkedResources>
 </projectDescription>
