@@ -17,7 +17,7 @@ body{
 	min-width: 100%;
   	position: absolute;
   	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
+	font-size: 14px;
   	height: 100%;
   	background: #FFFFFF;
 }
@@ -58,13 +58,12 @@ body{
 	  font-weight: bold;
 }
 .logo{
-  width: 348px;
+  width: 320px;
   height: 60px;
   float: left;
   text-align: left;
   display:block;
-  height:70px;
-  line-height:70px;
+  padding-top: 5px;
 }
 .menu_bar{
 		width: 100%;
