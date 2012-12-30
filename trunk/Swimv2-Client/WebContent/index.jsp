@@ -56,6 +56,7 @@
 	  margin-bottom: 20px;
 	  position: relative;
 	}
+	
 	</style>
 	</head>
 
@@ -79,11 +80,14 @@
 	  <div class="content">
 		  <div class="description">
 			  <h1 class="title">Swimv2</h1>
-			  <br>
-			  <div class="link">
-				
+			  <br> 		  
+			  				
 				<h2>Hai bisogno di aiuto? Swimv2 allora è quello che ti serve!</h2> <br>
-				<h3>Puoi cercare aiuto anche senza essere autenticato! </h3>
+				
+				<div class="long_link">
+				<img alt="Find people" src="/Swimv2-Client/img/find2.png" width="20" height="20" align="left"> 
+				<p align="left"><h3> <a href="./cerca.jsp"> Puoi cercare aiuto anche senza essere autenticato! </a> </h3> </p>
+				
 				</div>
 
 			</div>
