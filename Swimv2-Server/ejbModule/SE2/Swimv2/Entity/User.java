@@ -227,4 +227,8 @@ public class User implements Serializable {
 	public void addAmico(User user){
 		this.amici1.add(user);
 	}
+	
+	public String toString() {
+		return (this.nome +" "+ this.cognome +" "+ this.email +" ");
+	}
 }

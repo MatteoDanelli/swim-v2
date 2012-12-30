@@ -40,13 +40,13 @@ public class Messaggio implements Serializable {
 	private User destinatario;
 	
 	@ManyToOne
-	@JoinColumn(name="SKILL_RICHIESTA", nullable=false)
+	@JoinColumn(name="SKILL_RICHIESTA", nullable=true)
 	private Skill skillRichiesta;
 	
-	@Column(name="MESSAGGIO_LETTO", nullable=false)
+	@Column(name="MESSAGGIO_LETTO", nullable=true)
 	private boolean isMessaggioLetto;
 	
-	@Column(name="RICHIESTA_DI_AIUTO", nullable=false)
+	@Column(name="RICHIESTA_DI_AIUTO", nullable=true)
 	private boolean isRichiestaAiuto;
 	
 	@Column(name="DATA_DI_INVIO", nullable=false)
@@ -54,7 +54,7 @@ public class Messaggio implements Serializable {
 	
 	@Column(name="TESTO", nullable=true)
 	private String testo;
-
+	
 	//Getters and setters
 	public User getMittente() {
 		return mittente;
@@ -115,5 +115,12 @@ public class Messaggio implements Serializable {
 
 	public long getId() {
 		return id;
+	}
+	
+	public String toString() {
+		if (this.isRichiestaAiuto==true) 
+			return ("FROM: "+ this.getMittente().toString() +" TO "+ this.getDestinatario().toString() +". SKILL RICHIESTA: "+ this.getSkillRichiesta().toString() +" ");
+		return ("FROM: "+ this.getMittente().toString() +" TO "+ this.getDestinatario().toString());
+
 	}
 }

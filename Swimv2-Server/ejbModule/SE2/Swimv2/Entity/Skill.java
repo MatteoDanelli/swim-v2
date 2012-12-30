@@ -46,5 +46,8 @@ public class Skill implements Serializable {
 		return UserCheLaPossiedono;
 	}
 	
+	public String toString() {
+		return this.getNome();
+	}
 
 }
