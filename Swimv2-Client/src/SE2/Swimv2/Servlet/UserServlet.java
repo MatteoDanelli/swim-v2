@@ -20,9 +20,23 @@ import SE2.Swimv2.Session.GestoreUserRemote;
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	private static final String USER_PAGE = "User/user.jsp";
-	private static final String USER_ID= "userId";
+	//nomi attributi
+	private static final String ERROR = "Errore";
+
 	private static final String USER= "user";
+	
+	//valori attributi
+	private static final String LOGIN_ERROR= "logError";
+	private static final String USER_ID= "userId";
+
+	
+	//nomi pagine
+	private static final String HOME_PAGE = "index.jsp";
+	private static final String USER_PAGE = "User/user.jsp";
+	private static final String ERROR_PAGE = "error.jsp";
+	
+
+
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,18 +51,23 @@ public class UserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+			Long id= (Long) request.getSession().getAttribute("userId");
+			//se non esiste una sessione richiamo l' home page
+			if(id==null){
+				request.setAttribute(ERROR, LOGIN_ERROR);
+				request.getRequestDispatcher(HOME_PAGE).forward(request, response);
+				return;
+			}
 
 			if(request.getAttribute(USER)==null){
-
+			
 				try {
 					GestoreUserRemote gestoreUser = getGestoreUserRemote();
-					Long id= (Long)request.getSession().getAttribute(USER_ID);
 					User user= gestoreUser.getById(id.longValue());
 					request.setAttribute(USER, user);
 				} catch (NamingException e) {
 
 				}
-				
 				request.getRequestDispatcher(USER_PAGE).forward(request, response);
 				
 			}
