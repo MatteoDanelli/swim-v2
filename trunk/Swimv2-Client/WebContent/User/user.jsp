@@ -42,6 +42,11 @@
 	  <div class="margintop content">
  
 					<%
+					Long id= (Long) request.getSession().getAttribute("userId");
+					if(id==null){
+						request.setAttribute("Errore", "logError");
+						request.getRequestDispatcher("index.jsp").forward(request, response);
+					}
 					User user = (User) request.getAttribute("user");
 					if(user!= null) {
 						out.println("<p> Benvenuto "+ user.getNome() +"</p>");
