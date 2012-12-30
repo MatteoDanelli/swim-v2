@@ -18,7 +18,25 @@ import SE2.Swimv2.Session.GestoreLoginRemote;
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	//nomi attributi
+	private static final String ERROR = "Errore";
+	private static final String MESSAGE = "Messaggio";
+	
+	//valori attributi
+	private static final String LOGIN_ERROR= "logError";
+	private static final String USER_ID= "userId";
+	private static final String EMAIL= "email";
+	private static final String PSW= "password";
+	
+	//nomi pagine
+	private static final String HOME_PAGE = "index.jsp";
+	private static final String USER_PAGE = "User/user.jsp";
+	private static final String ERROR_PAGE = "error.jsp";
+	
+	//servlet
+	private static final String USER_SERVLET = "UserServlet";
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -30,39 +48,42 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		this.doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		long id = 0;
+		long id;
 		try {
-			Context jndiContext = new InitialContext();
 					
-			Object obj = jndiContext.lookup("GestoreLogin/remote");
-			GestoreLoginRemote l = (GestoreLoginRemote) obj;
+			GestoreLoginRemote gestoreLogin = this.getGestoreLoginRemote();
 			
-			String email = request.getParameter("email");
-			String password = request.getParameter("password");
+			String email = request.getParameter(EMAIL);
+			String password = request.getParameter(PSW);
 			
-			try {
-				id=l.loginUser(email, password);
-			} catch (LoginException e) {
-				e.printStackTrace();
+				try{
+					id=gestoreLogin.loginUser(email, password);
+					request.getSession().setAttribute(USER_ID, id);
+					response.sendRedirect(USER_SERVLET);
+
+				}
+				catch (LoginException e) {
+					request.setAttribute(ERROR, LOGIN_ERROR);
+					request.getRequestDispatcher(HOME_PAGE).forward(request, response);
+				}
+
+		}
+		catch (NamingException e) {
+				response.sendRedirect(ERROR_PAGE);
 			}
-			
-			if(id == -1) {
-				request.setAttribute("messaggio", "Accesso Negato");
-				response.sendRedirect("index.jsp?loginError=1");
-			} else {
-				request.getSession().setAttribute("user_id", id);
-				response.sendRedirect("User/user.jsp");
-			}
-		
-			}catch (NamingException e) {
-				e.printStackTrace();
-			}
+	}
+	
+	private GestoreLoginRemote getGestoreLoginRemote() throws NamingException{
+		Context jndiContext = new InitialContext();
+		Object obj = jndiContext.lookup("GestoreLogin/remote");
+		GestoreLoginRemote manager = (GestoreLoginRemote) obj;
+		return manager;
 	}
 }
