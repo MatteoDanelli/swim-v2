@@ -13,7 +13,7 @@ import SE2.Swimv2.Entity.Admin;
 
 /**
  * @author Matteo Danelli
- * Implementazione dell'interfaccia GestoreAdminRemote.
+ * Implementazione dell'interfaccia GestoreAdminRemote
  */
 @Stateless
 public class GestoreAdmin implements GestoreAdminRemote {
