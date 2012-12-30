@@ -63,18 +63,14 @@ public class GestoreLogin implements GestoreLoginRemote {
 	@Override
 	public long loginAdmin(String email, String password) throws LoginException {
 		try {
-			Query q = database
-					.createQuery("FROM Admin a WHERE a.email=:email AND a.password=:password");
+			Query q = database.createQuery("FROM Admin a WHERE a.email=:email AND a.password=:password");
 			q.setParameter("email", email);
 			q.setParameter("password", password);
 			Admin result = (Admin) q.getSingleResult();
 			return result.getId();
 		} catch (EntityNotFoundException e) {
-			e.printStackTrace();
 		} catch (NoResultException e) {
-			e.printStackTrace();
 		} catch (NonUniqueResultException e) {
-			e.printStackTrace();
 		}
 		throw new LoginException("L'admin non esiste!");
 	}
