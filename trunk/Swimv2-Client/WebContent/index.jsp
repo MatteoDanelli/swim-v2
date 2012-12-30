@@ -82,7 +82,7 @@
 			  <br>
 			  <div class="link">
 				
-				<h2>Hai bisogno di aiuto? Cerca qualcuno che ti puÃ² aiutare!</h2> <br>
+				<h2>Hai bisogno di aiuto? Cerca qualcuno che ti può aiutare!</h2> <br>
 				<h3>Puoi cercare anche senza bisogno di login! </h3>
 				</div>
 

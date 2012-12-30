@@ -5,12 +5,12 @@ import java.io.IOException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import SE2.Swimv2.Exceptions.LoginException;
 import SE2.Swimv2.Session.GestoreLoginRemote;
 
 /**
@@ -24,7 +24,6 @@ public class LoginServlet extends HttpServlet {
      */
     public LoginServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -38,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		long id;
+		long id = 0;
 		try {
 			Context jndiContext = new InitialContext();
 					
@@ -48,7 +47,11 @@ public class LoginServlet extends HttpServlet {
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			
-			id=l.loginUser(email, password);
+			try {
+				id=l.loginUser(email, password);
+			} catch (LoginException e) {
+				e.printStackTrace();
+			}
 			
 			if(id == -1) {
 				request.setAttribute("messaggio", "Accesso Negato");
