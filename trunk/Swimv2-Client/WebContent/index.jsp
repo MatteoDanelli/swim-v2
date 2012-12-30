@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,7 +8,7 @@
 	<meta name="description" content="">
  	
 	<style type="text/css">
-	@import url(css/main.css);
+	@import url(/Swimv2-Client/css/main.css);
 	
 	.iscriviti{
 	  width: 400px;
@@ -63,8 +64,8 @@
 
 	<div class="header">
 		<div class="content">
-	  		<a class="logo" href="#">
-	  			<img alt="Swimv2" src="logo_swimv2_1.gif" width="348" height="60">
+	  		<a class="logo" href="/Swimv2-Client/index.jsp">
+	  			<img alt="Swimv2" src="/Swimv2-Client/img/logo.gif" width="320" height="60">
 	  		</a>
 	  		<span class="iscriviti">
 	  		Sei l'amministratore?
@@ -82,8 +83,8 @@
 			  <br>
 			  <div class="link">
 				
-				<h2>Hai bisogno di aiuto? Cerca qualcuno che ti può aiutare!</h2> <br>
-				<h3>Puoi cercare anche senza bisogno di login! </h3>
+				<h2>Hai bisogno di aiuto? Swimv2 allora è quello che ti serve!</h2> <br>
+				<h3>Puoi cercare aiuto anche senza essere autenticato! </h3>
 				</div>
 
 			</div>
@@ -95,8 +96,8 @@
 				<div class="box_contents">
 					<form action="LoginServlet" method="post">
 					<%
-					String logout = request.getParameter("loginError");
-					if(logout!= null && logout.equals("1")) {
+					String logout = (String) request.getAttribute("Errore");
+					if(logout!= null && logout.equals("logError")) {
 						out.println("<p class=\"denied_access\">ACCESSO NEGATO!</p>");
 					}
 					%>
