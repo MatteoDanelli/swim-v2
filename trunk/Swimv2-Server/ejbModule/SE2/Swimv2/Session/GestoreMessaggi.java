@@ -1,5 +1,6 @@
 package SE2.Swimv2.Session;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -26,15 +27,21 @@ public class GestoreMessaggi implements GestoreMessaggiRemote {
 
 	@Override
 	public void inviaMessaggio(long mittente, long destinatario, String testo) {
-		// TODO Auto-generated method stub
-		
+		Messaggio nuovoMessaggio = new Messaggio();
+		User userMittente = database.find(User.class, mittente);
+		User UserDestinatario = database.find(User.class, destinatario);
+		nuovoMessaggio.setMittente(userMittente);
+		nuovoMessaggio.setDestinatario(UserDestinatario);
+		nuovoMessaggio.setTesto(testo);
+		nuovoMessaggio.setDataInvio(new Date());
+		database.persist(nuovoMessaggio);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Messaggio> elencoMessaggi(long user) {
 		User userCercato = database.find(User.class, user);
-		Query q = database.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario ORDER BY m.dataInvio desc, f.isMessaggioLetto desc");
+		Query q = database.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario ORDER BY m.dataInvio desc, m.isMessaggioLetto desc");
 		q.setParameter("userDestinatario", userCercato);
 		List<Messaggio> elenco = (List<Messaggio>) q.getResultList();
 		return elenco;
