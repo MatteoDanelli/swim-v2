@@ -3,6 +3,7 @@ package SE2.Swimv2.Session;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,7 +19,7 @@ import SE2.Swimv2.Exceptions.AmiciException;
 public class GestoreAmici implements GestoreAmiciRemote, GestoreAmiciLocal {
 	@PersistenceContext(unitName = "Swimv2")
 	EntityManager database;
-    
+	
 	/**
      * Costruttore
      */
@@ -32,6 +33,7 @@ public class GestoreAmici implements GestoreAmiciRemote, GestoreAmiciLocal {
      */
 	@Override
 	public void aggiungiAmicizia(long idUser1, long idUser2) throws AmiciException{
+
 		if(idUser1!=idUser2){
 			User user1 = database.find(User.class, idUser1);
 			User user2 = database.find(User.class, idUser2);

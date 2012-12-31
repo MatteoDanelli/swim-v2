@@ -12,6 +12,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import SE2.Swimv2.Entity.RichiestaAmicizia;
 import SE2.Swimv2.Entity.User;
+import SE2.Swimv2.Exceptions.AmiciException;
 import SE2.Swimv2.Exceptions.RichiestaAmiciziaException;
 
 /**
@@ -50,6 +51,7 @@ public class GestoreRichiesteAmicizia implements GestoreRichiesteAmiciziaRemote{
 			
 			try{
 				database.persist(richiesta);
+				database.flush();
 			}
 			catch(PersistenceException e){
 				throw new RichiestaAmiciziaException("Errore di persistenza");
@@ -60,31 +62,94 @@ public class GestoreRichiesteAmicizia implements GestoreRichiesteAmiciziaRemote{
 		}	
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<RichiestaAmicizia> elencoRichiesteAmicizia(long user) {
-		// TODO Auto-generated method stub
+	public List<RichiestaAmicizia> elencoRichiesteAmicizia(long userid) {
+		User user = database.find(User.class, userid);
+		Query q = database.createQuery("FROM RichiestaAmicizia r WHERE r.destinatario=:user ORDER BY r.id desc");
+		q.setParameter("user", user);
+		
+		try{
+			List<RichiestaAmicizia> result =(List<RichiestaAmicizia>) q.getResultList();
+			return result;
+		}catch (EntityNotFoundException e){
+		}catch (NoResultException e) {
+		}
 		return null;
 	}
 
 	@Override
-	public boolean presentiNuoveRichieste(long user) {
-		// TODO Auto-generated method stub
-		return false;
+	public int numeroDiNuoveRichieste(long userid) {
+		List<RichiestaAmicizia> result =elencoRichiesteAmicizia(userid);
+		if(result==null){
+			return 0;
+		}
+		return result.size();
 	}
 
 	@Override
-	public void accettaRichiestaAmicizia(RichiestaAmicizia richiestaAmicizia) {
-		// TODO Auto-generated method stub
+	public void accettaRichiestaAmicizia(long idRichiestaAmicizia,long currentUser) throws AmiciException, RichiestaAmiciziaException{
+		
+		RichiestaAmicizia richiesta = database.find(RichiestaAmicizia.class, idRichiestaAmicizia);
+		//verifico che la richiesta esiste
+		if(richiesta!=null){
+			User mittente = richiesta.getMittente();
+			User destinatario = richiesta.getDestinatario();
+			
+			//verifico che il destinatario sia colui che ha accettato la richiesta
+			if(destinatario.getId()!=currentUser){
+				throw new RichiestaAmiciziaException("Accesso Negato");
+			}
+			
+			try{
+				database.remove(richiesta);
+				database.flush();
+			}
+			catch(PersistenceException e){
+				System.err.println("Impossibile Rimovere la richiestaAmicizia :" + richiesta.getId());
+			}
+			
+			try {
+				gestoreAmici.aggiungiAmicizia(mittente.getId(), destinatario.getId());
+			} catch (AmiciException e) {
+				throw e;
+			}
+			
+			return;
+		}
+		throw new RichiestaAmiciziaException("Non esiste la richiesta d'amicizia specificata");
 		
 	}
 
 	@Override
-	public void rifiutaRichiestaAmicizia(RichiestaAmicizia richiestaAmicizia) {
-		// TODO Auto-generated method stub
+	public void rifiutaRichiestaAmicizia(long idRichiestaAmicizia,long currentUser)throws RichiestaAmiciziaException {
+		
+		RichiestaAmicizia richiesta = database.find(RichiestaAmicizia.class, idRichiestaAmicizia);
+		//verifico che la richiesta esiste
+		if(richiesta!=null){
+			User destinatario = richiesta.getDestinatario();
+			
+			//verifico che il destinatario sia colui che ha rifiutato la richiesta
+			if(destinatario.getId()!=currentUser){
+				throw new RichiestaAmiciziaException("Accesso Negato");
+			}
+			
+			try{
+				database.remove(richiesta);
+				database.flush();
+			}
+			catch(PersistenceException e){
+				System.err.println("Impossibile Rimovere la richiestaAmicizia :" + richiesta.getId());
+			}
+		
+			return;
+		}
+		throw new RichiestaAmiciziaException("Non esiste la richiesta d'amicizia specificata");
 		
 	}
 	
-	private boolean esisteRichiestaAmicizia(long fromUser, long toUser){
+	@Override
+	public boolean esisteRichiestaAmicizia(long fromUser, long toUser){
 		User mittente = database.find(User.class, fromUser);
 		User destinatario = database.find(User.class, toUser);
 		

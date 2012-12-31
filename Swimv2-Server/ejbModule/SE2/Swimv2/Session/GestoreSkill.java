@@ -5,6 +5,7 @@ package SE2.Swimv2.Session;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -19,6 +20,7 @@ import SE2.Swimv2.Entity.Skill;
 public class GestoreSkill implements GestoreSkillRemote {
 	@PersistenceContext(unitName = "Swimv2")
 	EntityManager database;
+
 	
 	@Override
 	public List<Skill> getSkillSet() {
