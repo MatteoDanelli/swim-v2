@@ -23,19 +23,6 @@ import javax.persistence.Table;
 public class Feedback implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
-	public static final String DATE_FORMAT = "dd-MM-yyyy";
-	
-	public Feedback(){
-		
-	}
-	public Feedback(User mittente, User destinatario,int stelle, String commento) {
-		this.mittente = mittente;
-		this.destinatario= destinatario;
-		this.StelleAssegnate=stelle;
-		this.commento=commento;
-		this.dataPubblicazione=new Date();
-	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -58,35 +45,33 @@ public class Feedback implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="DESTINATARIO")
 	private User destinatario;
+	
+	public Feedback(){
+	}
+	
+	public Feedback(User mittente, User destinatario,int stelle, String commento) {
+		this.mittente = mittente;
+		this.destinatario= destinatario;
+		this.StelleAssegnate=stelle;
+		this.commento=commento;
+		this.dataPubblicazione=new Date();
+	}
 
 	//Getters and setters
+	public long getId() {
+		return id;
+	}
 
 	public int getStelleAssegnate() {
 		return StelleAssegnate;
-	}
-
-	public void setStelleAssegnate(int stelleAssegnate) {
-		StelleAssegnate = stelleAssegnate;
 	}
 
 	public String getCommento() {
 		return commento;
 	}
 
-	public void setCommento(String commento) {
-		this.commento = commento;
-	}
-
 	public Date getDataPubblicazione() {
 		return dataPubblicazione;
-	}
-
-	public void setDataPubblicazione(Date dataPubblicazione) {
-		this.dataPubblicazione=dataPubblicazione;
-	}
-
-	public long getId() {
-		return id;
 	}
 
 	public User getMittente() {
