@@ -1,13 +1,10 @@
-/**
- * 
- */
 package SE2.Swimv2.Session;
 
 import java.util.List;
 import javax.ejb.Remote;
 
 import SE2.Swimv2.Entity.Skill;
-import SE2.Swimv2.Entity.User;
+import SE2.Swimv2.Exceptions.SkillException;
 
 /**
  * @author Matteo Danelli
@@ -15,7 +12,7 @@ import SE2.Swimv2.Entity.User;
  */
 @Remote
 public interface GestoreSkillRemote {
-	void createSkill(String nome);
+	void creaSkill(String nome) throws SkillException;
 	List<Skill> getSkillSet();
-	List<Skill> getPersonalSkill(User user);
+	List<Skill> getPersonalSkill(long userId);
 }
