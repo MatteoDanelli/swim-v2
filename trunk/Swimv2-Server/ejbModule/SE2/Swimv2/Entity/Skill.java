@@ -18,22 +18,25 @@ public class Skill implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public Skill(String nome) {
-		this.nome=nome;
-	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID_SKILL")
 	private long id;
 	
-	@Column(name="NOME")
+	@Column(name="NOME",unique=true)
 	private String nome;
 
 	@ManyToMany (mappedBy="skillPossedute")				
 	private Set<User> UserCheLaPossiedono;
-	 
+
+	public Skill() {
+	}	
 	
-	//Getters and setters
+	public Skill(String nome) {
+		this.nome=nome;
+	}
+	
+	//Getters
 	public long getId() {
 		return id;
 	}
@@ -41,13 +44,15 @@ public class Skill implements Serializable {
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public Set<User> getUserCheLaPossiedono() {
 		return UserCheLaPossiedono;
 	}
-	
-	public String toString() {
-		return this.getNome();
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
 	}
 
 }

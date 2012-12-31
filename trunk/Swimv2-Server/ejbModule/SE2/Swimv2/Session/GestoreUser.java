@@ -22,13 +22,14 @@ public class GestoreUser implements GestoreUserRemote {
 	EntityManager database;
 	
     /**
-     * Inserisce un nuovo utente,  assegnandoli tutti i suoi attributi.
+     *  Inserisce un nuovo utente,  assegnandoli tutti i suoi attributi.
      */
 	@Override
 	public long addUser(String email, String password, String nome,String cognome, String provincia, char sesso, Date datanascita,
 			Set<Skill> personalSkill) {
 			User newUser = new User(email, password, nome, cognome, provincia, sesso, datanascita);
     	try{
+    		newUser.setSkillPossedute(personalSkill);
     		database.persist(newUser);
     	}catch(PersistenceException e){
     		//Entità già presente.
