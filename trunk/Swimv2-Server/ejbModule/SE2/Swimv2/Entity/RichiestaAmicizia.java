@@ -33,8 +33,15 @@ public class RichiestaAmicizia implements Serializable {
 	@JoinColumn(name="DESTINATARIO", nullable=false)
 	private User destinatario;
 
-	//Getters and setters
-
+	public RichiestaAmicizia(){
+	}
+	
+	public RichiestaAmicizia(User mittente, User destinatario){
+		this.mittente = mittente;
+		this.destinatario = destinatario;
+	}
+	
+	//Getters
 	public long getId() {
 		return id;
 	}

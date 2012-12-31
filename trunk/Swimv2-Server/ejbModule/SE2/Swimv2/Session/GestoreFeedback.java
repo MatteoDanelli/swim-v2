@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -50,8 +52,9 @@ public class GestoreFeedback implements GestoreFeedbackRemote{
 			
 			Feedback feedback = new Feedback(mittente,destinatario,stelleDaAssegnare, commento);
 			database.persist(feedback);
-		}else
+		}else{
 			throw new FeedbackException("Impossibile creare il Feedback, gli User non sono amici");
+		}
 
 	}
 
@@ -66,8 +69,14 @@ public class GestoreFeedback implements GestoreFeedbackRemote{
 		Query q = database.createQuery("FROM Feedback f WHERE f.destinatario=:user ORDER BY f.dataPubblicazione desc , f.id desc");
 		q.setParameter("user", user);
 		
-		return (List<Feedback>) q.getResultList();
-
+		try{
+			List<Feedback> result =(List<Feedback>) q.getResultList();
+			return result;
+		}catch (EntityNotFoundException e){
+		}
+		catch (NoResultException e) {
+		}
+		return null;
 	}
 
     /**

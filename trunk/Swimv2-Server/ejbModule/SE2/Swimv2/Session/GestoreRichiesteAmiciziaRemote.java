@@ -1,14 +1,9 @@
-/**
- * 
- */
 package SE2.Swimv2.Session;
 
-import java.util.Set;
-
+import java.util.List;
 import javax.ejb.Remote;
-
 import SE2.Swimv2.Entity.RichiestaAmicizia;
-import SE2.Swimv2.Entity.User;
+import SE2.Swimv2.Exceptions.RichiestaAmiciziaException;
 
 /**
  * @author Matteo Danelli
@@ -16,10 +11,9 @@ import SE2.Swimv2.Entity.User;
  */
 @Remote
 public interface GestoreRichiesteAmiciziaRemote {
-	 void inviaRichiestaAmicizia(User fromUser, User toUser);
-	 Set<RichiestaAmicizia> elencaRichiesteAmicizia(User user);
-	 boolean presentiNuoveRichieste(User user);
-	 void accettaRichiestaAmicizia(RichiestaAmicizia richiestaDaAccettare);
-	 void rifiutaRichiestaAmicizia(RichiestaAmicizia richiestaDaRifiutare);
-	 
+	 void inviaRichiestaAmicizia(long fromUser, long toUser) throws RichiestaAmiciziaException;
+	 List<RichiestaAmicizia> elencoRichiesteAmicizia(long user);
+	 boolean presentiNuoveRichieste(long user);
+	 void accettaRichiestaAmicizia(RichiestaAmicizia richiestaAmicizia);
+	 void rifiutaRichiestaAmicizia(RichiestaAmicizia richiestaAmicizia);
 }
