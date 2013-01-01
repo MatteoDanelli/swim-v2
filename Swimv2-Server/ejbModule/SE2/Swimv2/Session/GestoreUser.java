@@ -1,16 +1,22 @@
 package SE2.Swimv2.Session;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 
 import SE2.Swimv2.Entity.Skill;
 import SE2.Swimv2.Entity.User;
+import SE2.Swimv2.Exceptions.UserException;
 
 /**
  * @author Daniel Cantoni, Matteo Danelli
@@ -20,50 +26,280 @@ import SE2.Swimv2.Entity.User;
 public class GestoreUser implements GestoreUserRemote {
 	@PersistenceContext(unitName = "Swimv2")
 	EntityManager database;
-	
+	@EJB 
+	private GestoreAmiciLocal gestoreAmici;
+
     /**
      *  Inserisce un nuovo utente,  assegnandoli tutti i suoi attributi.
      */
 	@Override
-	public long addUser(String email, String password, String nome,String cognome, String provincia, char sesso, Date datanascita,
-			Set<Skill> personalSkill) {
-			User newUser = new User(email, password, nome, cognome, provincia, sesso, datanascita);
+	public long addUser(String email, String password, String nome,
+			String cognome, String provincia, char sesso, Date dataNascita,
+			Set<Skill> personalSkill) throws UserException {
+
+		User newUser = new User(email, password, nome, cognome, provincia, sesso, dataNascita, personalSkill);
     	try{
-    		newUser.setSkillPossedute(personalSkill);
     		database.persist(newUser);
+    		database.flush();
+    		return newUser.getId();
     	}catch(PersistenceException e){
-    		//Entità già presente.
-    		return -1;
-    	}
-		return newUser.getId();
+    		throw new UserException("Errore, utente non inserito");
+    	}    	
 	}
 
-	/**
-	 * 
-	 */
 	@Override
-	public void modificaEmail(User user, String email) {
-		// TODO Auto-generated method stub
+	public void modificaEmail(long userId, String email) throws UserException {
 		
-	}
-
-	@Override
-	public void modificaPassword(User user, String password) {
-		// TODO Auto-generated method stub
+		User user = database.find(User.class, userId);
 		
+		try{
+			user.setEmail(email);
+			database.merge(user);
+		}catch(NullPointerException e){
+    		throw new UserException("Errore, dati non modificati");
+		}catch(PersistenceException e){
+    		throw new UserException("Errore, dati non modificati");
+    	}				
 	}
 
 	@Override
-	public void modificaAnagrafica(String nome, String cognome,
-			String provincia, char sesso, Date datanascita) {
-		// TODO Auto-generated method stub
+	public void modificaPassword(long userId, String password)throws UserException {
 		
+		User user = database.find(User.class, userId);
+		try{
+			user.setPassword(password);
+			database.merge(user);
+		}catch(NullPointerException e){
+    		throw new UserException("Errore, dati non modificati");
+		}catch(PersistenceException e){
+    		throw new UserException("Errore, dati non modificati");
+    	}		
 	}
 
 	@Override
-	public User getById(long id) {
-		User u = database.find(User.class, id);
-		return u;
+	public void modificaAnagrafica(long userId, String nome, String cognome,
+			String provincia, char sesso, Date dataNascita)
+			throws UserException {
+		
+		User user = database.find(User.class, userId);
+		try{
+			user.setNome(nome);
+			user.setCognome(cognome);
+			user.setProvincia(provincia);
+			user.setSesso(sesso);
+			user.setDataDiNascita(dataNascita);
+			database.merge(user);
+		}catch(NullPointerException e){
+    		throw new UserException("Errore, dati non modificati");
+		}catch(PersistenceException e){
+    		throw new UserException("Errore, dati non modificati");
+    	}		
 	}
 
+	@Override
+	public void modificaPersonalSkill(long userId, Set<Skill> personalSkill)
+			throws UserException {
+		
+		User user = database.find(User.class, userId);
+		try{
+			user.setSkillPossedute(personalSkill);
+			database.merge(user);
+		}catch(NullPointerException e){
+    		throw new UserException("Errore, dati non modificati");
+		}catch(PersistenceException e){
+    		throw new UserException("Errore, dati non modificati");
+    	}		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> cercaPerNome(String nome) {
+
+		Query q = database.createQuery("FROM User u WHERE u.nome = :nome ORDER BY u.nome asc, u.cognome asc");
+		q.setParameter("nome", nome);
+		
+		try{
+			List<User> result =(List<User>) q.getResultList();
+			return result;
+		}catch (EntityNotFoundException e){
+		}catch (NoResultException e) {
+		}
+		return null;		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> cercaPerCognome(String cognome) {
+
+		Query q = database.createQuery("FROM User u WHERE u.cognome = :cognome ORDER BY u.cognome asc, u.nome asc");
+		q.setParameter("cognome", cognome);
+		
+		try{
+			List<User> result =(List<User>) q.getResultList();
+			return result;
+		}catch (EntityNotFoundException e){
+		}catch (NoResultException e) {
+		}
+		return null;		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> cercaPerNominativo(String nome, String cognome) {
+		
+		Query q = database.createQuery("FROM User u WHERE u.cognome = :cognome and u.nome = :nome ORDER BY u.cognome asc, u.nome asc");
+		q.setParameter("cognome", cognome);
+		q.setParameter("nome", nome);
+		
+		try{
+			List<User> result =(List<User>) q.getResultList();
+			return result;
+		}catch (EntityNotFoundException e){
+		}catch (NoResultException e) {
+		}
+		return null;		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> cercaPerSkill(String nome){
+		
+		Query q = database.createQuery("SELECT u FROM Skill s, User u "+
+										"WHERE s.nome=:nome and u in elements(s.UserCheLaPossiedono) "+
+										"ORDER BY u.cognome asc,u.nome asc ");
+		q.setParameter("nome", nome);
+		
+		try{
+			List<User> result =(List<User>) q.getResultList();
+			return result;
+		}catch (EntityNotFoundException e){
+		}catch (NoResultException e) {
+		}
+		return null;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> cercaAmiciPerNome(long userId, String nome) {
+		
+		Set<User> amici = gestoreAmici.elencoAmici(userId);
+		
+		//se non ho amici è innutile che lancio la query
+		if(amici==null || amici.size()==0){
+			return null;
+		}
+		
+		Query q = database.createQuery("FROM User u WHERE u.nome = :nome and u in (:amici) ORDER BY u.nome asc, u.cognome asc");
+		q.setParameter("nome", nome);
+		q.setParameter("amici", amici);
+		
+		try{
+			List<User> result =(List<User>) q.getResultList();
+			return result;
+		}catch (EntityNotFoundException e){
+		}catch (NoResultException e) {
+		}
+		return null;		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> cercaAmiciPerCognome(long userId, String cognome) {
+		
+		Set<User> amici = gestoreAmici.elencoAmici(userId);
+	
+		//se non ho amici è innutile che lancio la query
+		if(amici==null || amici.size()==0){
+			return null;
+		}
+		
+		Query q = database.createQuery("FROM User u WHERE u.cognome = :cognome and u in (:amici) ORDER BY u.cognome asc,u.nome asc");
+		q.setParameter("cognome", cognome);
+		q.setParameter("amici", amici);
+		
+		try{
+			List<User> result =(List<User>) q.getResultList();
+			return result;
+		}catch (EntityNotFoundException e){
+		}catch (NoResultException e) {
+		}
+		return null;		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> cercaAmiciPerNominativo(long userId, String nome,
+			String cognome) {
+		
+		Set<User> amici = gestoreAmici.elencoAmici(userId);
+		
+		//se non ho amici è innutile che lancio la query
+		if(amici==null || amici.size()==0){
+			return null;
+		}
+		
+		Query q = database.createQuery("FROM User u WHERE u.cognome = :cognome and u.nome = :nome " +
+									   "and u in (:amici) ORDER BY u.cognome asc,u.nome asc");
+		q.setParameter("nome", nome);
+		q.setParameter("cognome", cognome);
+		q.setParameter("amici", amici);
+		
+		try{
+			List<User> result =(List<User>) q.getResultList();
+			return result;
+		}catch (EntityNotFoundException e){
+		}catch (NoResultException e) {
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> cercaAmiciPerSkill(long userId, String nome) {
+
+		Set<User> amici = gestoreAmici.elencoAmici(userId);
+		
+		//se non ho amici è innutile che lancio la query
+		if(amici==null || amici.size()==0){
+			return null;
+		}
+				
+		Query q = database.createQuery("SELECT u FROM Skill s, User u "+
+										"WHERE s.nome=:nome and u in elements(s.UserCheLaPossiedono) "+
+										"and u in (:amici) "+
+										"ORDER BY u.cognome asc,u.nome asc ");
+		q.setParameter("nome", nome);
+		q.setParameter("amici", amici);
+		try{
+			List<User> result =(List<User>) q.getResultList();
+			return result;
+		}catch (EntityNotFoundException e){
+		}catch (NoResultException e) {
+		}
+		return null;
+	}
+
+	@Override
+	public User getById(long userId) {
+		User result= database.find(User.class, userId);
+		return result;
+	}
+
+	@Override
+	public User getByEmail(String email) {
+		
+		Query q = database.createQuery("FROM User u WHERE u.email= :email ");
+		q.setParameter("email", email);
+		
+		try{
+			User result =(User) q.getSingleResult();
+			return result;
+		}catch (EntityNotFoundException e){
+		}catch (NoResultException e) {
+		}catch (NonUniqueResultException e){
+		}
+		return null;		
+	}
+	
 }
