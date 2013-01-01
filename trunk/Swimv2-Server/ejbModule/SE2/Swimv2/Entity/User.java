@@ -33,19 +33,6 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public User(){
-	};
-	
-	public User(String mail, String password, String nome, String cognome, String provincia, char sesso, Date data) {
-		this.email=mail;
-		this.nome=nome;
-		this.cognome=cognome;
-		setPassword(password);
-		this.provincia=provincia;
-		this.sesso=sesso;
-		this.dataDiNascita=data;
-	}
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID_USER")
@@ -108,127 +95,122 @@ public class User implements Serializable {
             )
 	private Set<User> amici2;
 	
-	//Getters and setters
+	public User(){
+	};
+	
+	public User(String mail, String password, String nome, String cognome, String provincia, char sesso, Date data,Set<Skill> skillPossedute) {
+		this.email=mail;
+		this.nome=nome;
+		this.cognome=cognome;
+		this.password=password;
+		this.provincia=provincia;
+		this.sesso=sesso;
+		this.dataDiNascita=data;
+		this.skillPossedute = skillPossedute;
+	}
+	
+	//getter
+	public long getId() {
+		return id;
+	}
 
 	public String getEmail() {
 		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getNome() {
 		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public String getCognome() {
 		return cognome;
 	}
 
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-
 	public String getProvincia() {
 		return provincia;
-	}
-
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
 	}
 
 	public char getSesso() {
 		return sesso;
 	}
 
-	public void setSesso(char sesso) {
-		this.sesso = sesso;
-	}
-
 	public Date getDataDiNascita() {
 		return dataDiNascita;
 	}
 
-	public void setDataDiNascita(Date dataDiNascita) {
-		this.dataDiNascita = dataDiNascita;
-	}
-
-	public long getId() {
-		return id;
-	}
 	public Set<RichiestaSkill> getRichiesteSkill() {
 		return richiesteSkill;
 	}
-	public void setRichiesteSkill(Set<RichiestaSkill> richiesteSkill) {
-		this.richiesteSkill = richiesteSkill;
-	}
+
 	public Set<RichiestaAmicizia> getRichiesteAmiciziaInviate() {
 		return richiesteAmiciziaInviate;
 	}
-	public void setRichiesteAmiciziaInviate(
-			Set<RichiestaAmicizia> richiesteAmiciziaInviate) {
-		this.richiesteAmiciziaInviate = richiesteAmiciziaInviate;
-	}
+
 	public Set<RichiestaAmicizia> getRichiesteAmiciziaRicevute() {
 		return richiesteAmiciziaRicevute;
 	}
-	public void setRichiesteAmiciziaRicevute(
-			Set<RichiestaAmicizia> richiesteAmiciziaRicevute) {
-		this.richiesteAmiciziaRicevute = richiesteAmiciziaRicevute;
-	}
+
 	public Set<Feedback> getFeedbackInviati() {
 		return feedbackInviati;
 	}
-	public void setFeedbackInviati(Set<Feedback> feedbackInviati) {
-		this.feedbackInviati = feedbackInviati;
-	}
+
 	public Set<Feedback> getFeedbackRicevuti() {
 		return feedbackRicevuti;
 	}
-	public void setFeedbackRicevuti(Set<Feedback> feedbackRicevuti) {
-		this.feedbackRicevuti = feedbackRicevuti;
-	}
+
 	public Set<Skill> getSkillPossedute() {
 		return skillPossedute;
 	}
-	public void setSkillPossedute(Set<Skill> skillPossedute) {
-		this.skillPossedute = skillPossedute;
-	}
+
 	public Set<User> getAmici1() {
 		return amici1;
-	}
-
-	public void setAmici1(Set<User> amici1) {
-		this.amici1 = amici1;
 	}
 
 	public Set<User> getAmici2() {
 		return amici2;
 	}
 
-	public void setAmici2(Set<User> amici2) {
-		this.amici2 = amici2;
+	//setter
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+	public void setSesso(char sesso) {
+		this.sesso = sesso;
+	}
+
+	public void setDataDiNascita(Date dataDiNascita) {
+		this.dataDiNascita = dataDiNascita;
+	}
+
+	public void setSkillPossedute(Set<Skill> skillPossedute) {
+		this.skillPossedute = skillPossedute;
+	}
+
 	// ADD per relazione many to many
 	public void addAmico(User user){
 		this.amici1.add(user);
 	}
-	
-	public String toString() {
-		return (this.nome +" "+ this.cognome +" "+ this.email +" ");
-	}
+
+
 }

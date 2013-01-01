@@ -34,6 +34,10 @@ public class GestoreAmici implements GestoreAmiciRemote, GestoreAmiciLocal {
 	@Override
 	public void aggiungiAmicizia(long idUser1, long idUser2) throws AmiciException{
 
+		if(this.verificaAmicizia(idUser1, idUser2)){
+			throw new AmiciException("Gli User sono già amici");
+		}
+		
 		if(idUser1!=idUser2){
 			User user1 = database.find(User.class, idUser1);
 			User user2 = database.find(User.class, idUser2);
