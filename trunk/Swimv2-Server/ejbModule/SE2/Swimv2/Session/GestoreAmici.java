@@ -3,7 +3,6 @@ package SE2.Swimv2.Session;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
