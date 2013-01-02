@@ -30,7 +30,6 @@ public class GestoreSkill implements GestoreSkillRemote {
 		
 		try{
 			database.persist(skill);
-			database.flush();
 		}
 		catch(PersistenceException e){
 			throw new SkillException("Skill non inserita");
@@ -42,14 +41,10 @@ public class GestoreSkill implements GestoreSkillRemote {
 	public List<Skill> getSkillSet() {
 
 		Query q = database.createQuery("FROM Skill s ORDER BY s.nome asc");
-		
-		try{
-			List<Skill> skillSet = (List<Skill>) q.getResultList();
-			return skillSet;
-		}catch (EntityNotFoundException e){
-		}catch (NoResultException e) {
-		}
-		return null;
+
+		List<Skill> skillSet = (List<Skill>) q.getResultList();
+		return skillSet;
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -59,12 +54,8 @@ public class GestoreSkill implements GestoreSkillRemote {
 		Query q = database.createQuery("FROM Skill s WHERE :user in elements(s.UserCheLaPossiedono) ORDER BY s.nome asc");
 		q.setParameter("user", user);
 		
-		try{
-			List<Skill> skillSet = (List<Skill>) q.getResultList();
-			return skillSet;
-		}catch (EntityNotFoundException e){
-		}catch (NoResultException e) {
-		}
-		return null;
+		List<Skill> skillSet = (List<Skill>) q.getResultList();
+		return skillSet;
+
 	}
 }
