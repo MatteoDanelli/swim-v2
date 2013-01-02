@@ -1,6 +1,7 @@
 package SE2.Swimv2.Session;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+
 
 import SE2.Swimv2.Entity.Skill;
 import SE2.Swimv2.Entity.User;
@@ -54,12 +56,13 @@ public class GestoreUser implements GestoreUserRemote {
 		
 		try{
 			user.setEmail(email);
-			database.merge(user);
+			database.flush();
 		}catch(NullPointerException e){
-    		throw new UserException("Errore, dati non modificati");
-		}catch(PersistenceException e){
-    		throw new UserException("Errore, dati non modificati");
-    	}				
+ 		}catch(PersistenceException e){
+    	}catch(IllegalStateException e){
+    	}
+		throw new UserException("Errore, dati non modificati");
+		
 	}
 
 	@Override
@@ -68,12 +71,13 @@ public class GestoreUser implements GestoreUserRemote {
 		User user = database.find(User.class, userId);
 		try{
 			user.setPassword(password);
-			database.merge(user);
+			database.flush();
 		}catch(NullPointerException e){
-    		throw new UserException("Errore, dati non modificati");
-		}catch(PersistenceException e){
-    		throw new UserException("Errore, dati non modificati");
-    	}		
+ 		}catch(PersistenceException e){
+    	}catch(IllegalStateException e){
+    	}
+		throw new UserException("Errore, dati non modificati");
+		
 	}
 
 	@Override
@@ -88,12 +92,13 @@ public class GestoreUser implements GestoreUserRemote {
 			user.setProvincia(provincia);
 			user.setSesso(sesso);
 			user.setDataDiNascita(dataNascita);
-			database.merge(user);
+			database.flush();
 		}catch(NullPointerException e){
-    		throw new UserException("Errore, dati non modificati");
-		}catch(PersistenceException e){
-    		throw new UserException("Errore, dati non modificati");
-    	}		
+ 		}catch(PersistenceException e){
+    	}catch(IllegalStateException e){
+    	}
+		throw new UserException("Errore, dati non modificati");
+		
 	}
 
 	@Override
@@ -103,12 +108,13 @@ public class GestoreUser implements GestoreUserRemote {
 		User user = database.find(User.class, userId);
 		try{
 			user.setSkillPossedute(personalSkill);
-			database.merge(user);
+			database.flush();
 		}catch(NullPointerException e){
-    		throw new UserException("Errore, dati non modificati");
-		}catch(PersistenceException e){
-    		throw new UserException("Errore, dati non modificati");
-    	}		
+ 		}catch(PersistenceException e){
+    	}catch(IllegalStateException e){
+    	}
+		throw new UserException("Errore, dati non modificati");
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -118,13 +124,9 @@ public class GestoreUser implements GestoreUserRemote {
 		Query q = database.createQuery("FROM User u WHERE u.nome = :nome ORDER BY u.nome asc, u.cognome asc");
 		q.setParameter("nome", nome);
 		
-		try{
-			List<User> result =(List<User>) q.getResultList();
-			return result;
-		}catch (EntityNotFoundException e){
-		}catch (NoResultException e) {
-		}
-		return null;		
+		List<User> result =(List<User>) q.getResultList();
+		return result;
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -134,13 +136,9 @@ public class GestoreUser implements GestoreUserRemote {
 		Query q = database.createQuery("FROM User u WHERE u.cognome = :cognome ORDER BY u.cognome asc, u.nome asc");
 		q.setParameter("cognome", cognome);
 		
-		try{
-			List<User> result =(List<User>) q.getResultList();
-			return result;
-		}catch (EntityNotFoundException e){
-		}catch (NoResultException e) {
-		}
-		return null;		
+		List<User> result =(List<User>) q.getResultList();
+		return result;
+	
 	}
 
 	@SuppressWarnings("unchecked")
@@ -151,13 +149,9 @@ public class GestoreUser implements GestoreUserRemote {
 		q.setParameter("cognome", cognome);
 		q.setParameter("nome", nome);
 		
-		try{
-			List<User> result =(List<User>) q.getResultList();
-			return result;
-		}catch (EntityNotFoundException e){
-		}catch (NoResultException e) {
-		}
-		return null;		
+		List<User> result =(List<User>) q.getResultList();
+		return result;
+	
 	}
 
 	@SuppressWarnings("unchecked")
@@ -169,15 +163,10 @@ public class GestoreUser implements GestoreUserRemote {
 										"ORDER BY u.cognome asc,u.nome asc ");
 		q.setParameter("nome", nome);
 		
-		try{
-			List<User> result =(List<User>) q.getResultList();
-			return result;
-		}catch (EntityNotFoundException e){
-		}catch (NoResultException e) {
-		}
-		return null;
+		List<User> result =(List<User>) q.getResultList();
+		return result;
+
 	}
-	
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -187,20 +176,17 @@ public class GestoreUser implements GestoreUserRemote {
 		
 		//se non ho amici è innutile che lancio la query
 		if(amici==null || amici.size()==0){
-			return null;
+			List<User> emptyList = new LinkedList<User>();
+			return emptyList;
 		}
 		
 		Query q = database.createQuery("FROM User u WHERE u.nome = :nome and u in (:amici) ORDER BY u.nome asc, u.cognome asc");
 		q.setParameter("nome", nome);
 		q.setParameter("amici", amici);
 		
-		try{
-			List<User> result =(List<User>) q.getResultList();
-			return result;
-		}catch (EntityNotFoundException e){
-		}catch (NoResultException e) {
-		}
-		return null;		
+		List<User> result =(List<User>) q.getResultList();
+		return result;
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -211,20 +197,17 @@ public class GestoreUser implements GestoreUserRemote {
 	
 		//se non ho amici è innutile che lancio la query
 		if(amici==null || amici.size()==0){
-			return null;
+			List<User> emptyList = new LinkedList<User>();
+			return emptyList;
 		}
 		
 		Query q = database.createQuery("FROM User u WHERE u.cognome = :cognome and u in (:amici) ORDER BY u.cognome asc,u.nome asc");
 		q.setParameter("cognome", cognome);
 		q.setParameter("amici", amici);
 		
-		try{
-			List<User> result =(List<User>) q.getResultList();
-			return result;
-		}catch (EntityNotFoundException e){
-		}catch (NoResultException e) {
-		}
-		return null;		
+		List<User> result =(List<User>) q.getResultList();
+		return result;
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -236,7 +219,8 @@ public class GestoreUser implements GestoreUserRemote {
 		
 		//se non ho amici è innutile che lancio la query
 		if(amici==null || amici.size()==0){
-			return null;
+			List<User> emptyList = new LinkedList<User>();
+			return emptyList;
 		}
 		
 		Query q = database.createQuery("FROM User u WHERE u.cognome = :cognome and u.nome = :nome " +
@@ -245,13 +229,9 @@ public class GestoreUser implements GestoreUserRemote {
 		q.setParameter("cognome", cognome);
 		q.setParameter("amici", amici);
 		
-		try{
-			List<User> result =(List<User>) q.getResultList();
-			return result;
-		}catch (EntityNotFoundException e){
-		}catch (NoResultException e) {
-		}
-		return null;
+		List<User> result =(List<User>) q.getResultList();
+		return result;
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -262,7 +242,8 @@ public class GestoreUser implements GestoreUserRemote {
 		
 		//se non ho amici è innutile che lancio la query
 		if(amici==null || amici.size()==0){
-			return null;
+			List<User> emptyList = new LinkedList<User>();
+			return emptyList;
 		}
 				
 		Query q = database.createQuery("SELECT u FROM Skill s, User u "+
@@ -271,13 +252,10 @@ public class GestoreUser implements GestoreUserRemote {
 										"ORDER BY u.cognome asc,u.nome asc ");
 		q.setParameter("nome", nome);
 		q.setParameter("amici", amici);
-		try{
-			List<User> result =(List<User>) q.getResultList();
-			return result;
-		}catch (EntityNotFoundException e){
-		}catch (NoResultException e) {
-		}
-		return null;
+		
+		List<User> result =(List<User>) q.getResultList();
+		return result;
+
 	}
 
 	@Override
