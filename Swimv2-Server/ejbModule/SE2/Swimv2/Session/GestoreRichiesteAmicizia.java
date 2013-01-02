@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
@@ -51,7 +52,6 @@ public class GestoreRichiesteAmicizia implements GestoreRichiesteAmiciziaRemote{
 			
 			try{
 				database.persist(richiesta);
-				database.flush();
 			}
 			catch(PersistenceException e){
 				throw new RichiestaAmiciziaException("Errore di persistenza");
@@ -69,13 +69,9 @@ public class GestoreRichiesteAmicizia implements GestoreRichiesteAmiciziaRemote{
 		Query q = database.createQuery("FROM RichiestaAmicizia r WHERE r.destinatario=:user ORDER BY r.id desc");
 		q.setParameter("user", user);
 		
-		try{
-			List<RichiestaAmicizia> result =(List<RichiestaAmicizia>) q.getResultList();
-			return result;
-		}catch (EntityNotFoundException e){
-		}catch (NoResultException e) {
-		}
-		return null;
+		List<RichiestaAmicizia> result =(List<RichiestaAmicizia>) q.getResultList();
+		return result;
+
 	}
 
 	@Override
@@ -103,7 +99,6 @@ public class GestoreRichiesteAmicizia implements GestoreRichiesteAmiciziaRemote{
 			
 			try{
 				database.remove(richiesta);
-				database.flush();
 			}
 			catch(PersistenceException e){
 				System.err.println("Impossibile Rimovere la richiestaAmicizia :" + richiesta.getId());
@@ -136,7 +131,6 @@ public class GestoreRichiesteAmicizia implements GestoreRichiesteAmiciziaRemote{
 			
 			try{
 				database.remove(richiesta);
-				database.flush();
 			}
 			catch(PersistenceException e){
 				System.err.println("Impossibile Rimovere la richiestaAmicizia :" + richiesta.getId());
@@ -157,15 +151,15 @@ public class GestoreRichiesteAmicizia implements GestoreRichiesteAmiciziaRemote{
 									   "or (r.mittente=:destinatario and r.destinatario=:mittente)");
 		q.setParameter("mittente", mittente);
 		q.setParameter("destinatario", destinatario);
+		
 		try {
 			Long num= (Long) q.getSingleResult();
 			if(num.longValue()==0){
 				return false;
 			}
-		}
-		catch (EntityNotFoundException e){
-		}
-		catch (NoResultException e) {
+		}catch (EntityNotFoundException e){
+		}catch (NoResultException e) {
+		}catch (NonUniqueResultException e){
 		}
 		return true;
 	}
