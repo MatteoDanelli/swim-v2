@@ -86,7 +86,7 @@
 				
 				<div class="long_link">
 				<img alt="Find people" src="/Swimv2-Client/img/find2.png" width="20" height="20" align="left"> 
-				<p align="left"><h3> <a href="#"> Cerca aiuto </a> </h3> </p>
+				<p align="left"><h3> <a href="/Swimv2-Client/Guest/cerca_utenti.jsp"> Cerca aiuto </a> </h3> </p>
 				
 				</div>
 
