@@ -42,7 +42,11 @@ public class GestoreAmici implements GestoreAmiciRemote, GestoreAmiciLocal {
 			User user1 = database.find(User.class, idUser1);
 			User user2 = database.find(User.class, idUser2);
 		
-			user1.addAmico(user2);
+			try{
+				user1.addAmico(user2);
+			}catch(NullPointerException e){
+				throw new AmiciException("Errore, utente presente nel database");
+			}
 			database.flush();
 		}else{
 			throw new AmiciException("Un utente non può essere amico di se stesso");
@@ -57,12 +61,15 @@ public class GestoreAmici implements GestoreAmiciRemote, GestoreAmiciLocal {
 		User user = database.find(User.class, idUser);
 		Set<User> returnSet = new HashSet<User>();
 		
-		for(User u: user.getAmici1()){
-			returnSet.add(u);
+		if(user!=null){
+			for(User u: user.getAmici1()){
+				returnSet.add(u);
+			}
+			for(User u: user.getAmici2()){
+				returnSet.add(u);
+			}
 		}
-		for(User u: user.getAmici2()){
-			returnSet.add(u);
-		}
+		
 		return returnSet;
 	}
 	
@@ -74,10 +81,14 @@ public class GestoreAmici implements GestoreAmiciRemote, GestoreAmiciLocal {
 		User user2 = database.find(User.class, idUser2);
 		Set<User> amiciUser1;
 
-		amiciUser1= elencoAmici(idUser1);
-		if(amiciUser1.contains(user2)){
-			return true;
+		try{
+			amiciUser1= elencoAmici(idUser1);
+			if(amiciUser1.contains(user2)){
+				return true;
+			}
+		}catch(NullPointerException e){			
 		}
+		
 		return false;
 	}
 

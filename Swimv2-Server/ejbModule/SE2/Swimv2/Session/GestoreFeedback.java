@@ -69,14 +69,9 @@ public class GestoreFeedback implements GestoreFeedbackRemote{
 		Query q = database.createQuery("FROM Feedback f WHERE f.destinatario=:user ORDER BY f.dataPubblicazione desc , f.id desc");
 		q.setParameter("user", user);
 		
-		try{
-			List<Feedback> result =(List<Feedback>) q.getResultList();
-			return result;
-		}catch (EntityNotFoundException e){
-		}
-		catch (NoResultException e) {
-		}
-		return null;
+		List<Feedback> result =(List<Feedback>) q.getResultList();
+		return result;
+
 	}
 
     /**
