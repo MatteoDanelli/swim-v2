@@ -16,6 +16,7 @@ import SE2.Swimv2.Entity.User;
 import SE2.Swimv2.Exceptions.MessaggiException;
 
 /**
+ * @author Matteo Danelli
  * Session Bean implementation class GestoreMessaggi
  */
 @Stateless
