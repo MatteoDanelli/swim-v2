@@ -22,13 +22,6 @@ import SE2.Swimv2.Exceptions.MessaggiException;
 public class GestoreRichiesteAiuto implements GestoreRichiesteAiutoRemote {
 	@PersistenceContext(unitName = "Swimv2")
 	EntityManager database;
-	
-    /**
-     * Default constructor. 
-     */
-    public GestoreRichiesteAiuto() {
-        // TODO Auto-generated constructor stub
-    }
 
 	@Override
 	public void inviaRichiestaAiuto(long mittente, long destinatario, String testo) throws MessaggiException {

@@ -27,13 +27,6 @@ public class GestoreRichiesteAmicizia implements GestoreRichiesteAmiciziaRemote{
 	@EJB 
 	private GestoreAmiciLocal gestoreAmici;
 	
-	
-    /**
-     * Default constructor. 
-     */
-    public GestoreRichiesteAmicizia() {
-        // TODO Auto-generated constructor stub
-    }
 
 	@Override
 	public void inviaRichiestaAmicizia(long fromUser, long toUser)

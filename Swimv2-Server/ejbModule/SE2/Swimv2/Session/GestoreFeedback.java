@@ -23,13 +23,6 @@ public class GestoreFeedback implements GestoreFeedbackRemote{
 	@EJB 
 	private GestoreAmiciLocal gestoreAmici;
 	
-    /**
-     * Costruttore 
-     */
-	
-    public GestoreFeedback() {
-        // TODO Auto-generated constructor stub
-    }
 
     /**
      * Questo metodo crea un nuovo Feedback

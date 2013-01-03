@@ -36,6 +36,15 @@ public class RichiestaSkill implements Serializable {
 	@JoinColumn(name="MITTENTE", nullable=false)
 	private User mittente;
 
+	//Default constructor
+	public RichiestaSkill(){
+		
+	}
+	
+	public RichiestaSkill(User mittente, String skill) {
+		this.mittente=mittente;
+		this.skillRichiesta=skill;
+	}
 	//Getters and setters
 
 	public boolean isRichiestaLetta() {
