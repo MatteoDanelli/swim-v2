@@ -3,6 +3,8 @@
  */
 package SE2.Swimv2.Session;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,6 +12,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import SE2.Swimv2.Entity.Admin;
+import SE2.Swimv2.Exceptions.AdminException;
 
 /**
  * @author Matteo Danelli
@@ -22,13 +25,13 @@ public class GestoreAdmin implements GestoreAdminRemote {
 
 	//Crea l'admin con la mail e la password dati come parametri
 	@Override
-	public void createAdmin(String email, String password) {
+	public void createAdmin(String email, String password) throws AdminException {
 		try {
 			database.persist(new Admin(email, password));
 		}
 		catch (PersistenceException e)
 		{
-			//Admin già presente! Deve essere unico, per cui non dovrebbe mai arrivare qui!
+			throw new AdminException("Admin già presente!");
 		}
 	}
 
@@ -42,4 +45,13 @@ public class GestoreAdmin implements GestoreAdminRemote {
 		q.setParameter("password", nuovaPassword);
 		q.executeUpdate();
 		}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Admin> getAdmin() {
+		Query q = database.createQuery("FROM Admin");
+		List<Admin> adminTrovati = (List<Admin>) q.getResultList();
+		return adminTrovati;
+	}
+	
 }

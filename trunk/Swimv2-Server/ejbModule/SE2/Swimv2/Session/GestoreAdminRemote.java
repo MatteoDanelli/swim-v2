@@ -3,7 +3,12 @@
  */
 package SE2.Swimv2.Session;
 
+import java.util.List;
+
 import javax.ejb.Remote;
+
+import SE2.Swimv2.Entity.Admin;
+import SE2.Swimv2.Exceptions.AdminException;
 
 /**
  * @author Matteo Danelli
@@ -11,6 +16,7 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface GestoreAdminRemote {
-	void createAdmin(String email, String password);
+	void createAdmin(String email, String password) throws AdminException;
 	void modificaPassword(String email, String nuovaPassword);
+	List<Admin> getAdmin();
 }
