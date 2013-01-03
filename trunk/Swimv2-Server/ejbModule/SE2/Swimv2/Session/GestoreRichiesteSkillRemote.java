@@ -3,7 +3,7 @@
  */
 package SE2.Swimv2.Session;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.ejb.Remote;
 
@@ -17,10 +17,10 @@ import SE2.Swimv2.Entity.User;
  */
 @Remote
 public interface GestoreRichiesteSkillRemote {
-	Set<RichiestaSkill> elencoRichieste();
+	List<RichiestaSkill> elencoRichieste();
 	void settaComeLetta(RichiestaSkill skillLetta);
 	void accettaRichiesta(RichiestaSkill skillDaAccettare);
 	void rifiutaRichiesta(RichiestaSkill skillDaRifiutare);
-	void inviaRichiestaAggiuntaSkill(User userCheLaRichiede, Skill skillRichiesta);
+	void inviaRichiestaAggiuntaSkill(long userCheLaRichiede, String skillRichiesta);
 	
 }

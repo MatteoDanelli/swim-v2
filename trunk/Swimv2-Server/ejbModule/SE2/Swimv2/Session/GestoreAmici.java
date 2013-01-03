@@ -19,13 +19,7 @@ public class GestoreAmici implements GestoreAmiciRemote, GestoreAmiciLocal {
 	@PersistenceContext(unitName = "Swimv2")
 	EntityManager database;
 	
-	/**
-     * Costruttore
-     */
-    public GestoreAmici() {
-        // TODO Auto-generated constructor stub
-    }
-    
+ 
     /**
      * Questo metodo aggiunge una relazione di amicizia tra i 2 user
      * 

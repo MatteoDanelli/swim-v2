@@ -24,11 +24,6 @@ public class GestoreMessaggi implements GestoreMessaggiRemote {
 	@PersistenceContext(unitName = "Swimv2")
 	EntityManager database;
 	
-    /**
-     * Default constructor. 
-     */
-    public GestoreMessaggi() {
-    }
 
 	@Override
 	public void inviaMessaggio(long mittente, long destinatario, String testo) throws MessaggiException {

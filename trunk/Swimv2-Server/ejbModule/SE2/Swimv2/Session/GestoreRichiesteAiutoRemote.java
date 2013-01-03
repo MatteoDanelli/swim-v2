@@ -1,12 +1,10 @@
 package SE2.Swimv2.Session;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Remote;
 
 import SE2.Swimv2.Entity.Messaggio;
-import SE2.Swimv2.Entity.User;
 import SE2.Swimv2.Exceptions.MessaggiException;
 /**
  * @author Daniel Cantoni
