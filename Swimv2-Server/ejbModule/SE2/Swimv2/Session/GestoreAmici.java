@@ -21,7 +21,7 @@ public class GestoreAmici implements GestoreAmiciRemote, GestoreAmiciLocal {
 	
  
     /**
-     * Questo metodo aggiunge una relazione di amicizia tra i 2 user
+     * Questo metodo aggiunge una relazione di amicizia tra 2 user
      * 
      */
 	@Override

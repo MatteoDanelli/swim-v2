@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ GestoreAdminTest.class })
+@SuiteClasses({ GestoreAdminTest.class, GestoreAmiciTest.class } )
 public class AllTests {
 	
 }
