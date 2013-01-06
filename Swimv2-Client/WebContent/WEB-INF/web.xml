@@ -49,4 +49,14 @@
     <servlet-name>RicercaUtentiServlet</servlet-name>
     <url-pattern>/RicercaUtentiServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ModificaDatiServlet</display-name>
+    <servlet-name>ModificaDatiServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.ModificaDatiServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModificaDatiServlet</servlet-name>
+    <url-pattern>/ModificaDatiServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

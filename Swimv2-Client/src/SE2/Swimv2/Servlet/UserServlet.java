@@ -51,7 +51,7 @@ public class UserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			Long id= (Long) request.getSession().getAttribute("userId");
+			Long id= (Long) request.getSession().getAttribute(USER_ID);
 			//se non esiste una sessione richiamo l' home page
 			if(id==null){
 				request.setAttribute(ERROR, LOGIN_ERROR);
@@ -81,8 +81,6 @@ public class UserServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 	}
 
-	
-	
 	private GestoreUserRemote getGestoreUserRemote() throws NamingException{
 		Context jndiContext = new InitialContext();
 		Object obj = jndiContext.lookup("GestoreUser/remote");

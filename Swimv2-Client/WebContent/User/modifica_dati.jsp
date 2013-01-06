@@ -20,7 +20,7 @@
 	  		</a>
 	  		
 	  		<span class="page_title">
-					User Page
+					User Data Page
 		  	</span>
 	  		
   		</div>
@@ -50,30 +50,57 @@
 						request.getRequestDispatcher("index.jsp").forward(request, response);
 					}
 					User user = (User) request.getAttribute("user");
-					if(user!= null) {
-						out.println("<p> Benvenuto "+ user.getNome() +"</p>");
-					}else{
+					if(user== null) {
 						request.getRequestDispatcher("index.jsp").forward(request, response);
 					}
 						
 					%>
-					
- 					<div class="box margintop">
+					 <div class="box">
 			  			<div class="box_title">
-							Notifiche
+							Modifica i tuoi Dati
 						</div>
 	  		
 				  		<div class="box_contents">
-							<p>Ci sono:</p><br>
-							<p>O Messaggi -<a href="#">Visualizza tutti i messaggi</a></p>
-							<p>O Richieste d'aiuto -<a href="#">Visualizza tutte le richiesta d'aiuto</a>	</p>
-							<p>O Richieste d'amicizia -<a href="#">Visualizza tutte le richiesta d'amicizia</a></p>		
+					<form action="ModificaDatiServlet" method="post">
+
+						<label>E-Mail: </label>
+						<input type="text" name="email" value="<%out.print(user.getEmail());%>">
+						<br>
+						<label>Password: </label>
+						<input type="password" name="password">
+						<br>
+						<label>Nome: </label>
+						<input type="text" name="nome" value="<%out.print(user.getNome());%>">
+						<br>
+						<label>Cognome: </label>
+						<input type="text" name="cognome" value="<%out.print(user.getCognome());%>">
+						<br>
+						<label>Provincia: </label>
+						<input type="text" name="provincia" value="<%out.print(user.getProvincia());%>">
+						<br>
+						<label>Sesso: </label>
+						<%if(user.getSesso()=='m'){ %>
+							<input type="radio" name="sesso" value="m" checked>Maschio
+							<input type="radio" name="sesso" value="f">Femmina
+						<%}else if(user.getSesso()=='f'){ %>
+							<input type="radio" name="sesso" value="m">Maschio
+							<input type="radio" name="sesso" value="f" checked>Femmina
+						<%}else{ %>
+							<input type="radio" name="sesso" value="m">Maschio
+							<input type="radio" name="sesso" value="f">Femmina
+						<%} %>
+						<br>
+						<label>Data di Nascita: </label>
+						<input type="text" name="data" value="<%if(user.getDataDiNascita()!=null){out.print(user.getDataDiNascita().toString());}%>">
+						<br>
+						
+						
+						<input type="submit" value="Modifica">
+					</form>		
 						</div> 
 	  		
 	  				</div>
-
-
-	  
+					
 	  </div>
 	</div>
   
