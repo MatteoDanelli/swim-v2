@@ -57,6 +57,7 @@ public class GestoreUser implements GestoreUserRemote {
 		try{
 			user.setEmail(email);
 			database.flush();
+			return;
 		}catch(NullPointerException e){
  		}catch(PersistenceException e){
     	}catch(IllegalStateException e){
@@ -72,6 +73,7 @@ public class GestoreUser implements GestoreUserRemote {
 		try{
 			user.setPassword(password);
 			database.flush();
+			return;
 		}catch(NullPointerException e){
  		}catch(PersistenceException e){
     	}catch(IllegalStateException e){
@@ -93,6 +95,7 @@ public class GestoreUser implements GestoreUserRemote {
 			user.setSesso(sesso);
 			user.setDataDiNascita(dataNascita);
 			database.flush();
+			return;
 		}catch(NullPointerException e){
  		}catch(PersistenceException e){
     	}catch(IllegalStateException e){
@@ -109,6 +112,7 @@ public class GestoreUser implements GestoreUserRemote {
 		try{
 			user.setSkillPossedute(personalSkill);
 			database.flush();
+			return;
 		}catch(NullPointerException e){
  		}catch(PersistenceException e){
     	}catch(IllegalStateException e){
