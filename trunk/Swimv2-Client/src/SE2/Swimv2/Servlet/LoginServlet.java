@@ -29,6 +29,7 @@ public class LoginServlet extends HttpServlet {
 	private static final String ADMIN_ID= "adminId";
 	private static final String EMAIL= "email";
 	private static final String PSW= "password";
+	private static final String UNKNOWN_ERROR="Errore Sconosciuto";
 	
 	//nomi pagine
 	private static final String HOME_PAGE = "index.jsp";
@@ -49,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.doPost(request, response);
+		response.sendRedirect(HOME_PAGE);
 	}
 
 	/**
@@ -57,28 +58,31 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		long id;
+		GestoreLoginRemote gestoreLogin;
 		try {
-					
-			GestoreLoginRemote gestoreLogin = this.getGestoreLoginRemote();
-			
-			String email = request.getParameter(EMAIL);
-			String password = request.getParameter(PSW);
-			
-				try{
-					id=gestoreLogin.loginUser(email, password);
-					request.getSession().setAttribute(USER_ID, id);
-					response.sendRedirect(USER_SERVLET);
-
-				}
-				catch (LoginException e) {
-					request.setAttribute(ERROR, LOGIN_ERROR);
-					request.getRequestDispatcher(HOME_PAGE).forward(request, response);
-				}
+			gestoreLogin = this.getGestoreLoginRemote();
 
 		}
 		catch (NamingException e) {
 				response.sendRedirect(ERROR_PAGE);
+				return;
+		}
+		
+		String email = request.getParameter(EMAIL);
+		String password = request.getParameter(PSW);
+		
+			try{
+				id=gestoreLogin.loginUser(email, password);
+				request.getSession().setAttribute(USER_ID, id);
+				response.sendRedirect(USER_SERVLET);
+				return;
+
 			}
+			catch (LoginException e) {
+				request.setAttribute(ERROR, LOGIN_ERROR);
+				request.getRequestDispatcher(HOME_PAGE).forward(request, response);
+			}
+
 	}
 	
 	private GestoreLoginRemote getGestoreLoginRemote() throws NamingException{

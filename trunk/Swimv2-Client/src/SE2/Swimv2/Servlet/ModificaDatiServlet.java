@@ -71,17 +71,20 @@ public class ModificaDatiServlet extends HttpServlet {
 				User user= gestoreUser.getById(id.longValue());
 				request.setAttribute(USER, user);
 			} catch (NamingException e) {
-
+				response.sendRedirect(ERROR_PAGE);
+				return;
 			}
-			request.getRequestDispatcher(USER_MODIFICA_DATI_PAGE).forward(request, response);
-			
 		}
+		
+		request.getRequestDispatcher(USER_MODIFICA_DATI_PAGE).forward(request, response);
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		GestoreUserRemote gestoreUser;
 		String email= request.getParameter(EMAIL);
 		String psw= request.getParameter(PASSWORD);
 		String nome= request.getParameter(NOME);
@@ -102,17 +105,36 @@ public class ModificaDatiServlet extends HttpServlet {
 		}
 		
 		try {
-			GestoreUserRemote gestoreUser = getGestoreUserRemote();
+			gestoreUser = getGestoreUserRemote();
+		} catch (NamingException e) {
+			response.sendRedirect(ERROR_PAGE);
+			return;
+		}
+		
+		try {
 			gestoreUser.modificaAnagrafica(id, nome, cognome, provincia, sesso, data);
+		} catch (UserException e) {
+			request.setAttribute(ERROR, "Dati Non Validi");
+			request.getRequestDispatcher(ERROR_PAGE).forward(request, response);
+			return;
+		}
+		
+		try {
 			gestoreUser.modificaEmail(id, email);
+		} catch (UserException e) {
+			request.setAttribute(ERROR, "Email Non Valida");
+			request.getRequestDispatcher(ERROR_PAGE).forward(request, response);
+			return;
+		}
+		
+		try {
 			if(psw!=""){
 				gestoreUser.modificaPassword(id, psw);
 			}
-
-		} catch (NamingException e) {
-
 		}catch (UserException e){
-			
+			request.setAttribute(ERROR, "Password Non Valida");
+			request.getRequestDispatcher(ERROR_PAGE).forward(request, response);
+			return;
 		}
 		
 		response.sendRedirect(USER_SERVLET);
