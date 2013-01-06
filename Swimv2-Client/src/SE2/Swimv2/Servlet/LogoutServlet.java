@@ -24,7 +24,6 @@ public class LogoutServlet extends HttpServlet {
 	
 	//nomi pagine
 	private static final String HOME_PAGE = "index.jsp";
-	private static final String ERROR_PAGE = "error.jsp";
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,13 +39,13 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession sessione = request.getSession();
-
+		
         if (sessione.getAttribute(USER_ID) != null) {
             sessione.setAttribute(USER_ID, null);
         }
         else if (sessione.getAttribute(ADMIN_ID) != null) {
             sessione.setAttribute(ADMIN_ID, null);
-    }
+        }
 		request.setAttribute(MESSAGE, LOGOUT_OK);
 		request.getRequestDispatcher(HOME_PAGE).forward(request, response);
 

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import SE2.Swimv2.Entity.User;
 import SE2.Swimv2.Session.GestoreLoginRemote;
+import SE2.Swimv2.Session.GestoreRichiesteAmiciziaRemote;
 import SE2.Swimv2.Session.GestoreUserRemote;
 
 /**
@@ -22,8 +23,8 @@ public class UserServlet extends HttpServlet {
     
 	//nomi attributi
 	private static final String ERROR = "Errore";
-
 	private static final String USER= "user";
+	private static final String RIC_AMICIZIA= "richiesteAmicizia";
 	
 	//valori attributi
 	private static final String LOGIN_ERROR= "logError";
@@ -52,6 +53,9 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 			Long id= (Long) request.getSession().getAttribute(USER_ID);
+			GestoreUserRemote gestoreUser;
+			GestoreRichiesteAmiciziaRemote gestoreRichiesteAmicizia;
+			
 			//se non esiste una sessione richiamo l' home page
 			if(id==null){
 				request.setAttribute(ERROR, LOGIN_ERROR);
@@ -62,16 +66,21 @@ public class UserServlet extends HttpServlet {
 			if(request.getAttribute(USER)==null){
 			
 				try {
-					GestoreUserRemote gestoreUser = getGestoreUserRemote();
+					gestoreUser = this.getGestoreUserRemote();
+					gestoreRichiesteAmicizia = this.getGestoreRichiesteAmiciziaRemote();
+				} catch (NamingException e) {
+					response.sendRedirect(ERROR_PAGE);
+					return;
+				}					
+					
 					User user= gestoreUser.getById(id.longValue());
 					request.setAttribute(USER, user);
-				} catch (NamingException e) {
-
-				}
-				request.getRequestDispatcher(USER_PAGE).forward(request, response);
-				
+					Integer numRichiesteAmicizia= gestoreRichiesteAmicizia.numeroDiNuoveRichieste(id);
+					request.setAttribute(RIC_AMICIZIA, numRichiesteAmicizia);
 			}
-
+			
+			request.getRequestDispatcher(USER_PAGE).forward(request, response);
+			
 	}
 
 	/**
@@ -87,4 +96,12 @@ public class UserServlet extends HttpServlet {
 		GestoreUserRemote manager = (GestoreUserRemote) obj;
 		return manager;
 	}
+	
+	private GestoreRichiesteAmiciziaRemote getGestoreRichiesteAmiciziaRemote() throws NamingException{
+		Context jndiContext = new InitialContext();
+		Object obj = jndiContext.lookup("GestoreRichiesteAmicizia/remote");
+		GestoreRichiesteAmiciziaRemote manager = (GestoreRichiesteAmiciziaRemote) obj;
+		return manager;
+	}
+
 }

@@ -48,13 +48,21 @@
 					if(id==null){
 						request.setAttribute("Errore", "logError");
 						request.getRequestDispatcher("index.jsp").forward(request, response);
+						return;
 					}
+					
 					User user = (User) request.getAttribute("user");
 					if(user!= null) {
 						out.println("<p> Benvenuto "+ user.getNome() +"</p>");
 					}else{
 						request.getRequestDispatcher("index.jsp").forward(request, response);
 					}
+					
+					Integer numRichiesteAmicizia = (Integer)request.getAttribute("richiesteAmicizia");
+					if( numRichiesteAmicizia==null){
+						numRichiesteAmicizia=0;
+					}
+					
 						
 					%>
 					
@@ -65,9 +73,9 @@
 	  		
 				  		<div class="box_contents">
 							<p>Ci sono:</p><br>
-							<p>O Messaggi -<a href="#">Visualizza tutti i messaggi</a></p>
+							<p>0 Messaggi -<a href="#">Visualizza tutti i messaggi</a></p>
 							<p>O Richieste d'aiuto -<a href="#">Visualizza tutte le richiesta d'aiuto</a>	</p>
-							<p>O Richieste d'amicizia -<a href="#">Visualizza tutte le richiesta d'amicizia</a></p>		
+							<p><%out.print(numRichiesteAmicizia.intValue()); %> Richieste d'amicizia -<a href="#">Visualizza tutte le richiesta d'amicizia</a></p>		
 						</div> 
 	  		
 	  				</div>
