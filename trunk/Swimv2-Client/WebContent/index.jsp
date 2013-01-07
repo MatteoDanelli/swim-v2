@@ -97,7 +97,7 @@
 					Log In
 				</div>
 				<div class="box_contents">
-					<form action="LoginServlet" method="post">
+					<form action="/Swimv2-Client/LoginServlet?type=user" method="post">
 					<%
 					String error= (String) request.getAttribute("Errore");
 					if(error!= null && error.equals("logError")) {
