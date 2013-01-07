@@ -13,6 +13,7 @@ import SE2.Swimv2.Entity.User;
 import SE2.Swimv2.Exceptions.FeedbackException;
 
 /**
+ * @author Daniel Cantoni, Matteo Danelli
  * Session Bean implementation class GestoreFeedback
  */
 @Stateless
@@ -26,31 +27,35 @@ public class GestoreFeedback implements GestoreFeedbackRemote{
 
     /**
      * Questo metodo crea un nuovo Feedback
+     * @param idMittente mittente del feedback
+     * @param idDestinatario destinatario del feedback
+     * @param stelleDaAssegnare stelle assegnate attraverso il feedback
+     * @param commento commento del feedback; opzionale.
      * @throws FeedbackException 
      */
 	@Override
 	public void creaFeedback(long idMittente, long idDestinatario, int stelleDaAssegnare,
 			String commento) throws FeedbackException {
 	
-		if(stelleDaAssegnare<0 || stelleDaAssegnare>5){
+		if(stelleDaAssegnare<0 || stelleDaAssegnare>5) {
 			throw new FeedbackException("Il numero di stelle deve essere compreso tra 0 e 5");
 		}
 		
-		if(gestoreAmici.verificaAmicizia(idMittente, idDestinatario)){
+		if(gestoreAmici.verificaAmicizia(idMittente, idDestinatario)) {
 			
 			User mittente = database.find(User.class, idMittente);
 			User destinatario = database.find(User.class, idDestinatario);
 			
 			Feedback feedback = new Feedback(mittente,destinatario,stelleDaAssegnare, commento);
 			database.persist(feedback);
-		}else{
+		} else{
 			throw new FeedbackException("Impossibile creare il Feedback, gli User non sono amici");
 		}
 
 	}
 
     /**
-     * Questo metodo restituisce la lista di feedback, associata ad un utente
+     * Questo metodo restituisce la lista di feedback ricevuti, associata ad un utente
      */
 	@SuppressWarnings("unchecked")
 	@Override
