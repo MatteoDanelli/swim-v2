@@ -44,14 +44,18 @@
   	<div class="wrapper">
 	  <div class="margintop content">
 	  				<%
+	  				//verifico sessione
 					Long id= (Long) request.getSession().getAttribute("userId");
 					if(id==null){
 						request.setAttribute("Errore", "logError");
-						request.getRequestDispatcher("index.jsp").forward(request, response);
+						request.getRequestDispatcher("/index.jsp").forward(request, response);
+						return;
 					}
+					
 					User user = (User) request.getAttribute("user");
 					if(user== null) {
-						request.getRequestDispatcher("index.jsp").forward(request, response);
+						response.sendRedirect("/Swimv2-Client/UserServlet");
+						return;
 					}
 						
 					%>

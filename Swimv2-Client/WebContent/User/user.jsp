@@ -33,7 +33,7 @@
 				<li><a class="first" href="UserServlet">Home Page</a></li>
 				<li><a href="#">Cerca Utente</a></li>
 				<li><a href="#">Visualizza Amici</a></li>
-				<li><a href="ModificaDatiServlet">Modifica Dati</a></li>
+				<li><a href="/Swimv2-Client/ModificaDatiServlet">Modifica Dati</a></li>
 				<li><a href="#">Modifica Skills</a></li>
 				<li><a href="#">Proponi Abilità</a></li>
 				<li><a href="LogoutServlet">Logout</a></li>
@@ -44,18 +44,21 @@
   	<div class="wrapper">
 	  <div class="margintop content">
 	  				<%
+	  				//verifico sessione
 					Long id= (Long) request.getSession().getAttribute("userId");
 					if(id==null){
 						request.setAttribute("Errore", "logError");
-						request.getRequestDispatcher("index.jsp").forward(request, response);
+						request.getRequestDispatcher("/index.jsp").forward(request, response);
 						return;
 					}
 					
+					//verifico attributo user
 					User user = (User) request.getAttribute("user");
 					if(user!= null) {
 						out.println("<p> Benvenuto "+ user.getNome() +"</p>");
 					}else{
-						request.getRequestDispatcher("index.jsp").forward(request, response);
+						response.sendRedirect("/Swimv2-Client/error.jsp");
+						return;
 					}
 					
 					Integer numRichiesteAmicizia = (Integer)request.getAttribute("richiesteAmicizia");

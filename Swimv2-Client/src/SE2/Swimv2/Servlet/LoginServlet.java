@@ -1,9 +1,6 @@
 package SE2.Swimv2.Servlet;
 
 import java.io.IOException;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import SE2.Swimv2.Exceptions.LoginException;
 import SE2.Swimv2.Session.GestoreLoginRemote;
+import SE2.Swimv2.Util.RemoteManager;
 
 /**
  * Servlet implementation class LoginServlet
@@ -29,16 +27,25 @@ public class LoginServlet extends HttpServlet {
 	private static final String ADMIN_ID= "adminId";
 	private static final String EMAIL= "email";
 	private static final String PSW= "password";
-	private static final String UNKNOWN_ERROR="Errore Sconosciuto";
+	
+	//nomi Paramentri
+	private static final String LOG_TYPE= "type";
+	
+	//valori Paramentri
+	private static final String ADMIN= "admin";
+	private static final String USER= "user";
 	
 	//nomi pagine
 	private static final String HOME_PAGE = "index.jsp";
-	private static final String USER_PAGE = "User/user.jsp";
 	private static final String ERROR_PAGE = "error.jsp";
 	
 	//servlet
 	private static final String USER_SERVLET = "UserServlet";
 
+	
+	private RemoteManager remoteManager = new RemoteManager();
+	private GestoreLoginRemote gestoreLogin;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -57,17 +64,28 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		long id;
-		GestoreLoginRemote gestoreLogin;
-		try {
-			gestoreLogin = this.getGestoreLoginRemote();
 
+		try {
+			gestoreLogin = remoteManager.getGestoreLoginRemote();
 		}
 		catch (NamingException e) {
 				response.sendRedirect(ERROR_PAGE);
 				return;
 		}
 		
+		String type= request.getParameter(LOG_TYPE);
+		if(type.equals(USER)){
+			loginUser(request, response);
+		}else if(type.equals(ADMIN)){
+			loginAdmin(request, response);
+		}else{
+			response.sendRedirect(HOME_PAGE);
+		}
+
+	}
+	
+	private void loginUser(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		long id;
 		String email = request.getParameter(EMAIL);
 		String password = request.getParameter(PSW);
 		
@@ -75,20 +93,15 @@ public class LoginServlet extends HttpServlet {
 				id=gestoreLogin.loginUser(email, password);
 				request.getSession().setAttribute(USER_ID, id);
 				response.sendRedirect(USER_SERVLET);
-				return;
-
 			}
 			catch (LoginException e) {
 				request.setAttribute(ERROR, LOGIN_ERROR);
 				request.getRequestDispatcher(HOME_PAGE).forward(request, response);
 			}
-
 	}
 	
-	private GestoreLoginRemote getGestoreLoginRemote() throws NamingException{
-		Context jndiContext = new InitialContext();
-		Object obj = jndiContext.lookup("GestoreLogin/remote");
-		GestoreLoginRemote manager = (GestoreLoginRemote) obj;
-		return manager;
+	private void loginAdmin(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+
 	}
+
 }

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import SE2.Swimv2.Entity.User;
 import SE2.Swimv2.Exceptions.UserException;
 import SE2.Swimv2.Session.GestoreUserRemote;
+import SE2.Swimv2.Util.RemoteManager;
 
 /**
  * Servlet implementation class ModificaDatiServlet
@@ -42,7 +43,10 @@ public class ModificaDatiServlet extends HttpServlet {
 	
 	//servlet
 	private static final String USER_SERVLET = "/Swimv2-Client/UserServlet";
-       
+    
+	private RemoteManager remoteManager= new RemoteManager();
+	private GestoreUserRemote gestoreUser;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -56,8 +60,8 @@ public class ModificaDatiServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Long id= (Long) request.getSession().getAttribute(USER_ID);
 		//se non esiste una sessione richiamo l' home page
+		Long id= (Long) request.getSession().getAttribute(USER_ID);
 		if(id==null){
 			request.setAttribute(ERROR, LOGIN_ERROR);
 			request.getRequestDispatcher(HOME_PAGE).forward(request, response);
@@ -67,7 +71,7 @@ public class ModificaDatiServlet extends HttpServlet {
 		if(request.getAttribute(USER)==null){
 		
 			try {
-				GestoreUserRemote gestoreUser = getGestoreUserRemote();
+				gestoreUser = remoteManager.getGestoreUserRemote();
 				User user= gestoreUser.getById(id.longValue());
 				request.setAttribute(USER, user);
 			} catch (NamingException e) {
@@ -84,7 +88,6 @@ public class ModificaDatiServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GestoreUserRemote gestoreUser;
 		String email= request.getParameter(EMAIL);
 		String psw= request.getParameter(PASSWORD);
 		String nome= request.getParameter(NOME);
@@ -105,7 +108,7 @@ public class ModificaDatiServlet extends HttpServlet {
 		}
 		
 		try {
-			gestoreUser = getGestoreUserRemote();
+			gestoreUser = remoteManager.getGestoreUserRemote();
 		} catch (NamingException e) {
 			response.sendRedirect(ERROR_PAGE);
 			return;
@@ -141,10 +144,4 @@ public class ModificaDatiServlet extends HttpServlet {
 
 	}
 
-	private GestoreUserRemote getGestoreUserRemote() throws NamingException{
-		Context jndiContext = new InitialContext();
-		Object obj = jndiContext.lookup("GestoreUser/remote");
-		GestoreUserRemote manager = (GestoreUserRemote) obj;
-		return manager;
-	}
 }
