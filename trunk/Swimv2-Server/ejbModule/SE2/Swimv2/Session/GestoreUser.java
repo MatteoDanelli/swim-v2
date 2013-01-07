@@ -35,9 +35,7 @@ public class GestoreUser implements GestoreUserRemote {
      *  Inserisce un nuovo utente,  assegnandoli tutti i suoi attributi.
      */
 	@Override
-	public long addUser(String email, String password, String nome,
-			String cognome, String provincia, char sesso, Date dataNascita,
-			Set<Skill> personalSkill) throws UserException {
+	public long addUser(String email, String password, String nome,String cognome, String provincia, char sesso, Date dataNascita,Set<Skill> personalSkill) throws UserException {
 
 		User newUser = new User(email, password, nome, cognome, provincia, sesso, dataNascita, personalSkill);
     	try{

@@ -13,7 +13,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
