@@ -6,6 +6,7 @@ package SE2.Swimv2.Test;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -48,9 +49,9 @@ public class GestoreFeedbackTest {
 		feedbackRemote = (GestoreFeedbackRemote) ref1;
 		userRemote = (GestoreUserRemote) ref2;
 		
-		user1 = userRemote.addUser("user4@mail.com", "psw1", "Daniele", "Cantoni", "SO", 'M', new Date(), null);
-		user2 = userRemote.addUser("user5@mail.com", "psw2", "Matthews", "Danelli", "BG", 'M', new Date(), null);
-		user3 = userRemote.addUser("user6@mail.com", "psw", "George", "Clooney", "HW", 'M', new Date(), null);	
+		user1 = userRemote.addUser("user4@mail.com", "psw1", "Daniele", "Cantoni", "SO", 'M', new GregorianCalendar(), null);
+		user2 = userRemote.addUser("user5@mail.com", "psw2", "Matthews", "Danelli", "BG", 'M', new GregorianCalendar(), null);
+		user3 = userRemote.addUser("user6@mail.com", "psw", "George", "Clooney", "HW", 'M', new GregorianCalendar(), null);	
 	
 		amiciRemote.aggiungiAmicizia(user1, user3);
 		amiciRemote.aggiungiAmicizia(user1, user2);
