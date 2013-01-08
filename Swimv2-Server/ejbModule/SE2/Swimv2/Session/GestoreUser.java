@@ -1,6 +1,6 @@
 package SE2.Swimv2.Session;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -35,7 +35,7 @@ public class GestoreUser implements GestoreUserRemote {
      *  Inserisce un nuovo utente,  assegnandoli tutti i suoi attributi.
      */
 	@Override
-	public long addUser(String email, String password, String nome,String cognome, String provincia, char sesso, Date dataNascita,Set<Skill> personalSkill) throws UserException {
+	public long addUser(String email, String password, String nome,String cognome, String provincia, char sesso, Calendar dataNascita,Set<Skill> personalSkill) throws UserException {
 
 		User newUser = new User(email, password, nome, cognome, provincia, sesso, dataNascita, personalSkill);
     	try{
@@ -82,7 +82,7 @@ public class GestoreUser implements GestoreUserRemote {
 
 	@Override
 	public void modificaAnagrafica(long userId, String nome, String cognome,
-			String provincia, char sesso, Date dataNascita)
+			String provincia, char sesso, Calendar dataNascita)
 			throws UserException {
 		
 		User user = database.find(User.class, userId);

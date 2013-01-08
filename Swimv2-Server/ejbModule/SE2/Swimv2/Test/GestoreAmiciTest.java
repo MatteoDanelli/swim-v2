@@ -6,6 +6,7 @@ package SE2.Swimv2.Test;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Hashtable;
 import java.util.Set;
 
@@ -41,9 +42,9 @@ public class GestoreAmiciTest {
 		amiciRemote = (GestoreAmiciRemote) ref1;
 		userRemote = (GestoreUserRemote) ref2;
 		
-		user1 = userRemote.addUser("user1@mail.com", "psw1", "Daniel", "Cantoni", "SO", 'M', new Date(), null);
-		user2 = userRemote.addUser("user2@mail.com", "psw2", "Matteo", "Danelli", "BG", 'M', new Date(), null);
-		user3 = userRemote.addUser("user3@mail.com", "psw", "Harry", "Potter", "HW", 'M', new Date(), null);
+		user1 = userRemote.addUser("user1@mail.com", "psw1", "Daniel", "Cantoni", "SO", 'M', new GregorianCalendar(), null);
+		user2 = userRemote.addUser("user2@mail.com", "psw2", "Matteo", "Danelli", "BG", 'M', new GregorianCalendar(), null);
+		user3 = userRemote.addUser("user3@mail.com", "psw", "Harry", "Potter", "HW", 'M', new GregorianCalendar(), null);
 		amiciRemote.aggiungiAmicizia(user1, user3);
 		amiciRemote.aggiungiAmicizia(user1, user2);
 	}
