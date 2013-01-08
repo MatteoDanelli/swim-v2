@@ -1,6 +1,6 @@
 package SE2.Swimv2.Session;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -17,10 +17,10 @@ import SE2.Swimv2.Entity.User;
 @Remote
 public interface GestoreUserRemote {
 
-	public long addUser(String email, String password, String nome, String cognome, String provincia, char sesso, Date dataNascita, Set<Skill> personalSkill) throws UserException;
+	public long addUser(String email, String password, String nome, String cognome, String provincia, char sesso, Calendar dataNascita, Set<Skill> personalSkill) throws UserException;
 	public void modificaEmail(long userId, String email)throws UserException;
 	public void modificaPassword(long userId, String password)throws UserException;
-	public void modificaAnagrafica(long userId, String nome, String cognome, String provincia, char sesso, Date datanascita)throws UserException;
+	public void modificaAnagrafica(long userId, String nome, String cognome, String provincia, char sesso, Calendar datanascita)throws UserException;
 	public void modificaPersonalSkill(long userId, Set<Skill> personalSkill)throws UserException;
 	public List<User> cercaPerNome(String nome);
 	public List<User> cercaPerCognome(String cognome);
