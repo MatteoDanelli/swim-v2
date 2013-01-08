@@ -1,7 +1,8 @@
 package SE2.Swimv2.Servlet;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -21,7 +22,7 @@ import SE2.Swimv2.Util.RemoteManager;
  */
 public class ModificaDatiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	//nomi attributi
+	//nomi parametri
 	private static final String ERROR = "Errore";
 	private static final String USER= "user";
 	private static final String EMAIL="email";
@@ -30,7 +31,9 @@ public class ModificaDatiServlet extends HttpServlet {
 	private static final String COGNOME="cognome";
 	private static final String PROVINCIA="provincia";
 	private static final String SESSO="sesso";
-	private static final String DATA="data";
+	private static final String GIORNO_NASCITA="giornoNascita";
+	private static final String MESE_NASCITA="meseNascita";
+	private static final String ANNO_NASCITA="annoNascita";
 	
 	//valori attributi
 	private static final String LOGIN_ERROR= "logError";
@@ -95,9 +98,19 @@ public class ModificaDatiServlet extends HttpServlet {
 		String provincia= request.getParameter(PROVINCIA);
 		String sessoString= request.getParameter(SESSO);
 		char sesso = sessoString.charAt(0);
-		String dataString= request.getParameter(DATA);
-		Date data = null;
+		String giornoNascita= request.getParameter(GIORNO_NASCITA);
+		String meseNascita= request.getParameter(MESE_NASCITA);
+		String annoNascita= request.getParameter(ANNO_NASCITA);
 		
+		Calendar data = null;
+		
+		//verifico che i parametri della data siano corretti
+		if(giornoNascita!="" && meseNascita!="" && annoNascita!=""){
+			int giorno = Integer.parseInt(giornoNascita);
+			int mese = Integer.parseInt(meseNascita);
+			int anno = Integer.parseInt(annoNascita);
+			data= new GregorianCalendar(anno,mese,giorno);
+		}
 		Long id= (Long) request.getSession().getAttribute(USER_ID);
 		
 		//se non esiste una sessione richiamo l' home page
