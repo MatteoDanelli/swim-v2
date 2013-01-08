@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="SE2.Swimv2.Entity.*"%>
+<%@ page import="java.util.Calendar"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -94,8 +95,34 @@
 							<input type="radio" name="sesso" value="f">Femmina
 						<%} %>
 						<br>
+						
 						<label>Data di Nascita: </label>
-						<input type="text" name="data" value="<%if(user.getDataDiNascita()!=null){out.print(user.getDataDiNascita().toString());}%>">
+						<select name="giornoNascita" >
+								<option selected="selected" value="">Giorno</option>
+								<%for(int i=1;i<=31;i++){
+									out.println("<option value=\""+ i +"\">"+i+"</option>");
+								}
+								%>
+
+						</select>
+						
+						<select name="meseNascita">
+								<option selected="selected" value="">Mese</option>
+								<%for(int i=0;i<=11;i++){
+									int j= i+1;
+									out.println("<option value=\""+ i +"\">"+ j +"</option>");
+								}
+								%>
+	
+						 </select>
+						 
+						 <select name="annoNascita">
+								<option selected="selected" value="">Anno</option>
+								<%for(int i=1950;i<=2013;i++){
+									out.println("<option value=\""+ i +"\">"+i+"</option>");
+								}
+								%>	
+						 </select>
 						<br>
 						
 						
