@@ -1,6 +1,6 @@
 package SE2.Swimv2.Entity;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -57,7 +57,7 @@ public class User implements Serializable {
 	private char sesso;
 	
 	@Column(name="DATA_DI_NASCITA", nullable=true)
-	private Date dataDiNascita;
+	private Calendar dataDiNascita;
 	
 	
 	@OneToMany(mappedBy="mittente")
@@ -98,7 +98,7 @@ public class User implements Serializable {
 	public User(){
 	};
 	
-	public User(String mail, String password, String nome, String cognome, String provincia, char sesso, Date data,Set<Skill> skillPossedute) {
+	public User(String mail, String password, String nome, String cognome, String provincia, char sesso, Calendar data,Set<Skill> skillPossedute) {
 		this.email=mail;
 		this.nome=nome;
 		this.cognome=cognome;
@@ -138,7 +138,7 @@ public class User implements Serializable {
 		return sesso;
 	}
 
-	public Date getDataDiNascita() {
+	public Calendar getDataDiNascita() {
 		return dataDiNascita;
 	}
 
@@ -199,7 +199,7 @@ public class User implements Serializable {
 		this.sesso = sesso;
 	}
 
-	public void setDataDiNascita(Date dataDiNascita) {
+	public void setDataDiNascita(Calendar dataDiNascita) {
 		this.dataDiNascita = dataDiNascita;
 	}
 

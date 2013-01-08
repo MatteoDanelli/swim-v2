@@ -4,12 +4,8 @@
 package SE2.Swimv2.Session;
 
 import java.util.List;
-
 import javax.ejb.Remote;
-
 import SE2.Swimv2.Entity.RichiestaSkill;
-import SE2.Swimv2.Entity.Skill;
-import SE2.Swimv2.Entity.User;
 
 /**
  * @author Matteo Danelli

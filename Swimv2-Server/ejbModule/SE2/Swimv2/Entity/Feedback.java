@@ -4,7 +4,9 @@
 package SE2.Swimv2.Entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,7 +38,7 @@ public class Feedback implements Serializable {
 	private String commento;
 	
 	@Column(name="DATA", nullable=false)
-	private Date dataPubblicazione;
+	private Calendar dataPubblicazione;
 	
 	@ManyToOne
 	@JoinColumn(name="MITTENTE")
@@ -54,7 +56,7 @@ public class Feedback implements Serializable {
 		this.destinatario= destinatario;
 		this.StelleAssegnate=stelle;
 		this.commento=commento;
-		this.dataPubblicazione=new Date();
+		this.dataPubblicazione=new GregorianCalendar();
 	}
 
 	//Getters and setters
@@ -70,7 +72,7 @@ public class Feedback implements Serializable {
 		return commento;
 	}
 
-	public Date getDataPubblicazione() {
+	public Calendar getDataPubblicazione() {
 		return dataPubblicazione;
 	}
 

@@ -4,7 +4,7 @@
 package SE2.Swimv2.Entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,7 +50,7 @@ public class Messaggio implements Serializable {
 	private boolean isRichiestaAiuto;
 	
 	@Column(name="DATA_DI_INVIO", nullable=false)
-	private Date dataInvio;
+	private Calendar dataInvio;
 	
 	@Column(name="TESTO", nullable=true)
 	private String testo;
@@ -97,11 +97,11 @@ public class Messaggio implements Serializable {
 		this.isRichiestaAiuto = isRichiestaAiuto;
 	}
 
-	public Date getDataInvio() {
+	public Calendar getDataInvio() {
 		return dataInvio;
 	}
 
-	public void setDataInvio(Date dataInvio) {
+	public void setDataInvio(Calendar dataInvio) {
 		this.dataInvio = dataInvio;
 	}
 

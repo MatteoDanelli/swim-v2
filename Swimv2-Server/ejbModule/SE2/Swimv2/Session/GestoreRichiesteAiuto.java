@@ -1,6 +1,6 @@
 package SE2.Swimv2.Session;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -32,7 +32,7 @@ public class GestoreRichiesteAiuto implements GestoreRichiesteAiutoRemote {
 			nuovoMessaggio.setMittente(userMittente);
 			nuovoMessaggio.setDestinatario(UserDestinatario);
 			nuovoMessaggio.setTesto(testo);
-			nuovoMessaggio.setDataInvio(new Date());
+			nuovoMessaggio.setDataInvio(new GregorianCalendar());
 			nuovoMessaggio.setRichiestaAiuto(true);
 			database.persist(nuovoMessaggio);
 		}
