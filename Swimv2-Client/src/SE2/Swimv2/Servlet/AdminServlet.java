@@ -1,6 +1,3 @@
-/**
- * 
- */
 package SE2.Swimv2.Servlet;
 
 import java.io.IOException;
@@ -35,6 +32,8 @@ public class AdminServlet extends HttpServlet {
 	private static final String HOME_PAGE = "index.jsp";
 	private static final String ADMIN_PAGE = "Admin/admin.jsp";
 	private static final String ERROR_PAGE = "error.jsp";
+	private static final String HOME_ADMIN = "/Admin/login_admin.jsp";
+
 	
 
 	private RemoteManager remoteManager= new RemoteManager();
@@ -47,13 +46,16 @@ public class AdminServlet extends HttpServlet {
         super();
     }
     
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-    	//se non esiste una sessione richiamo l'home page
+		//se non esiste una sessione richiamo l'home page
 		Long id= (Long) request.getSession().getAttribute(ADMIN_ID);
 		if(id==null){
 			request.setAttribute(ERROR, LOGIN_ERROR);
-			request.getRequestDispatcher(HOME_PAGE).forward(request, response);
+			request.getRequestDispatcher(HOME_ADMIN).forward(request, response);
 			return;
 		}
 		
