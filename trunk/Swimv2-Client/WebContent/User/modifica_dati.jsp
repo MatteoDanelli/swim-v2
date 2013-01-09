@@ -35,7 +35,7 @@
 				<li><a href="#">Cerca Utente</a></li>
 				<li><a href="#">Visualizza Amici</a></li>
 				<li><a href="ModificaDatiServlet">Modifica Dati</a></li>
-				<li><a href="#">Modifica Skills</a></li>
+				<li><a href="PersonalSkillServlet">Modifica Skills</a></li>
 				<li><a href="#">Proponi Abilità</a></li>
 				<li><a href="LogoutServlet">Logout</a></li>
 			</ul>
@@ -66,68 +66,68 @@
 						</div>
 	  		
 				  		<div class="box_contents">
-					<form action="ModificaDatiServlet" method="post">
-
-						<label>E-Mail: </label>
-						<input type="text" name="email" value="<%out.print(user.getEmail());%>">
-						<br>
-						<label>Password: </label>
-						<input type="password" name="password">
-						<br>
-						<label>Nome: </label>
-						<input type="text" name="nome" value="<%out.print(user.getNome());%>">
-						<br>
-						<label>Cognome: </label>
-						<input type="text" name="cognome" value="<%out.print(user.getCognome());%>">
-						<br>
-						<label>Provincia: </label>
-						<input type="text" name="provincia" value="<%out.print(user.getProvincia());%>">
-						<br>
-						<label>Sesso: </label>
-						<%if(user.getSesso()=='m'){ %>
-							<input type="radio" name="sesso" value="m" checked>Maschio
-							<input type="radio" name="sesso" value="f">Femmina
-						<%}else if(user.getSesso()=='f'){ %>
-							<input type="radio" name="sesso" value="m">Maschio
-							<input type="radio" name="sesso" value="f" checked>Femmina
-						<%}else{ %>
-							<input type="radio" name="sesso" value="m">Maschio
-							<input type="radio" name="sesso" value="f">Femmina
-						<%} %>
-						<br>
-						
-						<label>Data di Nascita: </label>
-						<select name="giornoNascita" >
-								<option selected="selected" value="">Giorno</option>
-								<%for(int i=1;i<=31;i++){
-									out.println("<option value=\""+ i +"\">"+i+"</option>");
-								}
-								%>
-
-						</select>
-						
-						<select name="meseNascita">
-								<option selected="selected" value="">Mese</option>
-								<%for(int i=0;i<=11;i++){
-									int j= i+1;
-									out.println("<option value=\""+ i +"\">"+ j +"</option>");
-								}
-								%>
-	
-						 </select>
-						 
-						 <select name="annoNascita">
-								<option selected="selected" value="">Anno</option>
-								<%for(int i=1950;i<=2013;i++){
-									out.println("<option value=\""+ i +"\">"+i+"</option>");
-								}
-								%>	
-						 </select>
-						<br>
-						
-						
-						<input type="submit" value="Modifica">
-					</form>		
+							<form action="/Swimv2-Client/ModificaDatiServlet" method="post">
+		
+								<label>E-Mail: </label>
+								<input type="text" name="email" value="<%out.print(user.getEmail());%>">
+								<br>
+								<label>Password: </label>
+								<input type="password" name="password">
+								<br>
+								<label>Nome: </label>
+								<input type="text" name="nome" value="<%out.print(user.getNome());%>">
+								<br>
+								<label>Cognome: </label>
+								<input type="text" name="cognome" value="<%out.print(user.getCognome());%>">
+								<br>
+								<label>Provincia: </label>
+								<input type="text" name="provincia" value="<%out.print(user.getProvincia());%>">
+								<br>
+								<label>Sesso: </label>
+								<%if(user.getSesso()=='m'){ %>
+									<input type="radio" name="sesso" value="m" checked>Maschio
+									<input type="radio" name="sesso" value="f">Femmina
+								<%}else if(user.getSesso()=='f'){ %>
+									<input type="radio" name="sesso" value="m">Maschio
+									<input type="radio" name="sesso" value="f" checked>Femmina
+								<%}else{ %>
+									<input type="radio" name="sesso" value="m">Maschio
+									<input type="radio" name="sesso" value="f">Femmina
+								<%} %>
+								<br>
+								
+								<label>Data di Nascita: </label>
+								<select name="giornoNascita" >
+										<option selected="selected" value="">Giorno</option>
+										<%for(int i=1;i<=31;i++){
+											out.println("<option value=\""+ i +"\">"+i+"</option>");
+										}
+										%>
+		
+								</select>
+								
+								<select name="meseNascita">
+										<option selected="selected" value="">Mese</option>
+										<%for(int i=0;i<=11;i++){
+											int j= i+1;
+											out.println("<option value=\""+ i +"\">"+ j +"</option>");
+										}
+										%>
+			
+								 </select>
+								 
+								 <select name="annoNascita">
+										<option selected="selected" value="">Anno</option>
+										<%for(int i=1950;i<=2013;i++){
+											out.println("<option value=\""+ i +"\">"+i+"</option>");
+										}
+										%>	
+								 </select>
+								<br>
+								
+								
+								<input type="submit" value="Modifica">
+							</form>		
 						</div> 
 	  		
 	  				</div>

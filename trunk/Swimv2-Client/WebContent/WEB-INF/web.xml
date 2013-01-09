@@ -59,4 +59,14 @@
     <servlet-name>ModificaDatiServlet</servlet-name>
     <url-pattern>/ModificaDatiServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PersonalSkillServlet</display-name>
+    <servlet-name>PersonalSkillServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.PersonalSkillServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PersonalSkillServlet</servlet-name>
+    <url-pattern>/PersonalSkillServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="SE2.Swimv2.Entity.*"%>
+<%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -20,7 +21,7 @@
 	  		</a>
 	  		
 	  		<span class="page_title">
-					User Page
+					User PersonalSkill
 		  	</span>
 	  		
   		</div>
@@ -33,7 +34,7 @@
 				<li><a class="first" href="UserServlet">Home Page</a></li>
 				<li><a href="#">Cerca Utente</a></li>
 				<li><a href="#">Visualizza Amici</a></li>
-				<li><a href="/Swimv2-Client/ModificaDatiServlet">Modifica Dati</a></li>
+				<li><a href="ModificaDatiServlet">Modifica Dati</a></li>
 				<li><a href="PersonalSkillServlet">Modifica Skills</a></li>
 				<li><a href="#">Proponi Abilità</a></li>
 				<li><a href="LogoutServlet">Logout</a></li>
@@ -52,39 +53,52 @@
 						return;
 					}
 					
-					//verifico attributo user
-					User user = (User) request.getAttribute("user");
-					if(user!= null) {
-						out.println("<p> Benvenuto "+ user.getNome() +"</p>");
-					}else{
-						response.sendRedirect("/Swimv2-Client/error.jsp");
+					//ottengo skillset, se l' attributo non esiste redirigo sull user page
+					List<Skill> skillSet = (List<Skill>) request.getAttribute("skillSet");
+					if(skillSet== null) {
+						response.sendRedirect("/Swimv2-Client/UserServlet");
 						return;
 					}
 					
-					Integer numRichiesteAmicizia = (Integer)request.getAttribute("richiesteAmicizia");
-					if( numRichiesteAmicizia==null){
-						numRichiesteAmicizia=0;
+					//ottengo il personalSkill, se l' attributo non esiste redirigo sull user page
+					List<Skill> personalSkill = (List<Skill>) request.getAttribute("personalSkill");
+					if(personalSkill== null) {
+						response.sendRedirect("/Swimv2-Client/UserServlet");
+						return;
 					}
 					
-						
-					%>
 					
- 					<div class="box margintop">
+					%>
+					 <div class="box">
 			  			<div class="box_title">
-							Notifiche
+							Le tue abilità
 						</div>
 	  		
 				  		<div class="box_contents">
-							<p>Ci sono:</p><br>
-							<p>0 Messaggi -<a href="#">Visualizza tutti i messaggi</a></p>
-							<p>O Richieste d'aiuto -<a href="#">Visualizza tutte le richiesta d'aiuto</a>	</p>
-							<p><%out.print(numRichiesteAmicizia.intValue()); %> Richieste d'amicizia -<a href="#">Visualizza tutte le richiesta d'amicizia</a></p>		
+							<form action="/Swimv2-Client/PersonalSkillServlet" method="post">
+									<%
+									for(Skill skill: skillSet){
+										out.print("<input name=\"" + skill.getId() + "\" type=\"checkbox\" value=\"" + skill.getId() + "\" ");
+										
+										for(Skill s: personalSkill){
+											if(s.getId()==skill.getId()){
+												out.print("checked");
+												break;
+											}
+										}
+										
+										out.print(">"+ skill.getNome() +"<br>\n");
+
+									}
+
+									%>
+								<br>
+								<input type="submit" value="Modifica">
+							</form>		
 						</div> 
 	  		
 	  				</div>
-
-
-	  
+					
 	  </div>
 	</div>
   
