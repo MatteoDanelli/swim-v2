@@ -42,7 +42,6 @@ public class UserServlet extends HttpServlet {
      */
     public UserServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -51,7 +50,7 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		//se non esiste una sessione richiamo l' home page
+		//se non esiste una sessione richiamo l'home page
 		Long id= (Long) request.getSession().getAttribute(USER_ID);
 		if(id==null){
 			request.setAttribute(ERROR, LOGIN_ERROR);
@@ -59,7 +58,7 @@ public class UserServlet extends HttpServlet {
 			return;
 		}
 
-		//SE NON È PRESENTE L' ATTRIBURO USER, LO CREO
+		//SE NON È PRESENTE L'ATTRIBUTO USER, LO CREO
 		//imposto gli attributi messaggi/richieste aiuto/richieste messaggi
 		if(request.getAttribute(USER)==null){
 		

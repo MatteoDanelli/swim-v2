@@ -115,7 +115,7 @@
 						<input type="password" name="password">
 						<input type="submit" value="Accedi">
 					</form>		
-					Non sei ancora registrato?<a href="#">Registrati! </a>
+					Non sei ancora registrato? <a href="#">Registrati! </a>
 			</div> 
 
 
