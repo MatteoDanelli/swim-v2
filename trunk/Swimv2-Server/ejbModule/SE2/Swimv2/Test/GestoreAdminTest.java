@@ -43,7 +43,7 @@ public class GestoreAdminTest {
 			} catch (AdminException e) {
 				e.printStackTrace();
 			}
-			assertEquals(1, adminRemote.getAdmin().size());
+			assertEquals("prova@mail.test", adminRemote.getAdmin().getEmail());
 		}
 
 	/**
@@ -52,9 +52,8 @@ public class GestoreAdminTest {
 	@Test
 	public void testModificaPassword() {
 		adminRemote.modificaPassword("prova@mail.test", "nuovaPassword");
-		for (Admin a : adminRemote.getAdmin()) {
+		Admin a = adminRemote.getAdmin();
 			assertEquals("nuovaPassword", a.getPassword());
-		}
 	}
 
 	/**

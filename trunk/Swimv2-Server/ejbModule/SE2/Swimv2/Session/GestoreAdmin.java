@@ -3,8 +3,6 @@
  */
 package SE2.Swimv2.Session;
 
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -46,12 +44,11 @@ public class GestoreAdmin implements GestoreAdminRemote {
 		q.executeUpdate();
 		}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Admin> getAdmin() {
+	public Admin getAdmin() {
 		Query q = database.createQuery("FROM Admin");
-		List<Admin> adminTrovati = (List<Admin>) q.getResultList();
-		return adminTrovati;
+		Admin adminTrovato = (Admin) q.getSingleResult();
+		return adminTrovato;
 	}
 	
 }
