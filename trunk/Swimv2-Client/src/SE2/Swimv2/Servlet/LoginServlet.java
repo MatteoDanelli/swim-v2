@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import SE2.Swimv2.Exceptions.LoginException;
+import SE2.Swimv2.Session.GestoreAdminRemote;
 import SE2.Swimv2.Session.GestoreLoginRemote;
 import SE2.Swimv2.Util.RemoteManager;
 
@@ -38,9 +39,11 @@ public class LoginServlet extends HttpServlet {
 	//nomi pagine
 	private static final String HOME_PAGE = "index.jsp";
 	private static final String ERROR_PAGE = "error.jsp";
+	private static final String HOME_ADMIN = "/Admin/login_admin.jsp";
 	
 	//servlet
 	private static final String USER_SERVLET = "UserServlet";
+	private static final String ADMIN_SERVLET = "AdminServlet";
 
 	
 	private RemoteManager remoteManager = new RemoteManager();
@@ -101,7 +104,19 @@ public class LoginServlet extends HttpServlet {
 	}
 	
 	private void loginAdmin(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-
+			long id;
+			String email = request.getParameter(EMAIL);
+			String password = request.getParameter(PSW);
+			
+				try{
+					id=gestoreLogin.loginAdmin(email, password);
+					request.getSession().setAttribute(ADMIN_ID, id);
+					response.sendRedirect(ADMIN_SERVLET);
+				}
+				catch (LoginException e) {
+					request.setAttribute(ERROR, LOGIN_ERROR);
+					request.getRequestDispatcher(HOME_ADMIN).forward(request, response);
+				}
 	}
 
 }
