@@ -29,7 +29,6 @@ public class AdminServlet extends HttpServlet {
 	private static final String LOGIN_ERROR= "logError";
 	
 	//nomi pagine
-	private static final String HOME_PAGE = "index.jsp";
 	private static final String ADMIN_PAGE = "Admin/admin.jsp";
 	private static final String ERROR_PAGE = "error.jsp";
 	private static final String HOME_ADMIN = "/Admin/login_admin.jsp";

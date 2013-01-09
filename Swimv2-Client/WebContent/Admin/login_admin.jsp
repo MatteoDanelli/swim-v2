@@ -76,7 +76,7 @@
   	<div class="wrapper">
 	  <div class="content">
 		  <div class="description">
-			<h4><a href="../index.jsp"> Torna alla HomePage</a></h4> <br>
+			<h4><a href="/Swimv2-Client/index.jsp"> Torna alla HomePage</a></h4> <br>
 			</div>
 			
 			
