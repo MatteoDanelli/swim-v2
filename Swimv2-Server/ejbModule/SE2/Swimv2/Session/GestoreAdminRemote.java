@@ -18,5 +18,5 @@ import SE2.Swimv2.Exceptions.AdminException;
 public interface GestoreAdminRemote {
 	void createAdmin(String email, String password) throws AdminException;
 	void modificaPassword(String email, String nuovaPassword);
-	List<Admin> getAdmin();
+	Admin getAdmin();
 }
