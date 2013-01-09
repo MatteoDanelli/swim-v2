@@ -191,6 +191,12 @@ body{
 	overflow: hidden;
 	position: relative;
 }
+.registration_form{
+	padding: 10px;
+	overflow: hidden;
+	position: relative;
+	width: 400px;
+}
 /* MENU */
 #menu{
 	height: 40px;

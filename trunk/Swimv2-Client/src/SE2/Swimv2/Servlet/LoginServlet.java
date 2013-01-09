@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import SE2.Swimv2.Exceptions.LoginException;
-import SE2.Swimv2.Session.GestoreAdminRemote;
 import SE2.Swimv2.Session.GestoreLoginRemote;
 import SE2.Swimv2.Util.RemoteManager;
 
@@ -20,7 +19,6 @@ public class LoginServlet extends HttpServlet {
     
 	//nomi attributi
 	private static final String ERROR = "Errore";
-	private static final String MESSAGE = "Messaggio";
 	
 	//valori attributi
 	private static final String LOGIN_ERROR= "logError";
