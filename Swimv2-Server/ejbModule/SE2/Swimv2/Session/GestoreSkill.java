@@ -56,4 +56,10 @@ public class GestoreSkill implements GestoreSkillRemote {
 		return skillSet;
 
 	}
+	
+	@Override
+	public Skill getById(long Id) {
+		Skill result= database.find(Skill.class, Id);
+		return result;
+	}
 }
