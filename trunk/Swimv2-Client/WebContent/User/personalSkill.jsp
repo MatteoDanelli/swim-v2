@@ -40,16 +40,16 @@
 	<div class="menu_bar">
 		<div class="content">
 			<ul id="menu">
-				<li><a class="first" href="UserServlet">Home Page</a></li>
-				<li><a href="#">Cerca Utente</a></li>
+				<li><a class="first" href="/Swimv2-Client/UserServlet">Home Page</a></li>
+				<li><a href="/Swimv2-Client/RicercaUtentiUserServlet">Cerca Utente</a></li>
 				<li><a href="#">Visualizza Amici</a></li>
-				<li><a href="ModificaDatiServlet">Modifica Dati</a></li>
-				<li><a href="PersonalSkillServlet">Modifica Skills</a></li>
+				<li><a href="/Swimv2-Client/ModificaDatiServlet">Modifica Dati</a></li>
+				<li><a href="/Swimv2-Client/PersonalSkillServlet">Modifica Skills</a></li>
 				<li><a href="#">Proponi Abilità</a></li>
-				<li><a href="LogoutServlet">Logout</a></li>
+				<li><a href="/Swimv2-Client/LogoutServlet">Logout</a></li>
 			</ul>
 		</div>		
-	</div>	
+	</div>		
 	  
   	<div class="wrapper">
 	  <div class="margintop content">

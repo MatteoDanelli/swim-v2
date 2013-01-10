@@ -28,9 +28,23 @@
   		</div>
  	</div>
  	
+ 	<div class="menu_bar">
+		<div class="content">
+			<ul id="menu">
+				<li><a class="first" href="/Swimv2-Client/UserServlet">Home Page</a></li>
+				<li><a href="/Swimv2-Client/RicercaUtentiUserServlet">Cerca Utente</a></li>
+				<li><a href="#">Visualizza Amici</a></li>
+				<li><a href="/Swimv2-Client/ModificaDatiServlet">Modifica Dati</a></li>
+				<li><a href="/Swimv2-Client/PersonalSkillServlet">Modifica Skills</a></li>
+				<li><a href="#">Proponi Abilità</a></li>
+				<li><a href="/Swimv2-Client/LogoutServlet">Logout</a></li>
+			</ul>
+		</div>		
+	</div>	
+ 	
  		
  	<div class="wrapper">
-	  <div class="content">
+	  <div class="margintop content">
 	  
 	  		<div class="box">
 	  			<div class="box_title">
@@ -40,7 +54,7 @@
 		  		<div class="box_contents">
 		  			<div class="elenco">
 		  				<h3>Ricerca per Nominativo:</h3>
-						<form class="form" action="/Swimv2-Client/RicercaUtentiGuestServlet?type=nominativo" method="post">
+						<form class="form" action="/Swimv2-Client/RicercaUtentiUserServlet?type=nominativo" method="post">
 							<label>Nome: </label>
 							<input type="text" name="nome">
 							<br>
@@ -53,7 +67,7 @@
 
 		  			<div class="elenco">
 		  				<h3>Ricerca per Skill:</h3>
-						<form class="form" action="/Swimv2-Client/RicercaUtentiGuestServlet?type=skill" method="post">
+						<form class="form" action="/Swimv2-Client/RicercaUtentiUserServlet?type=skill" method="post">
 							<label>Skill: </label>
 							<input type="text" name="skill">
 							<input type="submit" value="Cerca">
@@ -85,7 +99,7 @@
 									<li><b>Provincia:</b> <% out.println(user.getProvincia());%></li>
 								<%}%>
 							</ul>
-							<p class="link_right_align"><a href="<% out.println("/Swimv2-Client/Guest/ProfiloServlet?userId="+user.getId());%>">Visualizza Profilo</a></p>
+							<p class="link_right_align"><a href="<% out.println("/Swimv2-Client/User/ProfiloServlet?userId="+user.getId());%>">Visualizza Profilo</a></p>
 						</div>
 						
 						<%
