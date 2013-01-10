@@ -10,6 +10,14 @@
 	 
 	<style type="text/css">
 		@import url(/Swimv2-Client/css/main.css);
+		@import url(/Swimv2-Client/css/form.css);
+		.grid_element{
+			width: 33%;
+			overflow: hidden;
+			display: inline-block;
+
+		}
+
 	</style>
 	</head>
 
@@ -79,23 +87,28 @@
 				  		<div class="box_contents">
 							<form action="/Swimv2-Client/PersonalSkillServlet" method="post">
 									<%
+
 									for(Skill skill: skillSet){
-										out.print("<input name=\"" + skill.getId() + "\" type=\"checkbox\" value=\"" + skill.getId() + "\" ");
-										
-										for(Skill s: personalSkill){
-											if(s.getId()==skill.getId()){
-												out.print("checked");
-												break;
+
+										out.print("<div class=\"grid_element\">");
+
+											out.print("<input name=\"" + skill.getId() + "\" type=\"checkbox\" value=\"" + skill.getId() + "\" ");
+											
+											for(Skill s: personalSkill){
+												if(s.getId()==skill.getId()){
+													out.print(" checked ");
+													break;
+												}
 											}
-										}
-										
-										out.print(">"+ skill.getNome() +"<br>\n");
+											out.print(">"+ skill.getNome() +"<br>\n");
+											
+										out.print("</div>");
 
 									}
 
 									%>
 								<br>
-								<input type="submit" value="Modifica">
+								<input class="submit_button" type="submit" value="Modifica">
 							</form>		
 						</div> 
 	  		
