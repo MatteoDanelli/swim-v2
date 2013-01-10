@@ -21,11 +21,60 @@
 	  		
 	  		<span class="page_title">
 					Admin Page
-		  	</span>
-	  		
-	  		TEXT HERE!
-	  		
+		  	</span> 		
   		</div>
  	</div> 	
+ 	
+ 		<div class="menu_bar">
+		<div class="content">
+			<ul id="menu">
+				<li><a class="first" href="UserServlet">Home Page</a></li>
+				<li><a href="#">Aggiungi Skill</a></li>
+				<li><a href="#">Visualizza Richieste aggiunta Skill</a></li>
+				<li><a href="/Swimv2-Client/ModificaDatiServlet">Modifica password</a></li>
+				<li><a href="LogoutServlet">Logout</a></li>
+			</ul>
+		</div>		
+	</div>
+	
+	<div class="wrapper">
+	  <div class="margintop content">
+	  <% 
+	  //Controllo se esiste la sessione
+	  Long id = (Long) request.getSession().getAttribute("adminId");
+	  if (id==null) {
+			request.setAttribute("Errore", "logError");
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			return;
+		}
+	  
+		Admin admin = (Admin) request.getAttribute("admin");
+		if(admin!= null) {
+			out.println("<p> Benvenuto amministratore </p>");
+		} else {
+			response.sendRedirect("/Swimv2-Client/error.jsp");
+			return;
+		}
+		
+		Integer numRichiesteSkill = (Integer)request.getAttribute("richiesteSkill");
+	  %>
+				<div class="box margintop">
+			  			<div class="box_title">
+							Notifiche
+						</div>
+	  		
+				  		<div class="box_contents">
+				  		<div class="elenco">
+							<p>Ci sono:</p><br>
+							<p><%out.print(numRichiesteSkill.intValue()); %> Richieste d'ampliamento skill set - <a href="#">Visualizza</a></p>	
+							</div> 
+	  					</div>
+	  				</div>
+	
+	
+	</div>
+	</div>
+	
+	
 </body>
 </html>
