@@ -9,30 +9,7 @@
 	 
 	<style type="text/css">
 		@import url(/Swimv2-Client/css/main.css);
-		
-			#stylized label{
-			display:block;
-			text-align:right;
-			font-size:14px;
-			width:140px;
-			float:left;
-			font-weight:bold;
-			}
-			#stylized input{
-			float:left;
-			font-size:12px;
-			width:200px;
-			margin:2px 0 10px 10px;
-			}			
-			button{
-			  width: 150px;
-			  height: 40px;
-			  font-size: 16px;
-			  margin-top: 15px;
-			  margin-left: 150px;
-			  margin-bottom: 20px;
-			  position: relative;
- 				}
+		@import url(/Swimv2-Client/css/form.css);
 	</style>
 	</head>
 	
@@ -61,8 +38,9 @@
 					Completa i campi sottostanti per registrarti
 				</div>
 	  		
-		  		<div class="registration_form" id="stylized">
-						<form action="/Swimv2-Client/RegistraUserServlet" method="post">
+		  		<div class="box_contents">
+						<form class="form" action="/Swimv2-Client/RegistraUserServlet" method="post">
+							    <div class="form_center_contents">
 							      <label>E-Mail: </label>
 							      <input type="email" name="email" />
 							      
@@ -85,9 +63,11 @@
 							      <input type="date" name="dataDiNascita" />
 							      
 							       <label>Skill:</label>
-							      <input type="text" name="skill" />
-							</form>	
-							<button type="submit">Registra!</button>
+							      <input type="text" name="skill" >
+							<input type="submit" value="Registra!">
+							</div>
+						</form>	
+														
 							
 				</div> 
 
@@ -98,7 +78,6 @@
 
 	  
 	  </div>
-	</div>
-  
+ 
   </body>
 </html>
