@@ -8,6 +8,8 @@
 	 
 	<style type="text/css">
 		@import url(/Swimv2-Client/css/main.css);
+		@import url(/Swimv2-Client/css/form.css);
+		
 	</style>
 	</head>
 
