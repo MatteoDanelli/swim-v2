@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import SE2.Swimv2.Entity.Admin;
 import SE2.Swimv2.Session.GestoreAdminRemote;
+import SE2.Swimv2.Session.GestoreRichiesteSkillRemote;
 import SE2.Swimv2.Util.RemoteManager;
 
 /**
@@ -33,8 +34,11 @@ public class AdminServlet extends HttpServlet {
 	private static final String ERROR_PAGE = "error.jsp";
 	private static final String HOME_ADMIN = "/Admin/login_admin.jsp";
 
+	private static final String RIC_SKILL = "richiesteSkill";
+
 	private RemoteManager remoteManager= new RemoteManager();
 	private GestoreAdminRemote gestoreAdmin;
+	private GestoreRichiesteSkillRemote gestoreRichiesteSkill;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -59,12 +63,18 @@ public class AdminServlet extends HttpServlet {
 		if(request.getAttribute(ADMIN)==null) {		
 			try {
 				gestoreAdmin = remoteManager.getGestoreAdminRemote();
+				gestoreRichiesteSkill = remoteManager.getGestoreRichiesteSkillRemote();
 			} catch (NamingException e) {
 				response.sendRedirect(ERROR_PAGE);
 				return;
-			}					
-			Admin admin= gestoreAdmin.getAdmin();
+			}
+			
+			//Imposto l'attributo Admin da passare alla homePage
+			Admin admin = gestoreAdmin.getAdmin();
 			request.setAttribute(ADMIN, admin);
+			
+			Integer numRichiesteSkill= (Integer)gestoreRichiesteSkill.numeroDiNuoveRichieste();
+			request.setAttribute(RIC_SKILL, numRichiesteSkill);
 		}
 		
 		request.getRequestDispatcher(ADMIN_PAGE).forward(request, response);
