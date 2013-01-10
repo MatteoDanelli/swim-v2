@@ -68,7 +68,7 @@
 			<a class="logo" href="/Swimv2-Client/index.jsp"> <img
 				alt="Swimv2" src="/Swimv2-Client/img/logo.gif" width="320"
 				height="60">
-			</a> <span class="page_title"> Admin Page </span>
+			</a> <span class="page_title"> Admin Login </span>
 		</div>
 	</div>
 
