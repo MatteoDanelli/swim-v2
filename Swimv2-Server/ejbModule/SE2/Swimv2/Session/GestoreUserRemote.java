@@ -24,10 +24,12 @@ public interface GestoreUserRemote {
 	public void modificaPersonalSkill(long userId, Set<Skill> personalSkill)throws UserException;
 	public List<User> cercaPerNome(String nome);
 	public List<User> cercaPerCognome(String cognome);
+	public List<User> cercaPerNomeCognome(String nome,String cognome);
 	public List<User> cercaPerNominativo(String nome,String cognome);
 	public List<User> cercaPerSkill(String nome);
 	public List<User> cercaAmiciPerNome(long userId,String nome);
 	public List<User> cercaAmiciPerCognome(long userId, String cognome);
+	public List<User> cercaAmiciPerNomeCognome(long userId,String nome,String cognome);
 	public List<User> cercaAmiciPerNominativo(long userId, String nome,String cognome);
 	public List<User> cercaAmiciPerSkill(long userId, String nome);
 	public User getById(long userId);
