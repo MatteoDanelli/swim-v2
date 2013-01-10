@@ -52,5 +52,15 @@ public class GestoreRichiesteSkill implements GestoreRichiesteSkillRemote {
 		RichiestaSkill nuovaRichiesta = new RichiestaSkill(userMittente, skillRichiesta);
 		database.persist(nuovaRichiesta);		
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public int numeroDiNuoveRichieste() {
+		Query q = database.createQuery("FROM RichiestaSkill");
+		List<RichiestaSkill> result = q.getResultList();
+		System.out.println(result.size());
+		return result.size();
+		
+	}
 
 }
