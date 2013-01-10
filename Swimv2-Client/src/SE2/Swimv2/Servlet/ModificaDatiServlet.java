@@ -68,17 +68,14 @@ public class ModificaDatiServlet extends HttpServlet {
 			request.getRequestDispatcher(HOME_PAGE).forward(request, response);
 			return;
 		}
-
-		if(request.getAttribute(USER)==null){
 		
-			try {
-				gestoreUser = remoteManager.getGestoreUserRemote();
-				User user= gestoreUser.getById(id.longValue());
-				request.setAttribute(USER, user);
-			} catch (NamingException e) {
-				response.sendRedirect(ERROR_PAGE);
-				return;
-			}
+		try {
+			gestoreUser = remoteManager.getGestoreUserRemote();
+			User user= gestoreUser.getById(id.longValue());
+			request.setAttribute(USER, user);
+		} catch (NamingException e) {
+			response.sendRedirect(ERROR_PAGE);
+			return;
 		}
 		
 		request.getRequestDispatcher(USER_MODIFICA_DATI_PAGE).forward(request, response);
@@ -89,6 +86,15 @@ public class ModificaDatiServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//se non esiste una sessione richiamo l' home page
+		Long id= (Long) request.getSession().getAttribute(USER_ID);
+		if(id==null){
+			request.setAttribute(ERROR, LOGIN_ERROR);
+			request.getRequestDispatcher(HOME_PAGE).forward(request, response);
+			return;
+		}
+				
 		String email= request.getParameter(EMAIL);
 		String psw= request.getParameter(PASSWORD);
 		String nome= request.getParameter(NOME);
@@ -108,14 +114,6 @@ public class ModificaDatiServlet extends HttpServlet {
 			int mese = Integer.parseInt(meseNascita);
 			int anno = Integer.parseInt(annoNascita);
 			data= new GregorianCalendar(anno,mese,giorno);
-		}
-		Long id= (Long) request.getSession().getAttribute(USER_ID);
-		
-		//se non esiste una sessione richiamo l' home page
-		if(id==null){
-			request.setAttribute(ERROR, LOGIN_ERROR);
-			request.getRequestDispatcher(HOME_PAGE).forward(request, response);
-			return;
 		}
 		
 		try {

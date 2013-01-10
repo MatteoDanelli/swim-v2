@@ -64,23 +64,17 @@ public class PersonalSkillServlet extends HttpServlet {
 			request.getRequestDispatcher(HOME_PAGE).forward(request, response);
 			return;
 		}
-
-		//verifico se esite l' attributo Skill_set e personalskill
-		//se non esiste li creo
-		if(request.getAttribute(SKILL_SET)==null || request.getAttribute(PERSONAL_SKILL)==null){
 		
-			try {
-				gestoreSkill = remoteManager.getGestoreSkillRemote();
-				List<Skill> skillSet= gestoreSkill.getSkillSet();
-				List<Skill> personalSkill= gestoreSkill.getPersonalSkill(id);
-				request.setAttribute(SKILL_SET, skillSet);
-				request.setAttribute(PERSONAL_SKILL, personalSkill);
-			} catch (NamingException e) {
-				response.sendRedirect(ERROR_PAGE);
-				return;
-			}
+		try {
+			gestoreSkill = remoteManager.getGestoreSkillRemote();
+			List<Skill> skillSet= gestoreSkill.getSkillSet();
+			List<Skill> personalSkill= gestoreSkill.getPersonalSkill(id);
+			request.setAttribute(SKILL_SET, skillSet);
+			request.setAttribute(PERSONAL_SKILL, personalSkill);
+		} catch (NamingException e) {
+			response.sendRedirect(ERROR_PAGE);
+			return;
 		}
-		
 		
 		request.getRequestDispatcher(PERSONAL_SKILL_PAGE).forward(request, response);
 	}
@@ -90,12 +84,6 @@ public class PersonalSkillServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//carico lo skillset
-		List<Skill> skillSet;
-		Set<Skill> personalSkill= new HashSet<Skill>();
-		String skillPassataString;
-		Skill skillAggiunta;
-		
 		//se non esiste una sessione richiamo l' home page
 		Long id= (Long) request.getSession().getAttribute(USER_ID);
 		if(id==null){
@@ -103,6 +91,12 @@ public class PersonalSkillServlet extends HttpServlet {
 			request.getRequestDispatcher(HOME_PAGE).forward(request, response);
 			return;
 		}
+		
+		//carico lo skillset
+		List<Skill> skillSet;
+		Set<Skill> personalSkill= new HashSet<Skill>();
+		String skillPassataString;
+		Skill skillAggiunta;
 		
 		try {
 			gestoreSkill = remoteManager.getGestoreSkillRemote();

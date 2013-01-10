@@ -58,26 +58,24 @@ public class UserServlet extends HttpServlet {
 			return;
 		}
 
-		//SE NON È PRESENTE L'ATTRIBUTO USER, LO CREO
 		//imposto gli attributi messaggi/richieste aiuto/richieste messaggi
-		if(request.getAttribute(USER)==null){
+
+		try {
+			gestoreUser = remoteManager.getGestoreUserRemote();
+			gestoreRichiesteAmicizia = remoteManager.getGestoreRichiesteAmiciziaRemote();
+		} catch (NamingException e) {
+			response.sendRedirect(ERROR_PAGE);
+			return;
+		}	
 		
-			try {
-				gestoreUser = remoteManager.getGestoreUserRemote();
-				gestoreRichiesteAmicizia = remoteManager.getGestoreRichiesteAmiciziaRemote();
-			} catch (NamingException e) {
-				response.sendRedirect(ERROR_PAGE);
-				return;
-			}					
-			//SETTO ATTRIBUTO USER	
-			User user= gestoreUser.getById(id.longValue());
-			request.setAttribute(USER, user);
-			
-			//Setto attributo numero nuove richieste amicizia
-			Integer numRichiesteAmicizia= gestoreRichiesteAmicizia.numeroDiNuoveRichieste(id);
-			request.setAttribute(RIC_AMICIZIA, numRichiesteAmicizia);
-		}
+		//SETTO ATTRIBUTO USER	
+		User user= gestoreUser.getById(id.longValue());
+		request.setAttribute(USER, user);
 		
+		//Setto attributo numero nuove richieste amicizia
+		Integer numRichiesteAmicizia= gestoreRichiesteAmicizia.numeroDiNuoveRichieste(id);
+		request.setAttribute(RIC_AMICIZIA, numRichiesteAmicizia);
+
 		request.getRequestDispatcher(USER_PAGE).forward(request, response);
 			
 	}

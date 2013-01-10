@@ -33,8 +33,6 @@ public class AdminServlet extends HttpServlet {
 	private static final String ERROR_PAGE = "error.jsp";
 	private static final String HOME_ADMIN = "/Admin/login_admin.jsp";
 
-	
-
 	private RemoteManager remoteManager= new RemoteManager();
 	private GestoreAdminRemote gestoreAdmin;
 
