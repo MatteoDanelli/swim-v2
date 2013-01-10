@@ -1,3 +1,4 @@
+<%@page import="org.jboss.aspects.security.Unchecked"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="SE2.Swimv2.Entity.*"%>
 <%@ page import="java.util.List"%>
@@ -54,12 +55,13 @@
 					}
 					
 					//ottengo skillset, se l' attributo non esiste redirigo sull user page
+					@SuppressWarnings("unchecked")
 					List<Skill> skillSet = (List<Skill>) request.getAttribute("skillSet");
 					if(skillSet== null) {
 						response.sendRedirect("/Swimv2-Client/UserServlet");
 						return;
 					}
-					
+					@SuppressWarnings("unchecked")
 					//ottengo il personalSkill, se l' attributo non esiste redirigo sull user page
 					List<Skill> personalSkill = (List<Skill>) request.getAttribute("personalSkill");
 					if(personalSkill== null) {

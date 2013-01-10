@@ -84,7 +84,7 @@
 									<input type="text" name="cognome" value="<%out.print(user.getCognome());%>">
 									<br>
 									<label>Provincia: </label>
-									<input type="text" name="provincia" value="<%out.print(user.getProvincia());%>">
+									<input type="text" name="provincia" value="<%if(user.getProvincia()!=null){out.print(user.getProvincia());}%>">
 									<br>
 									<label>Sesso: </label>
 									<select name="sesso" >
