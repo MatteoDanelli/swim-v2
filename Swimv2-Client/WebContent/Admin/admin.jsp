@@ -29,7 +29,7 @@
 		<div class="content">
 			<ul id="menu">
 				<li><a class="first" href="/Swimv2-Client/index.jsp">Home Page</a></li>
-				<li><a href="#">Aggiungi Skill</a></li>
+				<li><a href="/Swimv2-Client/AggiungiSkillServlet">Aggiungi Skill</a></li>
 				<li><a href="/Swimv2-Client/ModificaPasswordAdminServlet">Modifica password</a></li>
 				<li><a href="LogoutServlet">Logout</a></li>
 			</ul>
