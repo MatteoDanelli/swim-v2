@@ -34,7 +34,7 @@
 				<li><a href="#">Cerca Utente</a></li>
 				<li><a href="#">Visualizza Amici</a></li>
 				<li><a href="/Swimv2-Client/ModificaDatiServlet">Modifica Dati</a></li>
-				<li><a href="PersonalSkillServlet">Modifica Skills</a></li>
+				<li><a href="/Swimv2-Client/PersonalSkillServlet">Modifica Skills</a></li>
 				<li><a href="#">Proponi Abilità</a></li>
 				<li><a href="LogoutServlet">Logout</a></li>
 			</ul>
