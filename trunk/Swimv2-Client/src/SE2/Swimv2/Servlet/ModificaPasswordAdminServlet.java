@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import SE2.Swimv2.Entity.Admin;
-import SE2.Swimv2.Exceptions.AdminException;
 import SE2.Swimv2.Session.GestoreAdminRemote;
 import SE2.Swimv2.Util.RemoteManager;
 

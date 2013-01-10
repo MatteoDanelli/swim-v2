@@ -40,17 +40,19 @@
 	  		
 		  		<div class="box_contents">
 						<form class="form" action="/Swimv2-Client/RegistraUserServlet" method="post">
+						<% if (request.getAttribute("Errore")=="Errore") {%>
+						<h3>Campi obbligatori non inseriti!!</h3> <%} %>
 								<div class="form_center_contents">
-									<label>E-Mail: </label>
+									<label>E-Mail ^: </label>
 									<input type="text" name="email">
 									<br>
-									<label>Password: </label>
+									<label>Password ^: </label>
 									<input type="password" name="password">
 									<br>
-									<label>Nome: </label>
+									<label>Nome ^: </label>
 									<input type="text" name="nome">
 									<br>
-									<label>Cognome: </label>
+									<label>Cognome ^: </label>
 									<input type="text" name="cognome">
 									<br>
 									<label>Provincia: </label>
@@ -92,7 +94,8 @@
 												}
 											%>	
 									 </select>
-									<br>
+									<br> <br>
+									<h5>I campi con ^ sono obbligatori</h5>
 									</div>
 								
 								<input type="submit" value="Registrati">
