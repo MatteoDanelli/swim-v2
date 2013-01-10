@@ -115,6 +115,10 @@ public class ModificaDatiServlet extends HttpServlet {
 			int anno = Integer.parseInt(annoNascita);
 			data= new GregorianCalendar(anno,mese,giorno);
 		}
+		//se provincia non inserita, setto il parametro a null
+		if(provincia==""){
+			provincia=null;
+		}
 		
 		try {
 			gestoreUser = remoteManager.getGestoreUserRemote();
