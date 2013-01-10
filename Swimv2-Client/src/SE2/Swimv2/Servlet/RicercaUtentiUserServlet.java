@@ -14,12 +14,13 @@ import SE2.Swimv2.Session.GestoreUserRemote;
 import SE2.Swimv2.Util.RemoteManager;
 
 /**
- * Servlet implementation class RicercaUtentiServlet
+ * Servlet implementation class RicercaUtentiUserServlet
  */
-public class RicercaUtentiServlet extends HttpServlet {
+public class RicercaUtentiUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	//nomi attributi
+	private static final String ERROR = "Errore";
 	private static final String NOME= "nome";
 	private static final String COGNOME= "cognome";
 	private static final String SKILL= "skill";
@@ -27,6 +28,8 @@ public class RicercaUtentiServlet extends HttpServlet {
 	private static final String MESSAGE = "Messaggio";
 	
 	//valori attributi
+	private static final String LOGIN_ERROR= "logError";
+	private static final String USER_ID= "userId";
 	private static final String NESSUN_RISULTATO = "La Ricerca non ha prodotto nessun risultato";
 	
 	//nomi paramentri
@@ -38,13 +41,15 @@ public class RicercaUtentiServlet extends HttpServlet {
 	
 	//nomi pagine
 	private static final String ERROR_PAGE = "error.jsp";
+	private static final String HOME_PAGE = "index.jsp";
+	private static final String USER_CERCA_UTENTI = "User/cercaUtenti.jsp";
     
 	private RemoteManager remoteManager= new RemoteManager();
 	private GestoreUserRemote gestoreUser;
 	/**
      * @see HttpServlet#HttpServlet()
      */
-    public RicercaUtentiServlet() {
+    public RicercaUtentiUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,13 +58,30 @@ public class RicercaUtentiServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/Guest/cerca_utenti.jsp").forward(request, response);
+		
+		//se non esiste una sessione richiamo l' home page
+		Long id= (Long) request.getSession().getAttribute(USER_ID);
+		if(id==null){
+			request.setAttribute(ERROR, LOGIN_ERROR);
+			request.getRequestDispatcher(HOME_PAGE).forward(request, response);
+			return;
+		}
+		
+		request.getRequestDispatcher(USER_CERCA_UTENTI).forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//se non esiste una sessione richiamo l' home page
+		Long id= (Long) request.getSession().getAttribute(USER_ID);
+		if(id==null){
+			request.setAttribute(ERROR, LOGIN_ERROR);
+			request.getRequestDispatcher(HOME_PAGE).forward(request, response);
+			return;
+		}
 		
 		String type= request.getParameter(TIPO_RICERCA);
 		
@@ -70,28 +92,27 @@ public class RicercaUtentiServlet extends HttpServlet {
 			return;
 		}
 		
+		List<User> risultati;
+		
 		if(type.equals(RICERCA_SKILL)){
 			String skill = request.getParameter(SKILL);
-			List<User> risultati = gestoreUser.cercaPerSkill(skill);
-			request.setAttribute(RISULTATI_RICERCA, risultati);
-			if(risultati.size()==0){
-				request.setAttribute(MESSAGE, NESSUN_RISULTATO);
-			}
-		
+			risultati = gestoreUser.cercaPerSkill(skill);
 		}
 		else if(type.equals(RICERCA_NOMINATIVO)){
 			String nome = request.getParameter(NOME);
 			String cognome = request.getParameter(COGNOME);
-			List<User> risultati = gestoreUser.cercaPerNominativo(nome, cognome);
-			request.setAttribute(RISULTATI_RICERCA, risultati);
-			if(risultati.size()==0){
-				request.setAttribute(MESSAGE, NESSUN_RISULTATO);
-			}
+			risultati = gestoreUser.cercaPerNominativo(nome, cognome);
+		}else{
+			response.sendRedirect(ERROR_PAGE);
+			return;
 		}
 		
+		request.setAttribute(RISULTATI_RICERCA, risultati);
+		if(risultati.size()==0){
+			request.setAttribute(MESSAGE, NESSUN_RISULTATO);
+		}
 
-		
-		request.getRequestDispatcher("/Guest/cerca_utenti.jsp").forward(request, response);
+		request.getRequestDispatcher(USER_CERCA_UTENTI).forward(request, response);
 	}
 
 }
