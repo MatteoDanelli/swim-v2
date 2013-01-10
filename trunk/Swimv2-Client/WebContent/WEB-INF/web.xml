@@ -89,4 +89,14 @@
     <servlet-name>RegistraUserServlet</servlet-name>
     <url-pattern>/RegistraUserServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ModificaPasswordAdminServlet</display-name>
+    <servlet-name>ModificaPasswordAdminServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.ModificaPasswordAdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModificaPasswordAdminServlet</servlet-name>
+    <url-pattern>/ModificaPasswordAdminServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -28,10 +28,9 @@
  		<div class="menu_bar">
 		<div class="content">
 			<ul id="menu">
-				<li><a class="first" href="UserServlet">Home Page</a></li>
+				<li><a class="first" href="/Swimv2-Client/index.jsp">Home Page</a></li>
 				<li><a href="#">Aggiungi Skill</a></li>
-				<li><a href="#">Visualizza Richieste aggiunta Skill</a></li>
-				<li><a href="/Swimv2-Client/ModificaDatiServlet">Modifica password</a></li>
+				<li><a href="/Swimv2-Client/ModificaPasswordAdminServlet">Modifica password</a></li>
 				<li><a href="LogoutServlet">Logout</a></li>
 			</ul>
 		</div>		
@@ -66,7 +65,10 @@
 				  		<div class="box_contents">
 				  		<div class="elenco">
 							<p>Ci sono:</p><br>
-							<p><%out.print(numRichiesteSkill.intValue()); %> Richieste d'ampliamento skill set - <a href="#">Visualizza</a></p>	
+							<p><%out.print(numRichiesteSkill.intValue()); %> Richieste d'ampliamento skill set 
+							<%if (numRichiesteSkill.intValue()!=0) { %>
+								<a href="#">- Visualizza</a></p>	
+							<% } %> 
 							</div> 
 	  					</div>
 	  				</div>
