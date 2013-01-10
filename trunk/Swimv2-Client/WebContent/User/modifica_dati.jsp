@@ -90,16 +90,16 @@
 									<select name="sesso" >
 										<%if(user.getSesso()=='M'){ %>
 											<option value="N">Sesso</option>
-											<option selected="selected" value="M">Maschio
-											<option value="F">Femmina
+											<option selected="selected" value="M">Maschio</option>
+											<option value="F">Femmina</option>
 										<%}else if(user.getSesso()=='F'){ %>
 											<option value="N">Sesso</option>
-											<option value="M">Maschio
-											<option selected="selected" value="F" >Femmina
+											<option value="M">Maschio</option>
+											<option selected="selected" value="F" >Femmina</option>
 										<%}else{ %>
 											<option selected="selected" value="N">Sesso</option>
-											<option value="M">Maschio
-											<option value="F">Femmina
+											<option value="M">Maschio</option>
+											<option value="F">Femmina</option>
 										<%} %>
 									</select>
 									<br>
