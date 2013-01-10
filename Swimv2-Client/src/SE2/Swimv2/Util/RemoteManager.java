@@ -7,6 +7,7 @@ import javax.naming.NamingException;
 import SE2.Swimv2.Session.GestoreAdminRemote;
 import SE2.Swimv2.Session.GestoreLoginRemote;
 import SE2.Swimv2.Session.GestoreRichiesteAmiciziaRemote;
+import SE2.Swimv2.Session.GestoreRichiesteSkillRemote;
 import SE2.Swimv2.Session.GestoreSkillRemote;
 import SE2.Swimv2.Session.GestoreUserRemote;
 
@@ -47,6 +48,13 @@ public class RemoteManager {
 		Context jndiContext = new InitialContext();
 		Object obj = jndiContext.lookup("GestoreSkill/remote");
 		GestoreSkillRemote manager = (GestoreSkillRemote) obj;
+		return manager;
+	}
+
+	public GestoreRichiesteSkillRemote getGestoreRichiesteSkillRemote() throws NamingException {
+		Context jndiContext = new InitialContext();
+		Object obj = jndiContext.lookup("GestoreRichiesteSkill/remote");
+		GestoreRichiesteSkillRemote manager = (GestoreRichiesteSkillRemote) obj;
 		return manager;
 	}
 }
