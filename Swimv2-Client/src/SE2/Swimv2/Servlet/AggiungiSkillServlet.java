@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import SE2.Swimv2.Entity.Admin;
+import SE2.Swimv2.Exceptions.SkillException;
 import SE2.Swimv2.Session.GestoreAdminRemote;
 import SE2.Swimv2.Session.GestoreSkillRemote;
 import SE2.Swimv2.Util.RemoteManager;
@@ -31,6 +32,10 @@ public class AggiungiSkillServlet extends HttpServlet {
 	private static final String ADD_SKILL = "Admin/add_skill.jsp";
 	private static final String ERROR_PAGE = "error.jsp";
 	private static final String HOME_ADMIN = "/Admin/login_admin.jsp";
+	
+	private static final String ADMIN_SERVLET = "/Swimv2-Client/AdminServlet";
+	
+	private static final String SKILL = "skill";
 	
 	private RemoteManager remoteManager= new RemoteManager();
 	private GestoreAdminRemote gestoreAdmin;
@@ -58,7 +63,6 @@ public class AggiungiSkillServlet extends HttpServlet {
 				if(request.getAttribute(ADMIN)==null) {		
 					try {
 						gestoreAdmin = remoteManager.getGestoreAdminRemote();
-						gestoreSkill = remoteManager.getGestoreSkillRemote();
 					} catch (NamingException e) {
 						response.sendRedirect(ERROR_PAGE);
 						return;
@@ -75,7 +79,31 @@ public class AggiungiSkillServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			//TODO
+		//se non esiste una sessione richiamo l'home page
+		Long id= (Long) request.getSession().getAttribute(ADMIN_ID);
+		if(id==null){
+			request.setAttribute(ERROR, LOGIN_ERROR);
+			request.getRequestDispatcher(HOME_ADMIN).forward(request, response);
+			return;
 		}
+			
+			String skillDaCreare = request.getParameter(SKILL);
+			try {
+				gestoreSkill=remoteManager.getGestoreSkillRemote();
+			} catch (NamingException e) {
+				response.sendRedirect(ERROR_PAGE);
+				return;
+			}
+			
+			try {
+				gestoreSkill.creaSkill(skillDaCreare);
+			} catch (SkillException e) {
+				response.sendRedirect(ERROR_PAGE);
+				return;
+			}
+			
+			response.sendRedirect(ADMIN_SERVLET);
 
+		}
+	
 }
