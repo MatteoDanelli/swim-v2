@@ -5,6 +5,7 @@ package SE2.Swimv2.Entity;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,111 +17,110 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * @author Matteo Danelli 
- * Tale classe rappresenta i messaggi all'interno del sistema, siano essi richieste di aiuto che conversazioni tra user.
+ * @author Matteo Danelli Tale classe rappresenta i messaggi all'interno del
+ *         sistema, siano essi richieste di aiuto che conversazioni tra user.
  */
 @Entity
-@Table(name="MESSAGGIO")
-
+@Table(name = "MESSAGGIO")
 public class Messaggio implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID_MESSAGGIO")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID_MESSAGGIO")
 	private long id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="MITTENTE", nullable=false)
+	@JoinColumn(name = "MITTENTE", nullable = false)
 	private User mittente;
-	
+
 	@ManyToOne
-	@JoinColumn(name="DESTINATARIO", nullable=false)
+	@JoinColumn(name = "DESTINATARIO", nullable = false)
 	private User destinatario;
-	
+
 	@ManyToOne
-	@JoinColumn(name="SKILL_RICHIESTA", nullable=true)
+	@JoinColumn(name = "SKILL_RICHIESTA", nullable = true)
 	private Skill skillRichiesta;
-	
-	@Column(name="MESSAGGIO_LETTO", nullable=true)
+
+	@Column(name = "MESSAGGIO_LETTO", nullable = true)
 	private boolean isMessaggioLetto;
-	
-	@Column(name="RICHIESTA_DI_AIUTO", nullable=true)
+
+	@Column(name = "RICHIESTA_DI_AIUTO", nullable = true)
 	private boolean isRichiestaAiuto;
-	
-	@Column(name="DATA_DI_INVIO", nullable=false)
+
+	@Column(name = "DATA_DI_INVIO", nullable = false)
 	private Calendar dataInvio;
-	
-	@Column(name="TESTO", nullable=true)
+
+	@Column(name = "TESTO", nullable = true)
 	private String testo;
+
+	// costruttori
+
+	public Messaggio() {
+
+	}
 	
-	//Getters and setters
-	public User getMittente() {
-		return mittente;
+	public Messaggio(User mittente, User destinatario, Skill skillRichiesta, boolean isRichiestaAiuto, String testo) {
+		
+		this.mittente = mittente;
+		this.destinatario = destinatario;
+		this.skillRichiesta = skillRichiesta;
+		this.isRichiestaAiuto = isRichiestaAiuto;
+		this.dataInvio = new GregorianCalendar();
+		this.testo = testo;
+		
+	}
+	
+	// Getters
+
+	public long getId() {
+		return id;
 	}
 
-	public void setMittente(User mittente) {
-		this.mittente = mittente;
+	public User getMittente() {
+		return mittente;
 	}
 
 	public User getDestinatario() {
 		return destinatario;
 	}
 
-
-	public void setDestinatario(User destinatario) {
-		this.destinatario = destinatario;
-	}
-
 	public Skill getSkillRichiesta() {
 		return skillRichiesta;
-	}
-
-	public void setSkillRichiesta(Skill skillRichiesta) {
-		this.skillRichiesta = skillRichiesta;
 	}
 
 	public boolean isMessaggioLetto() {
 		return isMessaggioLetto;
 	}
 
-	public void setMessaggioLetto(boolean isMessaggioLetto) {
-		this.isMessaggioLetto = isMessaggioLetto;
-	}
-
 	public boolean isRichiestaAiuto() {
 		return isRichiestaAiuto;
-	}
-
-	public void setRichiestaAiuto(boolean isRichiestaAiuto) {
-		this.isRichiestaAiuto = isRichiestaAiuto;
 	}
 
 	public Calendar getDataInvio() {
 		return dataInvio;
 	}
 
-	public void setDataInvio(Calendar dataInvio) {
-		this.dataInvio = dataInvio;
-	}
-
 	public String getTesto() {
 		return testo;
 	}
-
-	public void setTesto(String testo) {
-		this.testo = testo;
-	}
-
-	public long getId() {
-		return id;
-	}
 	
+	//setters
+	
+	public void setMessaggioLetto(boolean isMessaggioLetto) {
+		this.isMessaggioLetto = isMessaggioLetto;
+	}
+
 	public String toString() {
-		if (this.isRichiestaAiuto==true) 
-			return ("FROM: "+ this.getMittente().toString() +" TO "+ this.getDestinatario().toString() +". SKILL RICHIESTA: "+ this.getSkillRichiesta().toString() +" ");
-		return ("FROM: "+ this.getMittente().toString() +" TO "+ this.getDestinatario().toString());
+		if (this.isRichiestaAiuto == true)
+			return ("FROM: " + this.getMittente().toString() + " TO "
+					+ this.getDestinatario().toString() + ". SKILL RICHIESTA: "
+					+ this.getSkillRichiesta().toString() + " ");
+		return ("FROM: " + this.getMittente().toString() + " TO " + this
+				.getDestinatario().toString());
 
 	}
+
+
 }

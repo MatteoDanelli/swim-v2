@@ -1,6 +1,5 @@
 package SE2.Swimv2.Session;
 
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -12,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import SE2.Swimv2.Entity.Messaggio;
+import SE2.Swimv2.Entity.Skill;
 import SE2.Swimv2.Entity.User;
 import SE2.Swimv2.Exceptions.MessaggiException;
 
@@ -24,19 +24,17 @@ public class GestoreRichiesteAiuto implements GestoreRichiesteAiutoRemote {
 	EntityManager database;
 
 	@Override
-	public void inviaRichiestaAiuto(long mittente, long destinatario, String testo) throws MessaggiException {
+	public void inviaRichiestaAiuto(long mittente, long destinatario, Skill skill, String testo) throws MessaggiException {
+		
 		if (mittente != destinatario) {
-			Messaggio nuovoMessaggio = new Messaggio();
 			User userMittente = database.find(User.class, mittente);
 			User UserDestinatario = database.find(User.class, destinatario);
-			nuovoMessaggio.setMittente(userMittente);
-			nuovoMessaggio.setDestinatario(UserDestinatario);
-			nuovoMessaggio.setTesto(testo);
-			nuovoMessaggio.setDataInvio(new GregorianCalendar());
-			nuovoMessaggio.setRichiestaAiuto(true);
+			Messaggio nuovoMessaggio= new Messaggio(userMittente, UserDestinatario, skill, true, testo);
 			database.persist(nuovoMessaggio);
 		}
-		else throw new MessaggiException("Mittente e destinario coincidenti!");
+		else {
+			throw new MessaggiException("Mittente e destinario coincidenti!");
+		}
 	}
 
 

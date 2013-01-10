@@ -70,9 +70,6 @@ public class GestoreRichiesteAmicizia implements GestoreRichiesteAmiciziaRemote{
 	@Override
 	public int numeroDiNuoveRichieste(long userid) {
 		List<RichiestaAmicizia> result =elencoRichiesteAmicizia(userid);
-		if(result==null){
-			return 0;
-		}
 		return result.size();
 	}
 
