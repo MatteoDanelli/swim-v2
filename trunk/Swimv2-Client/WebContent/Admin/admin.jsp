@@ -28,7 +28,7 @@
  		<div class="menu_bar">
 		<div class="content">
 			<ul id="menu">
-				<li><a class="first" href="/Swimv2-Client/index.jsp">Home Page</a></li>
+				<li><a class="first" href="/Swimv2-Client/AdminServlet">Home Page</a></li>
 				<li><a href="/Swimv2-Client/AggiungiSkillServlet">Aggiungi Skill</a></li>
 				<li><a href="/Swimv2-Client/ModificaPasswordAdminServlet">Modifica password</a></li>
 				<li><a href="LogoutServlet">Logout</a></li>
@@ -49,7 +49,7 @@
 	  
 		Admin admin = (Admin) request.getAttribute("admin");
 		if(admin!= null) {
-			out.println("<p> Benvenuto amministratore </p>");
+			out.println("<h3> <p> Benvenuto!!! </p> </h3>");
 		} else {
 			response.sendRedirect("/Swimv2-Client/error.jsp");
 			return;
