@@ -1,6 +1,5 @@
 package SE2.Swimv2.Session;
 
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -28,16 +27,14 @@ public class GestoreMessaggi implements GestoreMessaggiRemote {
 	@Override
 	public void inviaMessaggio(long mittente, long destinatario, String testo) throws MessaggiException {
 		if (mittente != destinatario) {
-			Messaggio nuovoMessaggio = new Messaggio();
 			User userMittente = database.find(User.class, mittente);
 			User UserDestinatario = database.find(User.class, destinatario);
-			nuovoMessaggio.setMittente(userMittente);
-			nuovoMessaggio.setDestinatario(UserDestinatario);
-			nuovoMessaggio.setTesto(testo);
-			nuovoMessaggio.setDataInvio(new GregorianCalendar());
+			Messaggio nuovoMessaggio= new Messaggio(userMittente, UserDestinatario, null, false, testo);
 			database.persist(nuovoMessaggio);
 		}
-		else throw new MessaggiException("Mittente e destinario coincidenti!");
+		else {
+			throw new MessaggiException("Mittente e destinario coincidenti!");
+		}
 	}
 	
 	@SuppressWarnings("unchecked")

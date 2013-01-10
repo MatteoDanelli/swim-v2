@@ -59,7 +59,7 @@ public class Feedback implements Serializable {
 		this.dataPubblicazione=new GregorianCalendar();
 	}
 
-	//Getters and setters
+	//Getters
 	public long getId() {
 		return id;
 	}
