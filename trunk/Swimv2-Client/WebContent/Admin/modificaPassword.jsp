@@ -59,7 +59,7 @@
 						</div>
 						
 						<div class="box_contents">
-							<form class="form" action="/Swimv2-Client/ModificaDatiServlet" method="post">
+							<form class="form" action="/Swimv2-Client/ModificaPasswordAdminServlet" method="post">
 								
 								<div class="form_center_contents">
 									<label>Nuova Password: </label>
@@ -71,9 +71,7 @@
 							</form>		
 						</div> 
 						
-	  				</div>
-	
-	
+	  				</div>	
 	</div>
 	</div>
 	

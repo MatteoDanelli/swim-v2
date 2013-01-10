@@ -58,15 +58,22 @@
 							Aggiungi Skill
 						</div>
 	  		
-
+						<div class="box_contents">
+							<form class="form" action="/Swimv2-Client/AggiungiSkillServlet" method="post">
+								
+								<div class="form_center_contents">
+									<label>Nuova skill: </label>
+									<input type="text" name="skill">
+									<br>
+								</div>
+								
+								<input type="submit" value="Inserisci">
+							</form>		
+						</div> 
 
 
 	  				</div>
-	
-	
 	</div>
-	</div>
-	
-	
+	</div>	
 </body>
 </html>

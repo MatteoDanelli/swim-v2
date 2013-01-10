@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import SE2.Swimv2.Entity.Admin;
+import SE2.Swimv2.Exceptions.AdminException;
 import SE2.Swimv2.Session.GestoreAdminRemote;
 import SE2.Swimv2.Util.RemoteManager;
 
@@ -22,16 +23,17 @@ public class ModificaPasswordAdminServlet extends HttpServlet {
 	private static final String ERROR = "Errore";
 	private static final String ADMIN= "admin";
 	private static final String ADMIN_ID= "adminId";
+	private static final String PASSWORD="password";
 	
 	//valori attributi
 	private static final String LOGIN_ERROR= "logError";
 	
 	//nomi pagine
-	private static final String ADMIN_PAGE = "Admin/admin.jsp";
 	private static final String ERROR_PAGE = "error.jsp";
 	private static final String HOME_ADMIN = "/Admin/login_admin.jsp";
 
 	private static final String ADMIN_MODIFICA_PASSWORD = "/Admin/modificaPassword.jsp";
+	private static final String ADMIN_SERVLET = "/Swimv2-Client/AdminServlet";
 
 	private RemoteManager remoteManager = new RemoteManager();
 	private GestoreAdminRemote gestoreAdmin;
@@ -73,17 +75,31 @@ public class ModificaPasswordAdminServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//Se non esiste la sessione richiamo l'homepage
-		Long id= (Long) request.getSession().getAttribute(ADMIN_ID);
-		if(id==null){
+	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+
+		// Se non esiste la sessione richiamo l'homepage
+		Long id = (Long) request.getSession().getAttribute(ADMIN_ID);
+		if (id == null) {
 			request.setAttribute(ERROR, LOGIN_ERROR);
 			request.getRequestDispatcher(HOME_ADMIN).forward(request, response);
 			return;
 		}
-		
-		
-	}
+		String nuovaPassword = request.getParameter(PASSWORD);
+		try {
+			gestoreAdmin = remoteManager.getGestoreAdminRemote();
+		} catch (NamingException e) {
+			response.sendRedirect(ERROR_PAGE);
+			return;
+		}
 
+		try {
+			gestoreAdmin.modificaPassword(gestoreAdmin.getAdmin().getEmail(),nuovaPassword);
+		} catch (Exception e) {
+			response.sendRedirect(ERROR_PAGE);
+			return;
+		}
+
+		response.sendRedirect(ADMIN_SERVLET);
+
+	}
 }
