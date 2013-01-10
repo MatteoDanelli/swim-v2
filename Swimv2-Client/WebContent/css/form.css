@@ -1,0 +1,28 @@
+.form_center_contents {
+	width: 320px;
+	margin: 0 auto;
+}
+
+.form input[type=text],.form  input[type=password] {
+	width: 320px;
+	height: 25px;
+	font-size: 14px;
+}
+
+.form label {
+	width: 320px;
+	font-size: 14px;
+	font-weight: bold;
+	display: block;
+	margin-top: 5px;
+	color: #AA2424;
+}
+
+.form  input[type=submit] {
+	float: right;
+	width: 150px;
+	height: 40px;
+	font-size: 14px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
