@@ -69,7 +69,7 @@
     <servlet-name>PersonalSkillServlet</servlet-name>
     <url-pattern>/PersonalSkillServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>AdminServlet</display-name>
     <servlet-name>AdminServlet</servlet-name>
@@ -78,5 +78,15 @@
   <servlet-mapping>
     <servlet-name>AdminServlet</servlet-name>
     <url-pattern>/AdminServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RegistraUserServlet</display-name>
+    <servlet-name>RegistraUserServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.RegistraUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistraUserServlet</servlet-name>
+    <url-pattern>/RegistraUserServlet</url-pattern>
   </servlet-mapping>
 </web-app>
