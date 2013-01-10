@@ -18,5 +18,6 @@ public interface GestoreRichiesteSkillRemote {
 	void accettaRichiesta(RichiestaSkill skillDaAccettare);
 	void rifiutaRichiesta(RichiestaSkill skillDaRifiutare);
 	void inviaRichiestaAggiuntaSkill(long userCheLaRichiede, String skillRichiesta);
-	
+	int numeroDiNuoveRichieste();
+
 }
