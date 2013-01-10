@@ -20,7 +20,7 @@
 	  		</a>
 	  		
 	  		<span class="page_title">
-					Modifica password
+					Aggiungi Skill 
 		  	</span> 		
   		</div>
  	</div> 	
@@ -55,22 +55,12 @@
 	  %>
 				<div class="box margintop">
 			  			<div class="box_title">
-							Modifica Password
+							Aggiungi Skill
 						</div>
-						
-						<div class="box_contents">
-							<form class="form" action="/Swimv2-Client/ModificaDatiServlet" method="post">
-								
-								<div class="form_center_contents">
-									<label>Nuova Password: </label>
-									<input type="password" name="password">
-									<br>
-								</div>
-								
-								<input type="submit" value="Aggiorna">
-							</form>		
-						</div> 
-						
+	  		
+
+
+
 	  				</div>
 	
 	
