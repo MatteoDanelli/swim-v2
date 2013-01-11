@@ -1,4 +1,4 @@
-package SE2.Swimv2.Servlet;
+package SE2.Swimv2.Servlet.UserServlet;
 
 import java.io.IOException;
 import java.util.HashSet;
