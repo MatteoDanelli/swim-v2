@@ -65,9 +65,9 @@
 				  		<div class="box_contents">
 				  		<div class="elenco">
 							<p>Ci sono:</p><br>
-							<p><%out.print(numRichiesteSkill.intValue()); %> Richieste d'ampliamento skill set 
+							<p><%out.print(numRichiesteSkill.intValue()); %> Richieste d'ampliamento skill set -
 							<%if (numRichiesteSkill.intValue()!=0) { %>
-								<a href="#">- Visualizza</a></p>	
+								<a href="/Swimv2-Client/RichiesteAggiuntaSkillServlet">Visualizza tutte le richieste</a></p>	
 							<% } %> 
 							</div> 
 	  					</div>

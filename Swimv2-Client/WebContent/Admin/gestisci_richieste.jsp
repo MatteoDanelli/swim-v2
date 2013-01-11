@@ -1,3 +1,4 @@
+<%@page import="SE2.Swimv2.Exceptions.RichiesteSkillException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="SE2.Swimv2.Entity.*"%>
 <!DOCTYPE html>
@@ -8,8 +9,6 @@
 	 
 	<style type="text/css">
 		@import url(/Swimv2-Client/css/main.css);
-		@import url(/Swimv2-Client/css/form.css);
-		
 	</style>
 	</head>
 
@@ -22,7 +21,7 @@
 	  		</a>
 	  		
 	  		<span class="page_title">
-					Modifica password
+					Gestione Richieste
 		  	</span> 		
   		</div>
  	</div> 	
@@ -49,31 +48,28 @@
 			return;
 		}
 	  
-		Admin admin = (Admin) request.getAttribute("admin");
-		if(admin== null) {
+		RichiestaSkill richieste = (RichiestaSkill) request.getAttribute("richieste");
+		if(richieste== null) {
 			response.sendRedirect("/Swimv2-Client/error.jsp");
 			return;
 		}
 	  %>
 				<div class="box margintop">
 			  			<div class="box_title">
-							Modifica Password
+							Nuove Richieste
 						</div>
-						
-						<div class="box_contents">
-							<form class="form" action="/Swimv2-Client/ModificaPasswordAdminServlet" method="post">
-								
-								<div class="form_center_contents">
-									<label>Nuova Password: </label>
-									<input type="password" name="password">
-									<br>
-								</div>
-								
-								<p class="link_right_align"> <input type="submit" value="Aggiorna"></p>
-							</form>		
-						</div> 
-						
-	  				</div>	
+	  		
+				  		<div class="box_contents">
+				  		<div class="elenco">
+							<p>elenco qui:</p><br>
+
+
+
+							</div> 
+	  					</div>
+	  				</div>
+	
+	
 	</div>
 	</div>
 	

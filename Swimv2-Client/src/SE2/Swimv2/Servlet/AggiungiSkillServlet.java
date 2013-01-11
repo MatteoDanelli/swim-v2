@@ -16,6 +16,8 @@ import SE2.Swimv2.Util.RemoteManager;
 
 /**
  * Servlet implementation class AggiungiSkillServlet
+ * @author Matteo Danelli
+ * Gestione dell'azione AggiungiSkill da parte dell'Admin
  */
 public class AggiungiSkillServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

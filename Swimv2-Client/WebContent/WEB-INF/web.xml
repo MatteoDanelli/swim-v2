@@ -109,7 +109,7 @@
     <servlet-name>AggiungiSkillServlet</servlet-name>
     <url-pattern>/AggiungiSkillServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>ProfiloServlet</display-name>
     <servlet-name>ProfiloServlet</servlet-name>
@@ -128,5 +128,15 @@
   <servlet-mapping>
     <servlet-name>RicercaUtentiUserServlet</servlet-name>
     <url-pattern>/RicercaUtentiUserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RichiesteAggiuntaSkillServlet</display-name>
+    <servlet-name>RichiesteAggiuntaSkillServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.RichiesteAggiuntaSkillServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RichiesteAggiuntaSkillServlet</servlet-name>
+    <url-pattern>/RichiesteAggiuntaSkillServlet</url-pattern>
   </servlet-mapping>
 </web-app>

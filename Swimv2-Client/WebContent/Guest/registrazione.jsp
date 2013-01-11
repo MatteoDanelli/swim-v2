@@ -110,7 +110,7 @@ if (mail==null || mail=="" || password==null || password=="" || nome==null || no
 									<h5>I campi con ^ sono obbligatori</h5>
 									</div>
 								
-								<input type="submit" value="Registrati">
+								<p class="link_right_align"> <input type="submit" value="Registrati"> </p>
 						</form>	
 				</div> 
 
