@@ -25,7 +25,7 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 	//nomi attributi
 	private static final String ERROR = "Errore";
 	private static final String ADMIN= "admin";
-	private static final String RICHIESTE= "RICHIESTE";
+	private static final String RICHIESTE= "richieste";
 	private static final String ADMIN_ID= "adminId";
 	
 	//valori attributi
@@ -65,8 +65,6 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 				response.sendRedirect(ERROR_PAGE);
 				return;
 			}
-			
-			//Imposto l'attributo Admin da passare alla homePage
 			
 			List<RichiestaSkill> richieste = gestoreRichieste.elencoRichieste();
 			request.setAttribute(RICHIESTE, richieste);
