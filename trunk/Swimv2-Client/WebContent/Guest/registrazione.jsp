@@ -13,6 +13,20 @@
 	</style>
 	</head>
 	
+<script type="text/javascript">
+function validateForm()
+{
+var mail=document.forms["form"]["email"].value;
+var password=document.forms["form"]["password"].value;
+var nome=document.forms["form"]["nome"].value;
+var cognome=document.forms["form"]["cognome"].value;
+if (mail==null || mail=="" || password==null || password=="" || nome==null || nome=="" || cognome=="" || cognome==null)
+  {
+  alert("Campi obbligatori non compilati!");
+  return false;
+  }
+}</script>
+
 
   <body>
 
@@ -39,9 +53,7 @@
 				</div>
 	  		
 		  		<div class="box_contents">
-						<form class="form" action="/Swimv2-Client/RegistraUserServlet" method="post">
-						<% if (request.getAttribute("Errore")=="Errore") {%>
-						<h3>Campi obbligatori non inseriti!!</h3> <%} %>
+						<form class="form" name="form" action="/Swimv2-Client/RegistraUserServlet" method="post" onsubmit="return validateForm();">
 								<div class="form_center_contents">
 									<label>E-Mail ^: </label>
 									<input type="text" name="email">
