@@ -76,7 +76,6 @@ public class GestoreRichiesteSkill implements GestoreRichiesteSkillRemote {
 	public int numeroDiNuoveRichieste() {
 		Query q = database.createQuery("FROM RichiestaSkill");
 		List<RichiestaSkill> result = q.getResultList();
-		System.out.println(result.size());
 		return result.size();
 		
 	}
