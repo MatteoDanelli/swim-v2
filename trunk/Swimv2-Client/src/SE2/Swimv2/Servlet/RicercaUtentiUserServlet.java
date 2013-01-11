@@ -1,6 +1,7 @@
 package SE2.Swimv2.Servlet;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -98,12 +99,12 @@ public class RicercaUtentiUserServlet extends HttpServlet {
 		
 		if(type.equals(RICERCA_SKILL)){
 			String skill = request.getParameter(SKILL);
-			risultati = gestoreUser.cercaPerSkill(skill);
+			risultati = cercaUserSkill(id,skill,amici,gestoreUser);
 		}
 		else if(type.equals(RICERCA_NOMINATIVO)){
 			String nome = request.getParameter(NOME);
 			String cognome = request.getParameter(COGNOME);
-			risultati = gestoreUser.cercaPerNominativo(nome, cognome);
+			risultati = cercaUserNominativo(id,nome,cognome,amici,gestoreUser);
 		}else{
 			response.sendRedirect(ERROR_PAGE);
 			return;
@@ -117,4 +118,35 @@ public class RicercaUtentiUserServlet extends HttpServlet {
 		request.getRequestDispatcher(USER_CERCA_UTENTI).forward(request, response);
 	}
 
+	//metodo privato per la ricerca di un utente data la skill
+	private List<User> cercaUserSkill(long id,String skill,String amici,GestoreUserRemote gestoreUser){
+		
+		List<User> risultati= new LinkedList<User>();
+		if(skill==null){
+			return risultati;
+		}
+		
+		if(amici!=null){
+			risultati=gestoreUser.cercaAmiciPerSkill(id,skill);
+		}else{
+			risultati = gestoreUser.cercaPerSkill(skill);
+		}
+		return risultati;
+	}
+	
+	//metodo privato per la ricerca di un utente data il nominativo
+	private List<User> cercaUserNominativo(long id,String nome,String cognome,String amici,GestoreUserRemote gestoreUser){
+		
+		List<User> risultati= new LinkedList<User>();
+		if(nome==null || cognome==null){
+			return risultati;
+		}
+		
+		if(amici!=null){
+			risultati=gestoreUser.cercaAmiciPerNominativo(id,nome, cognome);
+		}else{
+			risultati = gestoreUser.cercaPerNominativo(nome, cognome);
+		}
+		return risultati;
+	}
 }

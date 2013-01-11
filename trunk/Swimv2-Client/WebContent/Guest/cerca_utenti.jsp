@@ -5,7 +5,7 @@
 <html>
 	<head>
 	<meta charset="utf-8">
-	<title>Swimv2-Search User</title>
+	<title>Swimv2 - Search User</title>
 	 
 	<style type="text/css">
 		@import url(/Swimv2-Client/css/main.css);
@@ -84,7 +84,7 @@
 									<li><b>Provincia:</b> <% out.println(user.getProvincia());%></li>
 								<%}%>
 							</ul>
-							<p class="link_right_align"><a href="<% out.println("/Swimv2-Client/Guest/ProfiloServlet?userId="+user.getId());%>">Visualizza Profilo</a></p>
+							<p class="link_right_align"><a href="<% out.println("/Swimv2-Client/ProfiloServlet?userId="+user.getId());%>">Visualizza Profilo</a></p>
 						</div>
 						
 						<%
