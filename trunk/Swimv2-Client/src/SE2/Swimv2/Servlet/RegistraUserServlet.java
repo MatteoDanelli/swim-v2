@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import SE2.Swimv2.Exceptions.LoginException;
 import SE2.Swimv2.Exceptions.UserException;
+import SE2.Swimv2.Session.GestoreLogin;
+import SE2.Swimv2.Session.GestoreLoginRemote;
 import SE2.Swimv2.Session.GestoreUserRemote;
 import SE2.Swimv2.Util.RemoteManager;
 
@@ -32,11 +35,18 @@ public class RegistraUserServlet extends HttpServlet {
 	private static final String MESE_NASCITA="meseNascita";
 	private static final String ANNO_NASCITA="annoNascita";
 	
+	private static final String USER_ID= "userId";
+	private static final String USER_SERVLET = "UserServlet";
+
+
 	private static final String ERROR_PAGE = "error.jsp";
 	private static final String REGISTRAZIONE = "/Guest/registrazione.jsp";	
+	private static final String LOGIN_ERROR= "logError";
+
 	
 	private RemoteManager remoteManager= new RemoteManager();
 	private GestoreUserRemote gestoreUser;
+	private GestoreLoginRemote gestoreLogin;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -57,6 +67,8 @@ public class RegistraUserServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		long idNuovoUser;
 
 		String email= request.getParameter(EMAIL);
 		String password= request.getParameter(PASSWORD);
@@ -85,6 +97,7 @@ public class RegistraUserServlet extends HttpServlet {
 
 		try {
 			gestoreUser = remoteManager.getGestoreUserRemote();
+			gestoreLogin = remoteManager.getGestoreLoginRemote();
 		} catch (NamingException e) {
 			response.sendRedirect(ERROR_PAGE);
 			return;
@@ -98,10 +111,16 @@ public class RegistraUserServlet extends HttpServlet {
 				return;
 			}
 
-			response.sendRedirect("index.jsp");
-
-
-	
+			try {
+				idNuovoUser=gestoreLogin.loginUser(email, password);
+				request.getSession().setAttribute(USER_ID, idNuovoUser);
+				response.sendRedirect(USER_SERVLET);
+			}
+			catch (LoginException e) {
+				request.setAttribute(ERROR, LOGIN_ERROR);
+				request.getRequestDispatcher(ERROR_PAGE).forward(request,response);
+				return;
+			}	
 	}
 
 }
