@@ -6,6 +6,7 @@ package SE2.Swimv2.Session;
 import java.util.List;
 import javax.ejb.Remote;
 import SE2.Swimv2.Entity.RichiestaSkill;
+import SE2.Swimv2.Exceptions.RichiesteSkillException;
 
 /**
  * @author Matteo Danelli
@@ -15,9 +16,9 @@ import SE2.Swimv2.Entity.RichiestaSkill;
 public interface GestoreRichiesteSkillRemote {
 	List<RichiestaSkill> elencoRichieste();
 	void settaComeLetta(RichiestaSkill skillLetta);
-	void accettaRichiesta(RichiestaSkill skillDaAccettare);
-	void rifiutaRichiesta(RichiestaSkill skillDaRifiutare);
-	void inviaRichiestaAggiuntaSkill(long userCheLaRichiede, String skillRichiesta);
+	void accettaRichiesta(RichiestaSkill skillDaAccettare) throws RichiesteSkillException;
+	void rifiutaRichiesta(RichiestaSkill skillDaRifiutare) throws RichiesteSkillException;
+	void inviaRichiestaAggiuntaSkill(long userCheLaRichiede, String skillRichiesta) throws RichiesteSkillException;
 	int numeroDiNuoveRichieste();
 
 }
