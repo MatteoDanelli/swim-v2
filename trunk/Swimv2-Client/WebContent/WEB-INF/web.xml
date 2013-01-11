@@ -23,7 +23,7 @@
     <description></description>
     <display-name>UserServlet</display-name>
     <servlet-name>UserServlet</servlet-name>
-    <servlet-class>SE2.Swimv2.Servlet.UserServlet</servlet-class>
+    <servlet-class>SE2.Swimv2.Servlet.UserServlet.UserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserServlet</servlet-name>
@@ -53,7 +53,7 @@
     <description></description>
     <display-name>ModificaDatiServlet</display-name>
     <servlet-name>ModificaDatiServlet</servlet-name>
-    <servlet-class>SE2.Swimv2.Servlet.ModificaDatiServlet</servlet-class>
+    <servlet-class>SE2.Swimv2.Servlet.UserServlet.ModificaDatiServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ModificaDatiServlet</servlet-name>
@@ -63,7 +63,7 @@
     <description></description>
     <display-name>PersonalSkillServlet</display-name>
     <servlet-name>PersonalSkillServlet</servlet-name>
-    <servlet-class>SE2.Swimv2.Servlet.PersonalSkillServlet</servlet-class>
+    <servlet-class>SE2.Swimv2.Servlet.UserServlet.PersonalSkillServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>PersonalSkillServlet</servlet-name>
@@ -123,7 +123,7 @@
     <description></description>
     <display-name>RicercaUtentiUserServlet</display-name>
     <servlet-name>RicercaUtentiUserServlet</servlet-name>
-    <servlet-class>SE2.Swimv2.Servlet.RicercaUtentiUserServlet</servlet-class>
+    <servlet-class>SE2.Swimv2.Servlet.UserServlet.RicercaUtentiUserServlet</servlet-class>
   </servlet>
     <servlet-mapping>
     <servlet-name>RicercaUtentiUserServlet</servlet-name>
@@ -133,7 +133,7 @@
     <description></description>
     <display-name>AmiciUserServlet</display-name>
     <servlet-name>AmiciUserServlet</servlet-name>
-    <servlet-class>SE2.Swimv2.Servlet.AmiciUserServlet</servlet-class>
+    <servlet-class>SE2.Swimv2.Servlet.UserServlet.AmiciUserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AmiciUserServlet</servlet-name>
@@ -143,7 +143,7 @@
     <description></description>
     <display-name>ProponiAbilitaServlet</display-name>
     <servlet-name>ProponiAbilitaServlet</servlet-name>
-    <servlet-class>SE2.Swimv2.Servlet.ProponiAbilitaServlet</servlet-class>
+    <servlet-class>SE2.Swimv2.Servlet.UserServlet.ProponiAbilitaServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ProponiAbilitaServlet</servlet-name>
