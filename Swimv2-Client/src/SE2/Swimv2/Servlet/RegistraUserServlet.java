@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import SE2.Swimv2.Entity.User;
 import SE2.Swimv2.Exceptions.UserException;
 import SE2.Swimv2.Session.GestoreUserRemote;
 import SE2.Swimv2.Util.RemoteManager;
@@ -23,7 +22,6 @@ public class RegistraUserServlet extends HttpServlet {
 	
 	//nomi parametri
 	private static final String ERROR = "Errore";
-	private static final String USER= "user";
 	private static final String EMAIL="email";
 	private static final String PASSWORD="password";
 	private static final String NOME="nome";
@@ -84,7 +82,7 @@ public class RegistraUserServlet extends HttpServlet {
 		if(provincia==""){
 			provincia=null;
 		}
-		
+
 		try {
 			gestoreUser = remoteManager.getGestoreUserRemote();
 		} catch (NamingException e) {
@@ -94,9 +92,9 @@ public class RegistraUserServlet extends HttpServlet {
 		
 		if (email != "" && password != "" && nome != "" && cognome != "") {
 			try {
-				gestoreUser.addUser(email, password, nome, cognome, provincia,sesso, data, null);
+				gestoreUser.addUser(email, password, nome, cognome, provincia, sesso, data, null);
 			} catch (UserException e) {
-				request.setAttribute(ERROR, "Errore creando l'user");
+				request.setAttribute(ERROR, "User già presente");
 				request.getRequestDispatcher(ERROR_PAGE).forward(request,response);
 				return;
 			}
