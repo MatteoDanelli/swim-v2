@@ -1,6 +1,7 @@
 <%@page import="SE2.Swimv2.Exceptions.RichiesteSkillException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="SE2.Swimv2.Entity.*"%>
+<%@ page import="java.util.List;"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -48,8 +49,8 @@
 			return;
 		}
 	  
-		RichiestaSkill richieste = (RichiestaSkill) request.getAttribute("richieste");
-		if(richieste== null) {
+	  //Controllo che le richieste non siano una lista nulla
+		if(request.getAttribute("richieste")== null) {
 			response.sendRedirect("/Swimv2-Client/error.jsp");
 			return;
 		}
