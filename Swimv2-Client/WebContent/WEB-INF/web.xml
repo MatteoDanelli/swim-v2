@@ -73,7 +73,7 @@
     <description></description>
     <display-name>AdminServlet</display-name>
     <servlet-name>AdminServlet</servlet-name>
-    <servlet-class>SE2.Swimv2.Servlet.AdminServlet</servlet-class>
+    <servlet-class>SE2.Swimv2.Servlet.AdminServlet.AdminServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminServlet</servlet-name>
@@ -93,7 +93,7 @@
     <description></description>
     <display-name>ModificaPasswordAdminServlet</display-name>
     <servlet-name>ModificaPasswordAdminServlet</servlet-name>
-    <servlet-class>SE2.Swimv2.Servlet.ModificaPasswordAdminServlet</servlet-class>
+    <servlet-class>SE2.Swimv2.Servlet.AdminServlet.ModificaPasswordAdminServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ModificaPasswordAdminServlet</servlet-name>
@@ -103,7 +103,7 @@
     <description></description>
     <display-name>AggiungiSkillServlet</display-name>
     <servlet-name>AggiungiSkillServlet</servlet-name>
-    <servlet-class>SE2.Swimv2.Servlet.AggiungiSkillServlet</servlet-class>
+    <servlet-class>SE2.Swimv2.Servlet.AdminServlet.AggiungiSkillServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AggiungiSkillServlet</servlet-name>
@@ -153,7 +153,7 @@
     <description></description>
     <display-name>RichiesteAggiuntaSkillServlet</display-name>
     <servlet-name>RichiesteAggiuntaSkillServlet</servlet-name>
-    <servlet-class>SE2.Swimv2.Servlet.RichiesteAggiuntaSkillServlet</servlet-class>
+    <servlet-class>SE2.Swimv2.Servlet.AdminServlet.RichiesteAggiuntaSkillServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RichiesteAggiuntaSkillServlet</servlet-name>
