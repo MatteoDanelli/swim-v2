@@ -10,6 +10,9 @@
 	 
 	<style type="text/css">
 		@import url(/Swimv2-Client/css/main.css);
+
+	form {
+display: inline	}		
 	</style>
 	</head>
 
@@ -49,8 +52,9 @@
 			return;
 		}
 	  
-	  //Controllo che le richieste non siano una lista nulla
-		if(request.getAttribute("richieste")== null) {
+	  //Controlla se la lista ottenuta dalla servlet è nulla
+		List<RichiestaSkill> elenco = (List<RichiestaSkill>)request.getAttribute("richieste");
+		if(elenco== null) {
 			response.sendRedirect("/Swimv2-Client/error.jsp");
 			return;
 		}
@@ -63,9 +67,20 @@
 				  		<div class="box_contents">
 				  		<div class="elenco">
 							<p>elenco qui:</p><br>
+							<label> <% for (RichiestaSkill richiesta : elenco) { 
+								out.println(richiesta.getSkillRichiesta());
+								%>
+							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet?choice=a" method="post">
+							<input type="submit" value="Accetta!"></form>
+							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet?choice=r" method="post">
+							<input type="submit" value="Rifiuta!"></form> <br>								
+								<%
+							}
+							%> </label>
 
 
-
+		
+							
 							</div> 
 	  					</div>
 	  				</div>
