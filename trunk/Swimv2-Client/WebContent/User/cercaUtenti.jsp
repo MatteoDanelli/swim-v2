@@ -87,37 +87,45 @@
 	  		</div>
  
 			<%
-				@SuppressWarnings("unchecked")
-				List<User> risultati= (List<User>) request.getAttribute("RisultatiRicerca");
-				String mex= (String) request.getAttribute("Messaggio");
+			//verifico sessione
+			Long id= (Long) request.getSession().getAttribute("userId");
+			if(id==null){
+				request.setAttribute("Errore", "logError");
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
+				return;
+			}
+			
+			@SuppressWarnings("unchecked")
+			List<User> risultati= (List<User>) request.getAttribute("RisultatiRicerca");
+			String mex= (String) request.getAttribute("Messaggio");
 
-				
-				if(risultati!=null && mex==null){
+			
+			if(risultati!=null && mex==null){
 
-					for(User user:risultati){
-						
-						%>
+				for(User user:risultati){
+					
+					%>
 
-						<div class="elenco">
-						<h3>User:</h3>
-							<ul>
-								<li><b>Nome:</b> <% out.println(user.getNome());%></li>
-								<li><b>Cognome:</b> <% out.println(user.getCognome());%></li>
-								<%if(user.getProvincia()!=null){ %>
-									<li><b>Provincia:</b> <% out.println(user.getProvincia());%></li>
-								<%}%>
-							</ul>
-							<p class="link_right_align"><a href="<% out.println("/Swimv2-Client/ProfiloServlet?userId="+user.getId());%>">Visualizza Profilo</a></p>
-						</div>
-						
-						<%
-						
-					}
+					<div class="elenco">
+					<h3>User:</h3>
+						<ul>
+							<li><b>Nome:</b> <% out.println(user.getNome());%></li>
+							<li><b>Cognome:</b> <% out.println(user.getCognome());%></li>
+							<%if(user.getProvincia()!=null){ %>
+								<li><b>Provincia:</b> <% out.println(user.getProvincia());%></li>
+							<%}%>
+						</ul>
+						<p class="link_right_align"><a href="<% out.println("/Swimv2-Client/ProfiloServlet?userId="+user.getId());%>">Visualizza Profilo</a></p>
+					</div>
+					
+					<%
+					
 				}
-				
-				if(mex!=null){
-					out.println("<br><p>"+ mex +"</p>");
-				}
+			}
+			
+			if(mex!=null){
+				out.println("<br><p>"+ mex +"</p>");
+			}
 				
 			%>
 
