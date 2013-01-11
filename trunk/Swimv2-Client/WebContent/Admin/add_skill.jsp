@@ -69,7 +69,7 @@
 									<br>
 								</div>
 								
-								<input type="submit" value="Inserisci">
+								<p class="link_right_align"> <input type="submit" value="Inserisci"> </p>
 							</form>		
 						</div> 
 

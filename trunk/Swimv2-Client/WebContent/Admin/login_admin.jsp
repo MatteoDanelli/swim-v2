@@ -99,7 +99,7 @@
 						<input type="text" name="email"> 
 						<label>Password:</label> 
 						<input type="password" name="password"> 
-						<input type="submit" value="Accedi">
+						<p class="link_right_align"> <input type="submit" value="Accedi"> </p>
 					</form>
 				</div>
 			</div>
