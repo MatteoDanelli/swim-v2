@@ -11,8 +11,9 @@
 	<style type="text/css">
 		@import url(/Swimv2-Client/css/main.css);
 
-	form {
-display: inline	}		
+	form {	
+	display: inline	
+	}
 	</style>
 	</head>
 
@@ -66,27 +67,21 @@ display: inline	}
 	  		
 				  		<div class="box_contents">
 				  		<div class="elenco">
-							<p>elenco qui:</p><br>
-							<label> <% for (RichiestaSkill richiesta : elenco) { 
+							<% for (RichiestaSkill richiesta : elenco) { 
 								out.println(richiesta.getSkillRichiesta());
-								%>
+								%> 
+
 							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet?choice=a" method="post">
-							<input type="submit" value="Accetta!"></form>
+							<input type="submit" value="Accetta!"></form> 
 							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet?choice=r" method="post">
-							<input type="submit" value="Rifiuta!"></form> <br>								
+							<input type="submit" value="Rifiuta!"></form> <br> 						
 								<%
 							}
-							%> </label>
-
-
-		
-							
+							%> 
 							</div> 
 	  					</div>
 	  				</div>
-	
-	
-	</div>
+			</div>
 	</div>
 	
 	
