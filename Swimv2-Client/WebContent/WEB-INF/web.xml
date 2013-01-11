@@ -41,13 +41,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>RicercaUtentiServlet</display-name>
-    <servlet-name>RicercaUtentiServlet</servlet-name>
-    <servlet-class>SE2.Swimv2.Servlet.RicercaUtentiServlet</servlet-class>
+    <display-name>RicercaUtentiGuestServlet</display-name>
+    <servlet-name>RicercaUtentiGuestServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.RicercaUtentiGuestServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>RicercaUtentiServlet</servlet-name>
-    <url-pattern>/RicercaUtentiServlet</url-pattern>
+    <servlet-name>RicercaUtentiGuestServlet</servlet-name>
+    <url-pattern>/RicercaUtentiGuestServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
