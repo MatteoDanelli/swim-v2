@@ -125,6 +125,10 @@
     <servlet-name>RicercaUtentiUserServlet</servlet-name>
     <servlet-class>SE2.Swimv2.Servlet.RicercaUtentiUserServlet</servlet-class>
   </servlet>
+    <servlet-mapping>
+    <servlet-name>RicercaUtentiUserServlet</servlet-name>
+    <url-pattern>/RicercaUtentiUserServlet</url-pattern>
+  </servlet-mapping>
 <servlet>
     <description></description>
     <display-name>AmiciUserServlet</display-name>
