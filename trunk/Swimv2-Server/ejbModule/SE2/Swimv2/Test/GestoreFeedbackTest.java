@@ -5,7 +5,6 @@ package SE2.Swimv2.Test;
 
 import static org.junit.Assert.*;
 
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Hashtable;
 import java.util.List;

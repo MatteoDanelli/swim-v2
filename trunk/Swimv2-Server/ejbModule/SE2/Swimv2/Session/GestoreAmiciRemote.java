@@ -1,8 +1,9 @@
 package SE2.Swimv2.Session;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.ejb.Remote;
+
 import SE2.Swimv2.Entity.User;
 import SE2.Swimv2.Exceptions.AmiciException;
 
@@ -13,6 +14,6 @@ import SE2.Swimv2.Exceptions.AmiciException;
 @Remote
 public interface GestoreAmiciRemote {
 	public void aggiungiAmicizia(long idUser1,long idUser2) throws AmiciException;
-	public Set<User> elencoAmici(long idUser);
+	public List<User> elencoAmici(long idUser);
 	public Boolean verificaAmicizia(long idUser1,long idUser2);
 }

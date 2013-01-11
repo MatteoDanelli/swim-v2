@@ -54,5 +54,17 @@ public class Skill implements Serializable {
 		// TODO Auto-generated method stub
 		return super.hashCode();
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (obj instanceof Skill) {
+			Skill other= (Skill)obj;
+			if(this.getId()==other.getId()){
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
