@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="SE2.Swimv2.Entity.*"%>
+<%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,6 +9,7 @@
 	 
 	<style type="text/css">
 		@import url(/Swimv2-Client/css/main.css);
+		@import url(/Swimv2-Client/css/form.css);
 	</style>
 	</head>
 
@@ -20,13 +22,12 @@
 	  		</a>
 	  		
 	  		<span class="page_title">
-					User Profile
+					Search User
 		  	</span>
 	  		
   		</div>
  	</div>
  	
- 		
  	<div class="menu_bar">
 		<div class="content">
 			<ul id="menu">
@@ -40,10 +41,12 @@
 			</ul>
 		</div>		
 	</div>	
-	  
-  	<div class="wrapper">
+ 	
+ 		
+ 	<div class="wrapper">
 	  <div class="margintop content">
-			profilo dell'utente x	  
+	  
+
 	  </div>
 	</div>
   

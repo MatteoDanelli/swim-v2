@@ -27,15 +27,15 @@
  	</div>
  	
  		
-	<div class="menu_bar">
+ 	<div class="menu_bar">
 		<div class="content">
 			<ul id="menu">
 				<li><a class="first" href="/Swimv2-Client/UserServlet">Home Page</a></li>
 				<li><a href="/Swimv2-Client/RicercaUtentiUserServlet">Cerca Utente</a></li>
-				<li><a href="#">Visualizza Amici</a></li>
+				<li><a href="/Swimv2-Client/AmiciUserServlet">Visualizza Amici</a></li>
 				<li><a href="/Swimv2-Client/ModificaDatiServlet">Modifica Dati</a></li>
 				<li><a href="/Swimv2-Client/PersonalSkillServlet">Modifica Skills</a></li>
-				<li><a href="#">Proponi Abilità</a></li>
+				<li><a href="/Swimv2-Client/ProponiAbilitaServlet">Proponi Abilità</a></li>
 				<li><a href="/Swimv2-Client/LogoutServlet">Logout</a></li>
 			</ul>
 		</div>		
