@@ -125,11 +125,27 @@
     <servlet-name>RicercaUtentiUserServlet</servlet-name>
     <servlet-class>SE2.Swimv2.Servlet.RicercaUtentiUserServlet</servlet-class>
   </servlet>
+<servlet>
+    <description></description>
+    <display-name>AmiciUserServlet</display-name>
+    <servlet-name>AmiciUserServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.AmiciUserServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
-    <servlet-name>RicercaUtentiUserServlet</servlet-name>
-    <url-pattern>/RicercaUtentiUserServlet</url-pattern>
+    <servlet-name>AmiciUserServlet</servlet-name>
+    <url-pattern>/AmiciUserServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description></description>
+    <display-name>ProponiAbilitaServlet</display-name>
+    <servlet-name>ProponiAbilitaServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.ProponiAbilitaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProponiAbilitaServlet</servlet-name>
+    <url-pattern>/ProponiAbilitaServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
     <description></description>
     <display-name>RichiesteAggiuntaSkillServlet</display-name>
     <servlet-name>RichiesteAggiuntaSkillServlet</servlet-name>
