@@ -23,7 +23,6 @@
 }
 
 .form  input[type=submit] {
-	float: right;
 	width: 150px;
 	height: 40px;
 	font-size: 14px;
@@ -32,7 +31,6 @@
 }
 
 .submit_button {
-	float: right;
 	width: 150px;
 	height: 40px;
 	font-size: 14px;

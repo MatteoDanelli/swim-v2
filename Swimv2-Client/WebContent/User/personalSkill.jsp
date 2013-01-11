@@ -107,8 +107,7 @@
 									}
 
 									%>
-								<br>
-								<input class="submit_button" type="submit" value="Modifica">
+								<p class="link_right_align"><input class="submit_button" type="submit" value="Modifica"></p>
 							</form>		
 						</div> 
 	  		

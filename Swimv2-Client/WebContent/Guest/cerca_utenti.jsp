@@ -46,9 +46,8 @@
 							<br>
 							<label>Cognome: </label>
 							<input type="text" name="cognome">
-							<input type="submit" value="Cerca">
+							<p class="link_right_align"> <input type="submit" value="Cerca"></p>
 						</form>
-						<br>	
 					</div>
 
 		  			<div class="elenco">
@@ -56,9 +55,9 @@
 						<form class="form" action="/Swimv2-Client/RicercaUtentiGuestServlet?type=skill" method="post">
 							<label>Skill: </label>
 							<input type="text" name="skill">
-							<input type="submit" value="Cerca">
+							<p class="link_right_align"> <input type="submit" value="Cerca"></p>
 						</form>
-						<br>
+	
 					</div>
 							
 				</div>	

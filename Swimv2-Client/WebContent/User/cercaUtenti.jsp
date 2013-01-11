@@ -5,7 +5,7 @@
 <html>
 	<head>
 	<meta charset="utf-8">
-	<title>Swimv2-Search User</title>
+	<title>Swimv2</title>
 	 
 	<style type="text/css">
 		@import url(/Swimv2-Client/css/main.css);
@@ -60,9 +60,13 @@
 							<br>
 							<label>Cognome: </label>
 							<input type="text" name="cognome">
-							<input type="submit" value="Cerca">
+							<br>
+							<br>
+							<input name="ricercaAmici" type="checkbox" value="1">Ricerca solo tra utenti amici
+							<br>
+							<p class="link_right_align"> <input type="submit" value="Cerca"></p>
 						</form>
-						<br>	
+	
 					</div>
 
 		  			<div class="elenco">
@@ -70,9 +74,13 @@
 						<form class="form" action="/Swimv2-Client/RicercaUtentiUserServlet?type=skill" method="post">
 							<label>Skill: </label>
 							<input type="text" name="skill">
-							<input type="submit" value="Cerca">
+							<br>
+							<br>
+							<input name="ricercaAmici" type="checkbox" value="1">Ricerca solo tra utenti amici
+							<br>
+							<p class="link_right_align"> <input type="submit" value="Cerca"></p>
 						</form>
-						<br>
+
 					</div>
 							
 				</div>	
@@ -99,7 +107,7 @@
 									<li><b>Provincia:</b> <% out.println(user.getProvincia());%></li>
 								<%}%>
 							</ul>
-							<p class="link_right_align"><a href="<% out.println("/Swimv2-Client/User/ProfiloServlet?userId="+user.getId());%>">Visualizza Profilo</a></p>
+							<p class="link_right_align"><a href="<% out.println("/Swimv2-Client/ProfiloServlet?userId="+user.getId());%>">Visualizza Profilo</a></p>
 						</div>
 						
 						<%
