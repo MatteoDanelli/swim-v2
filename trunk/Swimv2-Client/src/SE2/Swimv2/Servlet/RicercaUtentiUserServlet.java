@@ -34,6 +34,7 @@ public class RicercaUtentiUserServlet extends HttpServlet {
 	
 	//nomi paramentri
 	private static final String TIPO_RICERCA= "type";
+	private static final String SOLO_AMICI="ricercaAmici";
 
 	//valori paramentri
 	private static final String RICERCA_SKILL= "skill";
@@ -84,6 +85,7 @@ public class RicercaUtentiUserServlet extends HttpServlet {
 		}
 		
 		String type= request.getParameter(TIPO_RICERCA);
+		String amici= request.getParameter(SOLO_AMICI);
 		
 		try {
 			gestoreUser= remoteManager.getGestoreUserRemote();
