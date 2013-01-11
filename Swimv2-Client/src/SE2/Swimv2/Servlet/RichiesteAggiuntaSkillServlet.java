@@ -86,6 +86,8 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 			return;
 		}
 		
+		//GESTIRE ACCETTA/RIFIUTA
+		
 	}
 
 }
