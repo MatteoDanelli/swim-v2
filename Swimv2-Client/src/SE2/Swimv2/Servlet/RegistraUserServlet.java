@@ -90,21 +90,16 @@ public class RegistraUserServlet extends HttpServlet {
 			return;
 		}
 		
-		if (email != "" && password != "" && nome != "" && cognome != "") {
 			try {
 				gestoreUser.addUser(email, password, nome, cognome, provincia, sesso, data, null);
 			} catch (UserException e) {
-				request.setAttribute(ERROR, "User già presente");
+				request.setAttribute(ERROR, "Errore");
 				request.getRequestDispatcher(ERROR_PAGE).forward(request,response);
 				return;
 			}
 
 			response.sendRedirect("index.jsp");
-		}
-		else {
-			request.setAttribute(ERROR, "Errore");
-			request.getRequestDispatcher(REGISTRAZIONE).forward(request, response);	
-		}
+
 
 	
 	}
