@@ -20,13 +20,19 @@
 	  		</a>
   		</div>
  	</div>
-	  
+	   	
+ 		<div class="menu_bar">
+		<div class="content">
+			<ul id="menu">
+				<li><a class="first" href="/Swimv2-Client/index.jsp">Home Page</a></li>
+			</ul>
+		</div>		
+	</div>
+	
   	<div class="wrapper">
 	  <div class="content">
 		  <div class="description">
-			  <h1 class="title">Swimv2</h1>
-			  <br> 		  
-			  				
+		  		<br>			
 				<h2>Si è verificato un errore!</h2> <br>
 				<br>
 				<%
