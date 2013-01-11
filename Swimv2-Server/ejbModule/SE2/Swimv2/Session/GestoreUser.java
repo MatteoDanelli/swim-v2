@@ -245,7 +245,7 @@ public class GestoreUser implements GestoreUserRemote {
 	@Override
 	public List<User> cercaAmiciPerNome(long userId, String nome) {
 
-		Set<User> amici = gestoreAmici.elencoAmici(userId);
+		List<User> amici = gestoreAmici.elencoAmici(userId);
 
 		// se non ho amici è innutile che lancio la query
 		if (amici == null || amici.size() == 0) {
@@ -269,7 +269,7 @@ public class GestoreUser implements GestoreUserRemote {
 	@Override
 	public List<User> cercaAmiciPerCognome(long userId, String cognome) {
 
-		Set<User> amici = gestoreAmici.elencoAmici(userId);
+		List<User> amici = gestoreAmici.elencoAmici(userId);
 
 		// se non ho amici è innutile che lancio la query
 		if (amici == null || amici.size() == 0) {
@@ -295,7 +295,7 @@ public class GestoreUser implements GestoreUserRemote {
 	public List<User> cercaAmiciPerNomeCognome(long userId, String nome,
 			String cognome) {
 
-		Set<User> amici = gestoreAmici.elencoAmici(userId);
+		List<User> amici = gestoreAmici.elencoAmici(userId);
 
 		// se non ho amici è innutile che lancio la query
 		if (amici == null || amici.size() == 0) {
@@ -337,7 +337,7 @@ public class GestoreUser implements GestoreUserRemote {
 	@Override
 	public List<User> cercaAmiciPerSkill(long userId, String nome) {
 
-		Set<User> amici = gestoreAmici.elencoAmici(userId);
+		List<User> amici = gestoreAmici.elencoAmici(userId);
 
 		// se non ho amici è innutile che lancio la query
 		if (amici == null || amici.size() == 0) {

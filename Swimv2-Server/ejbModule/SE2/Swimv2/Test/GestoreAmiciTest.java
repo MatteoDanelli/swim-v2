@@ -3,12 +3,12 @@
  */
 package SE2.Swimv2.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Hashtable;
-import java.util.Set;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -66,7 +66,7 @@ public class GestoreAmiciTest {
 	 */
 	@Test
 	public void testElencoAmici() throws AmiciException {
-		Set<User> elenco = amiciRemote.elencoAmici(user3);
+		List<User> elenco = amiciRemote.elencoAmici(user3);
 		for (User u : elenco) {
 			assertEquals("user1@mail.com", u.getEmail());
 		}

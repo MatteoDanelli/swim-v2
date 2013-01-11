@@ -1,11 +1,12 @@
 package SE2.Swimv2.Session;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 
 import SE2.Swimv2.Entity.User;
 import SE2.Swimv2.Exceptions.AmiciException;
@@ -37,10 +38,15 @@ public class GestoreAmici implements GestoreAmiciRemote, GestoreAmiciLocal {
 		
 			try{
 				user1.addAmico(user2);
+				database.flush();
+				return;
 			}catch(NullPointerException e){
-				throw new AmiciException("Errore, utente presente nel database");
+				throw new AmiciException("Errore, utente non presente nel database");
+			}catch (PersistenceException e) {
+			}catch (IllegalStateException e) {
 			}
-			database.flush();
+			throw new AmiciException("Errore");
+			
 		}else{
 			throw new AmiciException("Un utente non può essere amico di se stesso");
 		}
@@ -50,20 +56,20 @@ public class GestoreAmici implements GestoreAmiciRemote, GestoreAmiciLocal {
 	 * Questo metodo restituisce l' insieme degli amici di un utente
 	 */
 	@Override
-	public Set<User> elencoAmici(long idUser) {
+	public List<User> elencoAmici(long idUser) {
 		User user = database.find(User.class, idUser);
-		Set<User> returnSet = new HashSet<User>();
+		List<User> list = new LinkedList<User>();
 		
 		if(user!=null){
 			for(User u: user.getAmici1()){
-				returnSet.add(u);
+				list.add(u);
 			}
 			for(User u: user.getAmici2()){
-				returnSet.add(u);
+				list.add(u);
 			}
 		}
 		
-		return returnSet;
+		return list;
 	}
 	
 	/**
@@ -72,17 +78,17 @@ public class GestoreAmici implements GestoreAmiciRemote, GestoreAmiciLocal {
 	@Override
 	public Boolean verificaAmicizia(long idUser1, long idUser2) {
 		User user2 = database.find(User.class, idUser2);
-		Set<User> amiciUser1;
+		List<User> amiciUser1;
 
 		try{
 			amiciUser1= elencoAmici(idUser1);
 			if(amiciUser1.contains(user2)){
 				return true;
 			}
+
 		}catch(NullPointerException e){			
 		}
 		
 		return false;
 	}
-
 }

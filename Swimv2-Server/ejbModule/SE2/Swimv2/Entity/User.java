@@ -212,5 +212,16 @@ public class User implements Serializable {
 		this.amici1.add(user);
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (obj instanceof User) {
+			User other= (User)obj;
+			if(this.getId()==other.getId()){
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
