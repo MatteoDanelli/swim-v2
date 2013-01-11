@@ -1,4 +1,4 @@
-package SE2.Swimv2.Servlet;
+package SE2.Swimv2.Servlet.AdminServlet;
 
 import java.io.IOException;
 
