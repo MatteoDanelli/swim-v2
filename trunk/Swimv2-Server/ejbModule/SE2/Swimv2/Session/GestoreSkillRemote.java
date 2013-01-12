@@ -11,8 +11,8 @@ import SE2.Swimv2.Exceptions.SkillException;
  */
 @Remote
 public interface GestoreSkillRemote {
-	void creaSkill(String nome) throws SkillException;
-	List<Skill> getSkillSet();
-	List<Skill> getPersonalSkill(long userId);
-	Skill getById(long Id);
+	public void creaSkill(String nome) throws SkillException;
+	public List<Skill> getSkillSet();
+	public List<Skill> getPersonalSkill(long userId);
+	public Skill getById(long Id);
 }

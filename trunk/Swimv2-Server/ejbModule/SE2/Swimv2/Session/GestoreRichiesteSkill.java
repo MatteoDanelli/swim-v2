@@ -30,6 +30,10 @@ public class GestoreRichiesteSkill implements GestoreRichiesteSkillRemote {
 	@Override
 	public void inviaRichiestaAggiuntaSkill(long userCheLaRichiede,	String skillRichiesta) throws RichiesteSkillException {
 		
+		if(gestoreSkill.isPresente(skillRichiesta)){
+			throw new RichiesteSkillException("Errore, richiesta non effettuats");
+		}
+		
 		User userMittente = database.find(User.class, userCheLaRichiede);
 		try {			
 			RichiestaSkill nuovaRichiesta = new RichiestaSkill(userMittente, skillRichiesta);

@@ -57,6 +57,20 @@ public class GestoreSkill implements GestoreSkillRemote,GestoreSkillLocal {
 
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean isPresente(String skill){
+		Query q = database.createQuery("FROM Skill s WHERE s.nome = :skill");
+		q.setParameter("skill", skill);
+
+		List<User> result = (List<User>) q.getResultList();
+		if(result.size()==0){
+			return false;
+		}
+		
+		return true;
+		
+	}
 	@Override
 	public Skill getById(long Id) {
 		Skill result= database.find(Skill.class, Id);
