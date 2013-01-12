@@ -14,11 +14,10 @@ import SE2.Swimv2.Exceptions.RichiesteSkillException;
  */
 @Remote
 public interface GestoreRichiesteSkillRemote {
-	List<RichiestaSkill> elencoRichieste();
-	void settaComeLetta(RichiestaSkill skillLetta);
+
 	void inviaRichiestaAggiuntaSkill(long userCheLaRichiede, String skillRichiesta) throws RichiesteSkillException;
-	int numeroDiNuoveRichieste();
 	void accettaRichiesta(long skill) throws RichiesteSkillException;
 	void rifiutaRichiesta(long skill) throws RichiesteSkillException;
+	List<RichiestaSkill> elencoRichieste();
 
 }

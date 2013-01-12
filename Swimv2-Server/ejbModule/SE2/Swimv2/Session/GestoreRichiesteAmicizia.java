@@ -68,12 +68,6 @@ public class GestoreRichiesteAmicizia implements GestoreRichiesteAmiciziaRemote{
 	}
 
 	@Override
-	public int numeroDiNuoveRichieste(long userid) {
-		List<RichiestaAmicizia> result =elencoRichiesteAmicizia(userid);
-		return result.size();
-	}
-
-	@Override
 	public void accettaRichiestaAmicizia(long idRichiestaAmicizia,long currentUser) throws AmiciException, RichiestaAmiciziaException{
 		
 		RichiestaAmicizia richiesta = database.find(RichiestaAmicizia.class, idRichiestaAmicizia);

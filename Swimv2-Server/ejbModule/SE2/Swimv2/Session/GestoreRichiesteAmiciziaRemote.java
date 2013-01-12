@@ -14,7 +14,6 @@ import SE2.Swimv2.Exceptions.RichiestaAmiciziaException;
 public interface GestoreRichiesteAmiciziaRemote {
 	 void inviaRichiestaAmicizia(long fromUser, long toUser) throws RichiestaAmiciziaException;
 	 List<RichiestaAmicizia> elencoRichiesteAmicizia(long userid);
-	 int numeroDiNuoveRichieste(long userid);
 	 void accettaRichiestaAmicizia(long idRichiestaAmicizia,long currentUser)throws AmiciException,RichiestaAmiciziaException;
 	 void rifiutaRichiestaAmicizia(long idRichiestaAmicizia,long currentUser)throws RichiestaAmiciziaException;
 	 public boolean esisteRichiestaAmicizia(long fromUser, long toUser);
