@@ -49,11 +49,6 @@
 			return;
 		}
 	  
-		Admin admin = (Admin) request.getAttribute("admin");
-		if(admin== null) {
-			response.sendRedirect("/Swimv2-Client/error.jsp");
-			return;
-		}
 	  %>
 				<div class="box margintop">
 			  			<div class="box_title">
