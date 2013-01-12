@@ -55,7 +55,7 @@
 					//verifico attributo user
 					User user = (User) request.getAttribute("user");
 					if(user!= null) {
-						out.println("<p> Benvenuto "+ user.getNome() +"</p>");
+						out.println("<h3> Benvenuto "+ user.getNome() +"</h3>");
 					}else{
 						response.sendRedirect("/Swimv2-Client/error.jsp");
 						return;
@@ -75,10 +75,12 @@
 						</div>
 	  		
 				  		<div class="box_contents">
+				  			<div class="elenco">
 							<p>Ci sono:</p><br>
-							<p>0 Messaggi -<a href="#">Visualizza tutti i messaggi</a></p>
-							<p>O Richieste d'aiuto -<a href="#">Visualizza tutte le richiesta d'aiuto</a>	</p>
-							<p><%out.print(numRichiesteAmicizia.intValue()); %> Richieste d'amicizia -<a href="#">Visualizza tutte le richiesta d'amicizia</a></p>		
+								<p>0 Nuovi Messaggi -<a href="#">Visualizza tutti i messaggi</a></p>
+								<p>0 Nuovi Richieste d'aiuto -<a href="#">Visualizza tutte le richiesta d'aiuto</a>	</p>
+								<p><%out.print(numRichiesteAmicizia.intValue()); %> Richieste d'amicizia -<a href="#">Visualizza tutte le richiesta d'amicizia</a></p>		
+							</div>
 						</div> 
 	  		
 	  				</div>
