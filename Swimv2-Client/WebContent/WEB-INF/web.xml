@@ -159,4 +159,14 @@
     <servlet-name>RichiesteAggiuntaSkillServlet</servlet-name>
     <url-pattern>/RichiesteAggiuntaSkillServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RichiesteAmiciziaServlet</display-name>
+    <servlet-name>RichiesteAmiciziaServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.UserServlet.RichiesteAmiciziaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RichiesteAmiciziaServlet</servlet-name>
+    <url-pattern>/RichiesteAmiciziaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

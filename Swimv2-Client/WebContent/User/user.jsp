@@ -79,7 +79,7 @@
 							<p>Ci sono:</p><br>
 								<p>0 Nuovi Messaggi -<a href="#">Visualizza tutti i messaggi</a></p>
 								<p>0 Nuovi Richieste d'aiuto -<a href="#">Visualizza tutte le richiesta d'aiuto</a>	</p>
-								<p><%out.print(numRichiesteAmicizia.intValue()); %> Richieste d'amicizia -<a href="#">Visualizza tutte le richiesta d'amicizia</a></p>		
+								<p><%out.print(numRichiesteAmicizia.intValue()); %> Richieste d'amicizia - <a href="/Swimv2-Client/RichiesteAmiciziaServlet">Visualizza tutte le richiesta d'amicizia</a></p>		
 							</div>
 						</div> 
 	  		
