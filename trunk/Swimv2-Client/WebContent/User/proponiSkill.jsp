@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="SE2.Swimv2.Entity.*"%>
-<%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,6 +9,7 @@
 	<style type="text/css">
 		@import url(/Swimv2-Client/css/main.css);
 		@import url(/Swimv2-Client/css/form.css);
+		
 	</style>
 	</head>
 
@@ -22,11 +22,10 @@
 	  		</a>
 	  		
 	  		<span class="page_title">
-					Friends
-		  	</span>
-	  		
+					Skill Request
+		  	</span> 		
   		</div>
- 	</div>
+ 	</div> 	
  	
  	<div class="menu_bar">
 		<div class="content">
@@ -41,12 +40,10 @@
 			</ul>
 		</div>		
 	</div>	
- 	
- 		
- 	<div class="wrapper">
+	
+	<div class="wrapper">
 	  <div class="margintop content">
-	  
-	  <%
+	  <% 
 		//verifico sessione
 		Long id= (Long) request.getSession().getAttribute("userId");
 		if(id==null){
@@ -54,49 +51,26 @@
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 			return;
 		}
-		
-		//se risultati non/lista amici non è settato esco
-		@SuppressWarnings("unchecked")
-		List<User> risultati= (List<User>) request.getAttribute("RisultatiRicerca");
-		if(risultati== null) {
-			response.sendRedirect("/Swimv2-Client/UserServlet");
-			return;
-		}
-		
-		String mex= (String) request.getAttribute("Messaggio");
-
-		
-		if(risultati!=null && mex==null){
-
-			for(User user:risultati){
-				
-				%>
-
-				<div class="elenco">
-				<h3>User:</h3>
-					<ul>
-						<li><b>Nome:</b> <% out.println(user.getNome());%></li>
-						<li><b>Cognome:</b> <% out.println(user.getCognome());%></li>
-						<%if(user.getProvincia()!=null){ %>
-							<li><b>Provincia:</b> <% out.println(user.getProvincia());%></li>
-						<%}%>
-					</ul>
-					<p class="link_right_align"><a href="<% out.println("/Swimv2-Client/ProfiloServlet?userId="+user.getId());%>">Visualizza Profilo</a></p>
-				</div>
-				
-				<%
-				
-			}
-		}
-		
-		if(mex!=null){
-			out.println("<br><p>"+ mex +"</p>");
-		}
-				
-			%>
-
-	  </div>
-	</div>
-  
-  </body>
+	  %>
+			<div class="box margintop">
+		  			<div class="box_title">
+						Proponi Skill
+					</div>
+	 		
+					<div class="box_contents">
+						<form class="form" action="/Swimv2-Client/ProponiAbilitaServlet" method="post">
+							
+							<div class="form_center_contents">
+								<label>Skill proposta: </label>
+								<input type="text" name="skill">
+								<br>
+							</div>
+							
+							<p class="link_right_align"> <input type="submit" value="Proponi"> </p>
+						</form>		
+					</div> 
+	 		</div>
+	 	</div>
+	</div>	
+</body>
 </html>
