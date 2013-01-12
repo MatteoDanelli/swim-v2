@@ -16,9 +16,9 @@ import SE2.Swimv2.Exceptions.RichiesteSkillException;
 public interface GestoreRichiesteSkillRemote {
 	List<RichiestaSkill> elencoRichieste();
 	void settaComeLetta(RichiestaSkill skillLetta);
-	void accettaRichiesta(RichiestaSkill skillDaAccettare) throws RichiesteSkillException;
-	void rifiutaRichiesta(RichiestaSkill skillDaRifiutare) throws RichiesteSkillException;
 	void inviaRichiestaAggiuntaSkill(long userCheLaRichiede, String skillRichiesta) throws RichiesteSkillException;
 	int numeroDiNuoveRichieste();
+	void accettaRichiesta(long skill) throws RichiesteSkillException;
+	void rifiutaRichiesta(long skill) throws RichiesteSkillException;
 
 }
