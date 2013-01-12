@@ -69,11 +69,11 @@
 				  		<div class="elenco">
 							<% for (RichiestaSkill richiesta : elenco) { 
 								out.println(richiesta.getSkillRichiesta());
+								long idRichiesta =richiesta.getId();
 								%> 
-
-							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet?choice=a" method="post">
+							<form class="form" action='"/Swimv2-Client/RichiesteAggiuntaSkillServlet?choice=a"+idRichiesta' method="post">
 							<input type="submit" value="Accetta!"></form> 
-							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet?choice=r" method="post">
+							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet?choice=r+idRichiesta" method="post">
 							<input type="submit" value="Rifiuta!"></form> <br> 						
 								<%
 							}
