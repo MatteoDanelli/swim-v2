@@ -36,8 +36,9 @@ public class GestoreRichiesteSkill implements GestoreRichiesteSkillRemote {
 	}
 
 	@Override
-	public void accettaRichiesta(RichiestaSkill skillDaAccettare) throws RichiesteSkillException {
+	public void accettaRichiesta(long skill) throws RichiesteSkillException {
 		try {
+		RichiestaSkill skillDaAccettare = database.find(RichiestaSkill.class, skill);
 		database.remove(skillDaAccettare);
 		String nomeSkill = skillDaAccettare.getSkillRichiesta();
 		Skill nuovaSkill = new Skill(nomeSkill);
@@ -49,9 +50,10 @@ public class GestoreRichiesteSkill implements GestoreRichiesteSkillRemote {
 	}
 
 	@Override
-	public void rifiutaRichiesta(RichiestaSkill skillDaRifiutare) throws RichiesteSkillException {
+	public void rifiutaRichiesta(long skill) throws RichiesteSkillException {
 		try {
-		database.remove(skillDaRifiutare);
+			RichiestaSkill skillDaRifiutare = database.find(RichiestaSkill.class, skill);
+			database.remove(skillDaRifiutare);
 		}
 		catch (PersistenceException e) {
 			throw new RichiesteSkillException("Errore nel rifiuto della skill!");
