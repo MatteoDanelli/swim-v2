@@ -36,7 +36,8 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 	//nomi pagine
 	private static final String ADD_SKILL = "/Admin/gestisci_richieste.jsp";
 	private static final String ERROR_PAGE = "error.jsp";
-	private static final String HOME_ADMIN = "/Admin/login_admin.jsp";
+	private static final String LOGIN_ADMIN = "/Admin/login_admin.jsp";
+	private static final String ADMIN_SERVLET = "/Swimv2-Client/AdminServlet";
 
 	private static final char RIFIUTA = 'a';
 	private static final char ACCETTA = 'r';
@@ -59,7 +60,7 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 		Long id= (Long) request.getSession().getAttribute(ADMIN_ID);
 		if(id==null){
 			request.setAttribute(ERROR, LOGIN_ERROR);
-			request.getRequestDispatcher(HOME_ADMIN).forward(request, response);
+			request.getRequestDispatcher(LOGIN_ADMIN).forward(request, response);
 			return;
 		}
 		
@@ -87,16 +88,18 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 		Long id= (Long) request.getSession().getAttribute(ADMIN_ID);
 		if(id==null){
 			request.setAttribute(ERROR, LOGIN_ERROR);
-			request.getRequestDispatcher(HOME_ADMIN).forward(request, response);
+			request.getRequestDispatcher(LOGIN_ADMIN).forward(request, response);
 			return;
 		}
 		
-		String parameter = (String) request.getAttribute(CHOICE);
+		String parameter = request.getParameter(CHOICE);
+		
 		char startingChar = parameter.charAt(0);
 		if(startingChar==ACCETTA) {
-				Long idSkill = Long.parseLong(parameter.substring(1));
 				try {
+					Long idSkill = Long.parseLong(parameter.substring(1));
 					gestoreRichieste.accettaRichiesta(idSkill);
+					response.sendRedirect(ADMIN_SERVLET);
 				} catch (RichiesteSkillException e) {
 					response.sendRedirect(ERROR_PAGE);
 					return;
@@ -104,10 +107,11 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 		
 		}
 		
-		if(startingChar==RIFIUTA) {
-				Long idSkill = Long.parseLong(parameter.substring(1));
+		else if(startingChar==RIFIUTA) {
 				try {
+					Long idSkill = Long.parseLong(parameter.substring(1));
 					gestoreRichieste.rifiutaRichiesta(idSkill);
+					response.sendRedirect(ADMIN_SERVLET);
 				} catch (RichiesteSkillException e) {
 					response.sendRedirect(ERROR_PAGE);
 					return;
@@ -117,8 +121,7 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 			response.sendRedirect(ERROR_PAGE);
 			return;
 		}
-		//GESTIRE ACCETTA/RIFIUTA
-		
+
 	}
 
 }
