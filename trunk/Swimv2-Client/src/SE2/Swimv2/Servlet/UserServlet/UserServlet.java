@@ -73,7 +73,7 @@ public class UserServlet extends HttpServlet {
 		request.setAttribute(USER, user);
 		
 		//Setto attributo numero nuove richieste amicizia
-		Integer numRichiesteAmicizia= gestoreRichiesteAmicizia.numeroDiNuoveRichieste(id);
+		Integer numRichiesteAmicizia= gestoreRichiesteAmicizia.elencoRichiesteAmicizia(id).size();
 		request.setAttribute(RIC_AMICIZIA, numRichiesteAmicizia);
 
 		request.getRequestDispatcher(USER_PAGE).forward(request, response);

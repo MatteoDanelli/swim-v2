@@ -73,7 +73,7 @@ public class AdminServlet extends HttpServlet {
 			Admin admin = gestoreAdmin.getAdmin();
 			request.setAttribute(ADMIN, admin);
 			
-			Integer numRichiesteSkill= (Integer)gestoreRichiesteSkill.numeroDiNuoveRichieste();
+			Integer numRichiesteSkill= (Integer)gestoreRichiesteSkill.elencoRichieste().size();
 			request.setAttribute(RIC_SKILL, numRichiesteSkill);
 		}
 		
