@@ -1,13 +1,15 @@
 package SE2.Swimv2.Servlet.UserServlet;
 
 import java.io.IOException;
+
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import SE2.Swimv2.Exceptions.RichiesteSkillException;
 import SE2.Swimv2.Session.GestoreRichiesteSkillRemote;
-import SE2.Swimv2.Session.GestoreUserRemote;
 import SE2.Swimv2.Util.RemoteManager;
 
 /**
@@ -28,7 +30,8 @@ public class ProponiAbilitaServlet extends HttpServlet {
 	private static final String USER_PROPONI_SKILL = "User/proponiSkill.jsp";
 	private static final String ERROR_PAGE = "error.jsp";
 	
-
+	//servlet
+	private static final String USER_SERVLET = "/Swimv2-Client/UserServlet";
     
 	private RemoteManager remoteManager= new RemoteManager();
 	private GestoreRichiesteSkillRemote gestoreRichiesteSkill;   
@@ -44,6 +47,7 @@ public class ProponiAbilitaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		//se non esiste una sessione richiamo l' home page
 		Long id= (Long) request.getSession().getAttribute(USER_ID);
 		if(id==null){
@@ -59,7 +63,31 @@ public class ProponiAbilitaServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		//se non esiste una sessione richiamo l' home page
+		Long id= (Long) request.getSession().getAttribute(USER_ID);
+		if(id==null){
+			request.setAttribute(ERROR, LOGIN_ERROR);
+			request.getRequestDispatcher(HOME_PAGE).forward(request, response);
+			return;
+		}
+		
+		String skill= request.getParameter(SKILL_PROPOSTA);
+		
+		try {
+			gestoreRichiesteSkill = remoteManager.getGestoreRichiesteSkillRemote();
+		} catch (NamingException e) {
+			response.sendRedirect(ERROR_PAGE);
+			return;
+		}
+		
+		try {
+			gestoreRichiesteSkill.inviaRichiestaAggiuntaSkill(id, skill);
+		} catch (RichiesteSkillException e) {
+			response.sendRedirect(ERROR_PAGE);
+		}
+		
+		response.sendRedirect(USER_SERVLET);
 	}
 
 }
