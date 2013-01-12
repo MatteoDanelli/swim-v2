@@ -26,7 +26,7 @@ public class RichiestaSkill implements Serializable {
 	@Column(name="ID_RICHIESTA_SKILL")
 	private long id;
 	
-	@Column(name="SKILL_RICHIESTA",nullable=false)
+	@Column(name="SKILL_RICHIESTA",nullable=false,unique=true)
 	private String skillRichiesta;
 	
 	@ManyToOne
