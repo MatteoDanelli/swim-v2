@@ -9,16 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import SE2.Swimv2.Entity.Admin;
 import SE2.Swimv2.Entity.RichiestaSkill;
 import SE2.Swimv2.Exceptions.RichiesteSkillException;
-import SE2.Swimv2.Session.GestoreAdminRemote;
 import SE2.Swimv2.Session.GestoreRichiesteSkillRemote;
 import SE2.Swimv2.Util.RemoteManager;
 
 /**
  * Servlet implementation class RichiesteAggiuntaSkillServlet
  * @author Matteo Danelli
+ * Tale classe gestisce la pagina di richieste ampliamento skill set e consente di accettare/rifiutare richieste
  */
 public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
