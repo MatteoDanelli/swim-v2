@@ -26,9 +26,6 @@ public class RichiestaSkill implements Serializable {
 	@Column(name="ID_RICHIESTA_SKILL")
 	private long id;
 	
-	@Column(name="LETTA")
-	private boolean richiestaLetta;
-	
 	@Column(name="SKILL_RICHIESTA",nullable=false)
 	private String skillRichiesta;
 	
@@ -45,30 +42,14 @@ public class RichiestaSkill implements Serializable {
 		this.mittente=mittente;
 		this.skillRichiesta=skill;
 	}
-	//Getters and setters
-
-	public boolean isRichiestaLetta() {
-		return richiestaLetta;
-	}
-
-	public void setRichiestaLetta(boolean richiestaLetta) {
-		this.richiestaLetta = richiestaLetta;
-	}
+	//Getters
 
 	public String getSkillRichiesta() {
 		return skillRichiesta;
 	}
 
-	public void setSkillRichiesta(String skillRichiesta) {
-		this.skillRichiesta = skillRichiesta;
-	}
-
 	public User getMittente() {
 		return mittente;
-	}
-
-	public void setMittente(User mittente) {
-		this.mittente = mittente;
 	}
 
 	public long getId() {

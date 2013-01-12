@@ -12,7 +12,7 @@ import SE2.Swimv2.Entity.Skill;
 import SE2.Swimv2.Exceptions.SkillException;
 
 @Stateless
-public class GestoreSkill implements GestoreSkillRemote {
+public class GestoreSkill implements GestoreSkillRemote,GestoreSkillLocal {
 	@PersistenceContext(unitName = "Swimv2")
 	EntityManager database;
 

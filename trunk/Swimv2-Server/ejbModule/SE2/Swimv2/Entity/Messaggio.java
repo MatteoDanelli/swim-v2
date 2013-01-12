@@ -69,6 +69,7 @@ public class Messaggio implements Serializable {
 		this.isRichiestaAiuto = isRichiestaAiuto;
 		this.dataInvio = new GregorianCalendar();
 		this.testo = testo;
+		this.isMessaggioLetto=false;
 		
 	}
 	
