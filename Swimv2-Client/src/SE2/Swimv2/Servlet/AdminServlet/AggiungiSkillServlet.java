@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import SE2.Swimv2.Entity.Admin;
 import SE2.Swimv2.Exceptions.SkillException;
-import SE2.Swimv2.Session.GestoreAdminRemote;
 import SE2.Swimv2.Session.GestoreSkillRemote;
 import SE2.Swimv2.Util.RemoteManager;
 
@@ -24,7 +22,6 @@ public class AggiungiSkillServlet extends HttpServlet {
 	
 	//nomi attributi
 	private static final String ERROR = "Errore";
-	private static final String ADMIN= "admin";
 	private static final String ADMIN_ID= "adminId";
 	
 	//valori attributi
@@ -40,7 +37,6 @@ public class AggiungiSkillServlet extends HttpServlet {
 	private static final String SKILL = "skill";
 	
 	private RemoteManager remoteManager= new RemoteManager();
-	private GestoreAdminRemote gestoreAdmin;
 	private GestoreSkillRemote gestoreSkill;
        
     /**
