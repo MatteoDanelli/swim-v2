@@ -37,10 +37,10 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 	private static final String ADD_SKILL = "/Admin/gestisci_richieste.jsp";
 	private static final String ERROR_PAGE = "error.jsp";
 	private static final String LOGIN_ADMIN = "/Admin/login_admin.jsp";
-	private static final String ADMIN_SERVLET = "/Swimv2-Client/AdminServlet";
+	private static final String AGGIUNTA_SERVLET = "/Swimv2-Client/RichiesteAggiuntaSkillServlet";
 
-	private static final char RIFIUTA = 'a';
-	private static final char ACCETTA = 'r';
+	private static final char RIFIUTA = 'r';
+	private static final char ACCETTA = 'a';
 	
 	private RemoteManager remoteManager= new RemoteManager();
 	private GestoreRichiesteSkillRemote gestoreRichieste;
@@ -99,7 +99,7 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 				try {
 					Long idSkill = Long.parseLong(parameter.substring(1));
 					gestoreRichieste.accettaRichiesta(idSkill);
-					response.sendRedirect(ADMIN_SERVLET);
+					response.sendRedirect(AGGIUNTA_SERVLET);
 				} catch (RichiesteSkillException e) {
 					response.sendRedirect(ERROR_PAGE);
 					return;
@@ -111,7 +111,7 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 				try {
 					Long idSkill = Long.parseLong(parameter.substring(1));
 					gestoreRichieste.rifiutaRichiesta(idSkill);
-					response.sendRedirect(ADMIN_SERVLET);
+					response.sendRedirect(AGGIUNTA_SERVLET);
 				} catch (RichiesteSkillException e) {
 					response.sendRedirect(ERROR_PAGE);
 					return;

@@ -62,18 +62,6 @@ public class AggiungiSkillServlet extends HttpServlet {
 					return;
 				}
 				
-				if(request.getAttribute(ADMIN)==null) {		
-					try {
-						gestoreAdmin = remoteManager.getGestoreAdminRemote();
-					} catch (NamingException e) {
-						response.sendRedirect(ERROR_PAGE);
-						return;
-					}
-					
-					//Imposto l'attributo Admin da passare alla homePage
-					Admin admin = gestoreAdmin.getAdmin();
-					request.setAttribute(ADMIN, admin);
-				}				
 				request.getRequestDispatcher(ADD_SKILL).forward(request, response);
 		    }
 
