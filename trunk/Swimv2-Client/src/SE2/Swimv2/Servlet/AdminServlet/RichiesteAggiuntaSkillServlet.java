@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import SE2.Swimv2.Entity.Admin;
 import SE2.Swimv2.Entity.RichiestaSkill;
+import SE2.Swimv2.Exceptions.RichiesteSkillException;
 import SE2.Swimv2.Session.GestoreAdminRemote;
 import SE2.Swimv2.Session.GestoreRichiesteSkillRemote;
 import SE2.Swimv2.Util.RemoteManager;
@@ -27,6 +28,7 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 	private static final String ADMIN= "admin";
 	private static final String RICHIESTE= "richieste";
 	private static final String ADMIN_ID= "adminId";
+	private static final String CHOICE="choice";
 	
 	//valori attributi
 	private static final String LOGIN_ERROR= "logError";
@@ -35,6 +37,9 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 	private static final String ADD_SKILL = "/Admin/gestisci_richieste.jsp";
 	private static final String ERROR_PAGE = "error.jsp";
 	private static final String HOME_ADMIN = "/Admin/login_admin.jsp";
+
+	private static final char RIFIUTA = 'a';
+	private static final char ACCETTA = 'r';
 	
 	private RemoteManager remoteManager= new RemoteManager();
 	private GestoreRichiesteSkillRemote gestoreRichieste;
@@ -86,6 +91,32 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 			return;
 		}
 		
+		String parameter = (String) request.getAttribute(CHOICE);
+		char startingChar = parameter.charAt(0);
+		if(startingChar==ACCETTA) {
+				Long idSkill = Long.parseLong(parameter.substring(1));
+				try {
+					gestoreRichieste.accettaRichiesta(idSkill);
+				} catch (RichiesteSkillException e) {
+					response.sendRedirect(ERROR_PAGE);
+					return;
+				}
+		
+		}
+		
+		if(startingChar==RIFIUTA) {
+				Long idSkill = Long.parseLong(parameter.substring(1));
+				try {
+					gestoreRichieste.rifiutaRichiesta(idSkill);
+				} catch (RichiesteSkillException e) {
+					response.sendRedirect(ERROR_PAGE);
+					return;
+				}
+		}
+		else {
+			response.sendRedirect(ERROR_PAGE);
+			return;
+		}
 		//GESTIRE ACCETTA/RIFIUTA
 		
 	}
