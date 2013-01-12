@@ -85,6 +85,7 @@ public class ProponiAbilitaServlet extends HttpServlet {
 			gestoreRichiesteSkill.inviaRichiestaAggiuntaSkill(id, skill);
 		} catch (RichiesteSkillException e) {
 			response.sendRedirect(ERROR_PAGE);
+			return;
 		}
 		
 		response.sendRedirect(USER_SERVLET);
