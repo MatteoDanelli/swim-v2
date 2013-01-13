@@ -81,6 +81,10 @@ public class GestoreFeedback implements GestoreFeedbackRemote{
 		
 		Double result=(Double) q.getSingleResult();
 		
+		if(result==null){
+			result=0.0;
+		}
+		
 		return result.doubleValue();
 	}
 
