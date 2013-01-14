@@ -72,10 +72,10 @@
 								long idRichiesta =richiesta.getId();
 								%> 
 						
-							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet?choice=a<%out.print(idRichiesta); %>" method="post">
-							<input type="submit" value="Accetta!"></form> 
-							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet?choice=r<%out.print(idRichiesta); %>" method="post">
-							<input type="submit" value="Rifiuta!"></form> <br> 						
+							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet" method="post">
+							<input type="submit" value="Accetta!"><input type="hidden" name="scelta" value="a"><input type="hidden" name="id" value="<%out.print(idRichiesta); %>"></form> 
+							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet" method="post">
+							<input type="submit" value="Rifiuta!"><input type="hidden" name="scelta" value="r"><input type="hidden" name="id" value="<%out.print(idRichiesta); %>"></form> <br> 						
 								<%
 							}
 							%> 
