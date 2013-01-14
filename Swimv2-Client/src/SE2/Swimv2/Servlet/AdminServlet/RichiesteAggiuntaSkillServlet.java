@@ -27,7 +27,8 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 	private static final String ADMIN= "admin";
 	private static final String RICHIESTE= "richieste";
 	private static final String ADMIN_ID= "adminId";
-	private static final String CHOICE="choice";
+	private static final String CHOICE="scelta";
+	private static final String ID_RICHIESTA="id";
 	
 	//valori attributi
 	private static final String LOGIN_ERROR= "logError";
@@ -38,8 +39,8 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 	private static final String LOGIN_ADMIN = "/Admin/login_admin.jsp";
 	private static final String AGGIUNTA_SERVLET = "/Swimv2-Client/RichiesteAggiuntaSkillServlet";
 
-	private static final char RIFIUTA = 'r';
-	private static final char ACCETTA = 'a';
+	private static final String RIFIUTA = "r";
+	private static final String ACCETTA = "a";
 	
 	private RemoteManager remoteManager= new RemoteManager();
 	private GestoreRichiesteSkillRemote gestoreRichieste;
@@ -91,12 +92,12 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 			return;
 		}
 		
-		String parameter = request.getParameter(CHOICE);
+		String parameterChoice = request.getParameter(CHOICE);
+		String parameterId = request.getParameter(ID_RICHIESTA);
 		
-		char startingChar = parameter.charAt(0);
-		if(startingChar==ACCETTA) {
+		if(parameterChoice==ACCETTA) {
 				try {
-					Long idSkill = Long.parseLong(parameter.substring(1));
+					Long idSkill = Long.parseLong(parameterId.substring(1));
 					gestoreRichieste.accettaRichiesta(idSkill);
 					response.sendRedirect(AGGIUNTA_SERVLET);
 				} catch (RichiesteSkillException e) {
@@ -106,9 +107,9 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 		
 		}
 		
-		else if(startingChar==RIFIUTA) {
+		else if(parameterChoice==RIFIUTA) {
 				try {
-					Long idSkill = Long.parseLong(parameter.substring(1));
+					Long idSkill = Long.parseLong(parameterId.substring(1));
 					gestoreRichieste.rifiutaRichiesta(idSkill);
 					response.sendRedirect(AGGIUNTA_SERVLET);
 				} catch (RichiesteSkillException e) {
