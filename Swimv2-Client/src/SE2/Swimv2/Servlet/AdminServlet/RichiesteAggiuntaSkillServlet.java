@@ -94,10 +94,12 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 		
 		String parameterChoice = request.getParameter(CHOICE);
 		String parameterId = request.getParameter(ID_RICHIESTA);
-		
+		System.out.println(parameterChoice);
+		Long idSkill = Long.parseLong(parameterId);
+
 		if(parameterChoice==ACCETTA) {
+			System.out.println("INSIDE ACCETTA");
 				try {
-					Long idSkill = Long.parseLong(parameterId.substring(1));
 					gestoreRichieste.accettaRichiesta(idSkill);
 					response.sendRedirect(AGGIUNTA_SERVLET);
 				} catch (RichiesteSkillException e) {
@@ -109,7 +111,6 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 		
 		else if(parameterChoice==RIFIUTA) {
 				try {
-					Long idSkill = Long.parseLong(parameterId.substring(1));
 					gestoreRichieste.rifiutaRichiesta(idSkill);
 					response.sendRedirect(AGGIUNTA_SERVLET);
 				} catch (RichiesteSkillException e) {

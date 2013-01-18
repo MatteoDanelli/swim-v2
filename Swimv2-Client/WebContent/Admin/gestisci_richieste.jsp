@@ -73,9 +73,16 @@
 								%> 
 						
 							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet" method="post">
-							<input type="submit" value="Accetta!"><input type="hidden" name="scelta" value="a"><input type="hidden" name="id" value="<%out.print(idRichiesta); %>"></form> 
+							<input type="hidden" name="scelta" value="a" />
+							<input type="hidden" name="id" value="<%out.print(idRichiesta); %>"/>
+							<input type="submit" value="Accetta!"/>
+    						</form> 
+							
 							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet" method="post">
-							<input type="submit" value="Rifiuta!"><input type="hidden" name="scelta" value="r"><input type="hidden" name="id" value="<%out.print(idRichiesta); %>"></form> <br> 						
+							<input type="hidden" name="scelta" value="r"/>
+							<input type="hidden" name="id" value="<%out.print(idRichiesta); %>"/>
+							<input type="submit" value="Rifiuta!"/>
+							</form> <br> 						
 								<%
 							}
 							%> 
