@@ -28,7 +28,8 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 	private static final String RICHIESTE= "richieste";
 	private static final String ADMIN_ID= "adminId";
 	private static final String CHOICE="scelta";
-	private static final String ID_RICHIESTA="id";
+	private static final String ID_RICHIESTA = "id";
+
 	
 	//valori attributi
 	private static final String LOGIN_ERROR= "logError";
@@ -41,6 +42,7 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 
 	private static final String RIFIUTA = "r";
 	private static final String ACCETTA = "a";
+
 	
 	private RemoteManager remoteManager= new RemoteManager();
 	private GestoreRichiesteSkillRemote gestoreRichieste;
@@ -90,15 +92,13 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 			request.setAttribute(ERROR, LOGIN_ERROR);
 			request.getRequestDispatcher(LOGIN_ADMIN).forward(request, response);
 			return;
-		}
-		
-		String parameterChoice = request.getParameter(CHOICE);
-		String parameterId = request.getParameter(ID_RICHIESTA);
-		System.out.println(parameterChoice);
-		Long idSkill = Long.parseLong(parameterId);
-
-		if(parameterChoice==ACCETTA) {
-			System.out.println("INSIDE ACCETTA");
+		}		
+        
+        String parameterChoice = request.getParameter(CHOICE);
+        String parameterId = request.getParameter(ID_RICHIESTA);
+        Long idSkill = Long.parseLong(parameterId);
+        
+        if(parameterChoice==ACCETTA) {
 				try {
 					gestoreRichieste.accettaRichiesta(idSkill);
 					response.sendRedirect(AGGIUNTA_SERVLET);
@@ -106,10 +106,9 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 					response.sendRedirect(ERROR_PAGE);
 					return;
 				}
-		
 		}
 		
-		else if(parameterChoice==RIFIUTA) {
+        else if(parameterChoice==RIFIUTA) {
 				try {
 					gestoreRichieste.rifiutaRichiesta(idSkill);
 					response.sendRedirect(AGGIUNTA_SERVLET);
