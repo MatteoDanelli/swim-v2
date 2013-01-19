@@ -45,6 +45,7 @@ public class GestoreRichiesteAmicizia implements GestoreRichiesteAmiciziaRemote{
 			
 			try{
 				database.persist(richiesta);
+				database.flush();
 			}
 			catch(PersistenceException e){
 				throw new RichiestaAmiciziaException("Errore di persistenza");
