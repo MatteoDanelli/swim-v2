@@ -34,7 +34,7 @@ public class Feedback implements Serializable {
 	@Column(name="STELLE", nullable=false)
 	private int StelleAssegnate;
 	
-	@Column(name="COMMENTO", nullable=true)
+	@Column(name="COMMENTO", nullable=true,columnDefinition="TEXT")
 	private String commento;
 	
 	@Column(name="DATA", nullable=false)

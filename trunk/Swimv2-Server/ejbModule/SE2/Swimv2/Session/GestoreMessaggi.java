@@ -29,18 +29,22 @@ public class GestoreMessaggi implements GestoreMessaggiRemote {
 		User userMittente = database.find(User.class, mittente);
 		User UserDestinatario = database.find(User.class, destinatario);
 		
-		if(testo.equals("")){
+		if(testo==null || testo.equals("")){
 			throw new MessaggiException("IL messaggio è vuoto");
 		}
 		
-		if (mittente != destinatario) {
-			Messaggio nuovoMessaggio= new Messaggio(userMittente, UserDestinatario, null, false, testo);
-			database.persist(nuovoMessaggio);
-		}
-		else {
+		if (mittente == destinatario) {
 			throw new MessaggiException("Mittente e destinario coincidenti!");
 		}
 		
+		try{
+			Messaggio nuovoMessaggio= new Messaggio(userMittente, UserDestinatario, null, false, testo);
+			database.persist(nuovoMessaggio);
+			return;
+		}catch (PersistenceException e) {				
+		}catch(NullPointerException e){			
+		}
+		throw new MessaggiException("Errore accesso al database");
 	}
 	
 	@SuppressWarnings("unchecked")
