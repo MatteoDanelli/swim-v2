@@ -32,6 +32,16 @@
 	if( numRichiesteAmicizia==null){
 		numRichiesteAmicizia=0;
 	}
+	
+	Integer nuoviMessaggi = (Integer)request.getAttribute("newMess");
+	if( nuoviMessaggi==null){
+		nuoviMessaggi=0;
+	}
+	
+	Integer nuoveRichiesteAiuto= (Integer)request.getAttribute("newHelp");
+	if( nuoveRichiesteAiuto==null){
+		nuoveRichiesteAiuto=0;
+	}
 		
 	%>
 	<div class="header">
@@ -77,8 +87,8 @@
 				  		<div class="box_contents">
 				  			<div class="elenco">
 							<p>Ci sono:</p><br>
-								<p>0 Nuovi Messaggi -<a href="#">Visualizza tutti i messaggi</a></p>
-								<p>0 Nuovi Richieste d'aiuto -<a href="#">Visualizza tutte le richiesta d'aiuto</a>	</p>
+								<p><%out.print(nuoviMessaggi.intValue()); %> Nuovi Messaggi -<a href="/Swimv2-Client/VisualizzaMessaggiServlet">Visualizza tutti i messaggi</a></p>
+								<p><%out.print(nuoveRichiesteAiuto.intValue()); %> Nuovi Richieste d'aiuto -<a href="/Swimv2-Client/VisualizzaRichiesteAiutoServlet">Visualizza tutte le richiesta d'aiuto</a></p>
 								<p><%out.print(numRichiesteAmicizia.intValue()); %> Richieste d'amicizia - <a href="/Swimv2-Client/RichiesteAmiciziaServlet">Visualizza tutte le richiesta d'amicizia</a></p>		
 							</div>
 						</div> 

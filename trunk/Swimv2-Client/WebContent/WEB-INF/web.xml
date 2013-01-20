@@ -209,4 +209,24 @@
     <servlet-name>RichiediAmiciziaServlet</servlet-name>
     <url-pattern>/RichiediAmiciziaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VisualizzaMessaggiServlet</display-name>
+    <servlet-name>VisualizzaMessaggiServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.UserServlet.VisualizzaMessaggiServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VisualizzaMessaggiServlet</servlet-name>
+    <url-pattern>/VisualizzaMessaggiServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VisualizzaRichiesteAiutoServlet</display-name>
+    <servlet-name>VisualizzaRichiesteAiutoServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.UserServlet.VisualizzaRichiesteAiutoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VisualizzaRichiesteAiutoServlet</servlet-name>
+    <url-pattern>/VisualizzaRichiesteAiutoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

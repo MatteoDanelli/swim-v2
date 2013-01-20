@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import SE2.Swimv2.Entity.User;
+import SE2.Swimv2.Session.GestoreMessaggiRemote;
+import SE2.Swimv2.Session.GestoreRichiesteAiutoRemote;
 import SE2.Swimv2.Session.GestoreRichiesteAmiciziaRemote;
 import SE2.Swimv2.Session.GestoreUserRemote;
 import SE2.Swimv2.Util.RemoteManager;
@@ -22,6 +24,8 @@ public class UserServlet extends HttpServlet {
 	private static final String ERROR = "Errore";
 	private static final String USER= "user";
 	private static final String RIC_AMICIZIA= "richiesteAmicizia";
+	private static final String NEW_MEX= "newMess";
+	private static final String NEW_AIUTO= "newHelp";
 	private static final String USER_ID= "userId";
 	
 	//valori attributi
@@ -36,6 +40,8 @@ public class UserServlet extends HttpServlet {
 	private RemoteManager remoteManager= new RemoteManager();
 	private GestoreUserRemote gestoreUser;
 	private GestoreRichiesteAmiciziaRemote gestoreRichiesteAmicizia;
+	private GestoreMessaggiRemote gestoreMessaggi;
+	private GestoreRichiesteAiutoRemote gestoreRichiesteAiuto;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -63,6 +69,8 @@ public class UserServlet extends HttpServlet {
 		try {
 			gestoreUser = remoteManager.getGestoreUserRemote();
 			gestoreRichiesteAmicizia = remoteManager.getGestoreRichiesteAmiciziaRemote();
+			gestoreMessaggi= remoteManager.getGestoreMessaggiRemote();
+			gestoreRichiesteAiuto= remoteManager.getGestoreRichiesteAiutoRemote();
 		} catch (NamingException e) {
 			response.sendRedirect(ERROR_PAGE);
 			return;
@@ -72,9 +80,17 @@ public class UserServlet extends HttpServlet {
 		User user= gestoreUser.getById(id.longValue());
 		request.setAttribute(USER, user);
 		
-		//Setto attributo numero nuove richieste amicizia
+		//Setto attributo numero richieste amicizia
 		Integer numRichiesteAmicizia= gestoreRichiesteAmicizia.elencoRichiesteAmicizia(id).size();
 		request.setAttribute(RIC_AMICIZIA, numRichiesteAmicizia);
+		
+		//Setto attributo numero nuovi messaggi
+		Integer numMex= gestoreMessaggi.verificaNuoviMessaggi(id);
+		request.setAttribute(NEW_MEX, numMex);
+		
+		//Setto attributo numero nuove richieste aiuto
+		Integer numRichiesteAiuto= gestoreRichiesteAiuto.verificaNuoveRichiesteAiuto(id);
+		request.setAttribute(NEW_AIUTO, numRichiesteAiuto);
 
 		request.getRequestDispatcher(USER_PAGE).forward(request, response);
 			
