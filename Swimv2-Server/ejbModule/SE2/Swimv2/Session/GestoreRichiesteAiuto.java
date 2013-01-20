@@ -22,32 +22,37 @@ public class GestoreRichiesteAiuto implements GestoreRichiesteAiutoRemote {
 	EntityManager database;
 
 	@Override
-	public void inviaRichiestaAiuto(long mittente, long destinatario, Skill skill, String testo) throws MessaggiException {
+	public void inviaRichiestaAiuto(long mittente, long destinatario,
+			Skill skill, String testo) throws MessaggiException {
 
 		User userMittente = database.find(User.class, mittente);
 		User UserDestinatario = database.find(User.class, destinatario);
-		
-		if(skill==null){
+
+		if (skill == null) {
 			throw new MessaggiException("La skill è null");
 		}
-		
-		if (mittente != destinatario) {
-			Messaggio nuovoMessaggio= new Messaggio(userMittente, UserDestinatario, skill, true, testo);
-			database.persist(nuovoMessaggio);
-		}
-		else {
+
+		if (mittente == destinatario) {
 			throw new MessaggiException("Mittente e destinario coincidenti!");
 		}
-		
+		try {
+			Messaggio nuovoMessaggio = new Messaggio(userMittente,
+					UserDestinatario, skill, true, testo);
+			database.persist(nuovoMessaggio);
+			return;
+		} catch (PersistenceException e) {
+		} catch (NullPointerException e) {
+		}
+		throw new MessaggiException("Errore accesso al database");
 	}
-
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Messaggio> elencoRichiesteAiuto(long user){
-		
+	public List<Messaggio> elencoRichiesteAiuto(long user) {
+
 		User userCercato = database.find(User.class, user);
-		Query q = database.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario ORDER BY m.dataInvio desc, m.isMessaggioLetto desc");
+		Query q = database
+				.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario ORDER BY m.dataInvio desc, m.isMessaggioLetto desc");
 		q.setParameter("userDestinatario", userCercato);
 
 		List<Messaggio> elenco = (List<Messaggio>) q.getResultList();
@@ -57,25 +62,26 @@ public class GestoreRichiesteAiuto implements GestoreRichiesteAiutoRemote {
 	@SuppressWarnings("unchecked")
 	@Override
 	public int verificaNuoveRichiesteAiuto(long user) {
-		
+
 		User userCercato = database.find(User.class, user);
-		Query q = database.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario AND m.isMessaggioLetto='false'");
+		Query q = database
+				.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario AND m.isMessaggioLetto='false'");
 		q.setParameter("userDestinatario", userCercato);
 		List<Messaggio> elenco = (List<Messaggio>) q.getResultList();
 
 		return elenco.size();
-		
+
 	}
 
 	@Override
 	public void settaRichiestaLetta(long messaggio) throws MessaggiException {
-		
+
 		Messaggio messaggioLetto = database.find(Messaggio.class, messaggio);
-	
-		try{	
-		messaggioLetto.setMessaggioLetto(true);
-		database.flush();
-		return;
+
+		try {
+			messaggioLetto.setMessaggioLetto(true);
+			database.flush();
+			return;
 		} catch (NullPointerException e) {
 		} catch (PersistenceException e) {
 		} catch (IllegalStateException e) {

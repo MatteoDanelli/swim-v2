@@ -52,7 +52,7 @@ public class Messaggio implements Serializable {
 	@Column(name = "DATA_DI_INVIO", nullable = false)
 	private Calendar dataInvio;
 
-	@Column(name = "TESTO", nullable = true)
+	@Column(name = "TESTO", nullable = true, columnDefinition="TEXT")
 	private String testo;
 
 	// costruttori
