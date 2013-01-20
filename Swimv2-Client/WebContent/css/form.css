@@ -2,7 +2,10 @@
 	width: 320px;
 	margin: 0 auto;
 }
-
+.form_center_textarea {
+	width: 640px;
+	margin: 0 auto;
+}
 .form input[type=text],.form  input[type=password] {
 	width: 320px;
 	height: 25px;
@@ -20,6 +23,12 @@
 	display: block;
 	margin-top: 5px;
 	color: #AA2424;
+}
+
+.form textarea{
+	width: 640px;
+	height: 200px;
+	font-size: 14px;
 }
 
 .form  input[type=submit] {
