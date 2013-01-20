@@ -52,7 +52,7 @@ public class GestoreRichiesteAiuto implements GestoreRichiesteAiutoRemote {
 
 		User userCercato = database.find(User.class, user);
 		Query q = database
-				.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario ORDER BY m.dataInvio desc, m.isMessaggioLetto desc");
+				.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario AND m.isRichiestaAiuto=true ORDER BY m.dataInvio desc, m.isMessaggioLetto desc");
 		q.setParameter("userDestinatario", userCercato);
 
 		List<Messaggio> elenco = (List<Messaggio>) q.getResultList();
@@ -65,7 +65,7 @@ public class GestoreRichiesteAiuto implements GestoreRichiesteAiutoRemote {
 
 		User userCercato = database.find(User.class, user);
 		Query q = database
-				.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario AND m.isMessaggioLetto='false'");
+				.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario AND m.isMessaggioLetto=false AND m.isRichiestaAiuto=true");
 		q.setParameter("userDestinatario", userCercato);
 		List<Messaggio> elenco = (List<Messaggio>) q.getResultList();
 
