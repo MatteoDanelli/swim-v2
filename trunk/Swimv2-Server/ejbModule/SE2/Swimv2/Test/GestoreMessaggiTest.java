@@ -49,9 +49,9 @@ public class GestoreMessaggiTest {
 	public void testVerificaNuoviMessaggi() {
 		try {
 			messaggiRemote.inviaMessaggio(u1, u2, "testo");
-			assertFalse(messaggiRemote.verificaNuoviMessaggi(u1));
+			assertFalse(messaggiRemote.verificaNuoviMessaggi(u1)!=0);
 			messaggiRemote.settaMessaggioLetto(messaggiRemote.elencoMessaggi(u1).indexOf(0));
-			assertTrue(messaggiRemote.verificaNuoviMessaggi(u1));
+			assertTrue(messaggiRemote.verificaNuoviMessaggi(u1)==0);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
