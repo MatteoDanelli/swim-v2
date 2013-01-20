@@ -179,7 +179,7 @@
 	 		<p><b>Media Voti: </b><%out.print(avg); %></p>
 			<% 
 			if(feed.size()==0){
-				out.println("<p>Non ci sono Feedback</p>");
+				out.println("<p><br>Non ci sono Feedback</p>");
 			}
 				for(Feedback f: feed){
 			  		%>

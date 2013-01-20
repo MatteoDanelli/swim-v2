@@ -25,7 +25,6 @@ import SE2.Swimv2.Util.RemoteManager;
 public class ProfiloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//nomi parametri
-	private static final String ERROR = "Errore";
 	private static final String USER_PROFILE = "userId";
 	
 	//nomi attributi
@@ -39,7 +38,6 @@ public class ProfiloServlet extends HttpServlet {
 	private static final String PULSANTI= "pulsanti";
 	
 	//nomi pagine
-	private static final String HOME_PAGE = "index.jsp";
 	private static final String USER_PROFILE_PAGE = "User/profiloUtenti.jsp";
 	private static final String GUEST_PROFILE_PAGE = "Guest/profiloUtenti.jsp";
 	private static final String ERROR_PAGE = "error.jsp";
@@ -65,13 +63,16 @@ public class ProfiloServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		//verifico da chi è stata fatta la richiesta di visualizzazione del profilo
 		Long id= (Long) request.getSession().getAttribute(USER_ID);
+		
 		if(id==null){
 			this.guestRequest(request, response);
 		}else{
 			this.userRequest(id,request, response);
 		}
+		
 	}
 
 	/**
@@ -126,6 +127,35 @@ public class ProfiloServlet extends HttpServlet {
 	
 	//metodo che gestisce le richieste fatte da uu utente Guest
 	private void guestRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		long userIdDaVisualizzare;
+		
+		try {
+			gestoreUser = remoteManager.getGestoreUserRemote();
+			gestoreFeedback= remoteManager.getGestoreFeedbackRemote();
+			gestoreSkill = remoteManager.getGestoreSkillRemote();
+		} catch (NamingException e) {
+			response.sendRedirect(ERROR_PAGE);
+			return;
+		}
+		
+		try{
+			userIdDaVisualizzare= Long.parseLong(request.getParameter(USER_PROFILE));
+		}catch(NumberFormatException e){
+			response.sendRedirect(ERROR_PAGE);
+			return;
+		}
+		
+		User user= gestoreUser.getById(userIdDaVisualizzare);
+		List<Feedback> feedbacks = gestoreFeedback.elencoFeedback(userIdDaVisualizzare);
+		List<Skill> skills = gestoreSkill.getPersonalSkill(userIdDaVisualizzare);
+		double avg = gestoreFeedback.mediaVotiFeedback(userIdDaVisualizzare);
+
+		
+		request.setAttribute(USER, user);
+		request.setAttribute(FEEDBACK, feedbacks);
+		request.setAttribute(FEEDBACK_AVG, avg);
+		request.setAttribute(PERSONAL_SKILL, skills);
 		
 		request.getRequestDispatcher(GUEST_PROFILE_PAGE).forward(request, response);
 		
