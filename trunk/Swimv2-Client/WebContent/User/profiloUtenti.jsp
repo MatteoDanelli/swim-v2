@@ -114,7 +114,7 @@
 					<div class="submenu">
 						<%
 							if(richiestaAmicizia){
-								%> <a href="#">Richiedi Amicizia</a> <%
+								%> <a href="/Swimv2-Client/RichiediAmiciziaServlet?destinatario=<%out.print(user.getId());%>">Richiedi Amicizia</a> <%
 							}
 						
 							if(sendFeedback){
