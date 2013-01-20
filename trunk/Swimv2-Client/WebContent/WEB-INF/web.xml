@@ -169,4 +169,34 @@
     <servlet-name>RichiesteAmiciziaServlet</servlet-name>
     <url-pattern>/RichiesteAmiciziaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MessaggiServlet</display-name>
+    <servlet-name>MessaggiServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.UserServlet.MessaggiServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessaggiServlet</servlet-name>
+    <url-pattern>/MessaggiServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RichiesteAiutoServlet</display-name>
+    <servlet-name>RichiesteAiutoServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.UserServlet.RichiesteAiutoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RichiesteAiutoServlet</servlet-name>
+    <url-pattern>/RichiesteAiutoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FeedbackServlet</display-name>
+    <servlet-name>FeedbackServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.UserServlet.FeedbackServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FeedbackServlet</servlet-name>
+    <url-pattern>/FeedbackServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

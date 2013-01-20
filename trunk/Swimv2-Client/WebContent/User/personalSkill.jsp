@@ -22,7 +22,32 @@
 	</head>
 
   <body>
-
+	<%
+	//verifico sessione
+	Long id= (Long) request.getSession().getAttribute("userId");
+	if(id==null){
+		request.setAttribute("Errore", "logError");
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		return;
+	}
+	
+	//ottengo skillset, se l' attributo non esiste redirigo sull user page
+	@SuppressWarnings("unchecked")
+	List<Skill> skillSet = (List<Skill>) request.getAttribute("skillSet");
+	if(skillSet== null) {
+		response.sendRedirect("/Swimv2-Client/UserServlet");
+		return;
+	}
+	@SuppressWarnings("unchecked")
+	//ottengo il personalSkill, se l' attributo non esiste redirigo sull user page
+	List<Skill> personalSkill = (List<Skill>) request.getAttribute("personalSkill");
+	if(personalSkill== null) {
+		response.sendRedirect("/Swimv2-Client/UserServlet");
+		return;
+	}
+	
+	
+	%>
 	<div class="header">
 		<div class="content">
 	  		<a class="logo" href="/Swimv2-Client/index.jsp">
@@ -41,6 +66,7 @@
 		<div class="content">
 			<ul id="menu">
 				<li><a class="first" href="/Swimv2-Client/UserServlet">Home Page</a></li>
+				<li><a href="/Swimv2-Client/ProfiloServlet?userId=<%out.print(id);%>">Profilo</a></li>
 				<li><a href="/Swimv2-Client/RicercaUtentiUserServlet">Cerca Utente</a></li>
 				<li><a href="/Swimv2-Client/AmiciUserServlet">Visualizza Amici</a></li>
 				<li><a href="/Swimv2-Client/ModificaDatiServlet">Modifica Dati</a></li>
@@ -53,32 +79,7 @@
 	  
   	<div class="wrapper">
 	  <div class="margintop content">
-	  				<%
-	  				//verifico sessione
-					Long id= (Long) request.getSession().getAttribute("userId");
-					if(id==null){
-						request.setAttribute("Errore", "logError");
-						request.getRequestDispatcher("/index.jsp").forward(request, response);
-						return;
-					}
-					
-					//ottengo skillset, se l' attributo non esiste redirigo sull user page
-					@SuppressWarnings("unchecked")
-					List<Skill> skillSet = (List<Skill>) request.getAttribute("skillSet");
-					if(skillSet== null) {
-						response.sendRedirect("/Swimv2-Client/UserServlet");
-						return;
-					}
-					@SuppressWarnings("unchecked")
-					//ottengo il personalSkill, se l' attributo non esiste redirigo sull user page
-					List<Skill> personalSkill = (List<Skill>) request.getAttribute("personalSkill");
-					if(personalSkill== null) {
-						response.sendRedirect("/Swimv2-Client/UserServlet");
-						return;
-					}
-					
-					
-					%>
+
 					 <div class="box">
 			  			<div class="box_title">
 							Le tue abilità

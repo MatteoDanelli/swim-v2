@@ -8,6 +8,7 @@ import SE2.Swimv2.Session.GestoreAdminRemote;
 import SE2.Swimv2.Session.GestoreAmiciRemote;
 import SE2.Swimv2.Session.GestoreFeedbackRemote;
 import SE2.Swimv2.Session.GestoreLoginRemote;
+import SE2.Swimv2.Session.GestoreMessaggiRemote;
 import SE2.Swimv2.Session.GestoreRichiesteAmiciziaRemote;
 import SE2.Swimv2.Session.GestoreRichiesteSkillRemote;
 import SE2.Swimv2.Session.GestoreSkillRemote;
@@ -71,6 +72,13 @@ public class RemoteManager {
 		Context jndiContext = new InitialContext();
 		Object obj = jndiContext.lookup("GestoreFeedback/remote");
 		GestoreFeedbackRemote manager = (GestoreFeedbackRemote) obj;
+		return manager;
+	}
+	
+	public GestoreMessaggiRemote getGestoreMessaggiRemote() throws NamingException {
+		Context jndiContext = new InitialContext();
+		Object obj = jndiContext.lookup("GestoreMessaggi/remote");
+		GestoreMessaggiRemote manager = (GestoreMessaggiRemote) obj;
 		return manager;
 	}
 }

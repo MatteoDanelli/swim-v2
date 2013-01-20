@@ -14,7 +14,16 @@
 	</head>
 
   <body>
-
+	<%
+	//verifico sessione
+	Long id= (Long) request.getSession().getAttribute("userId");
+	if(id==null){
+		request.setAttribute("Errore", "logError");
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		return;
+	}
+	
+	%>
 	<div class="header">
 		<div class="content">
 	  		<a class="logo" href="/Swimv2-Client/index.jsp">
@@ -32,6 +41,7 @@
 		<div class="content">
 			<ul id="menu">
 				<li><a class="first" href="/Swimv2-Client/UserServlet">Home Page</a></li>
+				<li><a href="/Swimv2-Client/ProfiloServlet?userId=<%out.print(id);%>">Profilo</a></li>
 				<li><a href="/Swimv2-Client/RicercaUtentiUserServlet">Cerca Utente</a></li>
 				<li><a href="/Swimv2-Client/AmiciUserServlet">Visualizza Amici</a></li>
 				<li><a href="/Swimv2-Client/ModificaDatiServlet">Modifica Dati</a></li>
@@ -87,14 +97,6 @@
 	  		</div>
  
 			<%
-			//verifico sessione
-			Long id= (Long) request.getSession().getAttribute("userId");
-			if(id==null){
-				request.setAttribute("Errore", "logError");
-				request.getRequestDispatcher("/index.jsp").forward(request, response);
-				return;
-			}
-			
 			@SuppressWarnings("unchecked")
 			List<User> risultati= (List<User>) request.getAttribute("RisultatiRicerca");
 			String mex= (String) request.getAttribute("Messaggio");

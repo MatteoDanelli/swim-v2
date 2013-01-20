@@ -13,35 +13,6 @@
 	</head>
 
   <body>
-
-	<div class="header">
-		<div class="content">
-	  		<a class="logo" href="/Swimv2-Client/index.jsp">
-	  			<img alt="Swimv2" src="/Swimv2-Client/img/logo.gif" width="320" height="60">
-	  		</a>
-	  		
-	  		<span class="page_title">
-					Friendship Request
-		  	</span> 		
-  		</div>
- 	</div> 	
- 	
- 	<div class="menu_bar">
-		<div class="content">
-			<ul id="menu">
-				<li><a class="first" href="/Swimv2-Client/UserServlet">Home Page</a></li>
-				<li><a href="/Swimv2-Client/RicercaUtentiUserServlet">Cerca Utente</a></li>
-				<li><a href="/Swimv2-Client/AmiciUserServlet">Visualizza Amici</a></li>
-				<li><a href="/Swimv2-Client/ModificaDatiServlet">Modifica Dati</a></li>
-				<li><a href="/Swimv2-Client/PersonalSkillServlet">Modifica Skills</a></li>
-				<li><a href="/Swimv2-Client/ProponiAbilitaServlet">Proponi Abilità</a></li>
-				<li><a href="/Swimv2-Client/LogoutServlet">Logout</a></li>
-			</ul>
-		</div>		
-	</div>	
-	
-	<div class="wrapper">
-	  <div class="margintop content">
 	  <% 
 		//verifico sessione
 		Long id= (Long) request.getSession().getAttribute("userId");
@@ -59,6 +30,36 @@
 			return;
 		}
 	  %>
+	<div class="header">
+		<div class="content">
+	  		<a class="logo" href="/Swimv2-Client/index.jsp">
+	  			<img alt="Swimv2" src="/Swimv2-Client/img/logo.gif" width="320" height="60">
+	  		</a>
+	  		
+	  		<span class="page_title">
+					Friendship Request
+		  	</span> 		
+  		</div>
+ 	</div> 	
+ 	
+ 	<div class="menu_bar">
+		<div class="content">
+			<ul id="menu">
+				<li><a class="first" href="/Swimv2-Client/UserServlet">Home Page</a></li>
+				<li><a href="/Swimv2-Client/ProfiloServlet?userId=<%out.print(id);%>">Profilo</a></li>
+				<li><a href="/Swimv2-Client/RicercaUtentiUserServlet">Cerca Utente</a></li>
+				<li><a href="/Swimv2-Client/AmiciUserServlet">Visualizza Amici</a></li>
+				<li><a href="/Swimv2-Client/ModificaDatiServlet">Modifica Dati</a></li>
+				<li><a href="/Swimv2-Client/PersonalSkillServlet">Modifica Skills</a></li>
+				<li><a href="/Swimv2-Client/ProponiAbilitaServlet">Proponi Abilità</a></li>
+				<li><a href="/Swimv2-Client/LogoutServlet">Logout</a></li>
+			</ul>
+		</div>		
+	</div>	
+	
+	<div class="wrapper">
+	  <div class="margintop content">
+
 		<div class="box margintop">
 	  			<div class="box_title">
 					Richieste Amicizia

@@ -22,6 +22,13 @@
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 			return;
 		}
+		
+		//verifico attributo user
+		User user = (User) request.getAttribute("user");
+		if(user== null) {
+			response.sendRedirect("/Swimv2-Client/error.jsp");
+			return;
+		}
 	  %>
 	<div class="header">
 		<div class="content">
@@ -30,7 +37,7 @@
 	  		</a>
 	  		
 	  		<span class="page_title">
-					Skill Request
+					New Message
 		  	</span> 		
   		</div>
  	</div> 	
@@ -55,19 +62,22 @@
 
 			<div class="box margintop">
 		  			<div class="box_title">
-						Proponi Skill
+						Messaggio
 					</div>
 	 		
 					<div class="box_contents">
-						<form class="form" action="/Swimv2-Client/ProponiAbilitaServlet" method="post">
-							
-							<div class="form_center_contents">
-								<label>Skill proposta: </label>
-								<input type="text" name="skill">
+					
+	
+						<form class="form" action="/Swimv2-Client/MessaggiServlet" method="post">
+							<input type="hidden" name="destinatario" value="<%out.print(user.getId());%>">
+							<div class="form_center_textarea">
+								<p><b>Destinatario: </b><%out.print(user.getCognome() + " " + user.getNome()); %></p>
+								<br>
+								<textarea name="messaggio"></textarea>
 								<br>
 							</div>
 							
-							<p class="link_right_align"> <input type="submit" value="Proponi"> </p>
+							<p class="link_right_align"> <input type="submit" value="Invia"> </p>
 						</form>		
 					</div> 
 	 		</div>
