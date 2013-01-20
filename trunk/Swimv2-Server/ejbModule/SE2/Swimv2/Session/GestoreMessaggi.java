@@ -52,7 +52,7 @@ public class GestoreMessaggi implements GestoreMessaggiRemote {
 	public List<Messaggio> elencoMessaggi(long user){
 		
 		User userCercato = database.find(User.class, user);
-		Query q = database.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario ORDER BY m.dataInvio desc, m.isMessaggioLetto desc");
+		Query q = database.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario AND m.isRichiestaAiuto=false ORDER BY m.dataInvio desc, m.isMessaggioLetto desc");
 		q.setParameter("userDestinatario", userCercato);
 
 		List<Messaggio> elenco = (List<Messaggio>) q.getResultList();
@@ -64,7 +64,7 @@ public class GestoreMessaggi implements GestoreMessaggiRemote {
 	public int verificaNuoviMessaggi(long user) {
 		
 		User userCercato = database.find(User.class, user);
-		Query q = database.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario AND m.isMessaggioLetto='false'");
+		Query q = database.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario AND m.isMessaggioLetto=false AND m.isRichiestaAiuto=false");
 		q.setParameter("userDestinatario", userCercato);
 		List<Messaggio> elenco = (List<Messaggio>) q.getResultList();
 		
