@@ -118,10 +118,10 @@
 							}
 						
 							if(sendFeedback){
-								%> <a href="#">Aggiungi Feedback</a> <%
+								%> <a href="/Swimv2-Client/FeedbackServlet?destinatario=<%out.print(user.getId());%>">Crea Feedback</a> <%
 							}
 						%>
-						<a href="#">Invia Richiesta Aiuto</a>
+						<a href="/Swimv2-Client/RichiesteAiutoServlet?destinatario=<%out.print(user.getId());%>">Invia Richiesta Aiuto</a>
 						<a href="/Swimv2-Client/MessaggiServlet?destinatario=<%out.print(user.getId());%>">Invia Messaggio</a>
 					</div>		
 
@@ -190,7 +190,15 @@
 							<li><b>Stelle:</b> <% out.println(f.getStelleAssegnate());%></li>
 							<%
 							if(f.getCommento()!=null){
-								out.print("<li><b>Commento:</b> "+ f.getCommento() +"</li>");
+								
+								StringBuffer text = new StringBuffer(f.getCommento());
+								  
+						        int loc = (new String(text)).indexOf('\n');
+						        while(loc > 0){
+						            text.replace(loc, loc+1, "<br>");
+						            loc = (new String(text)).indexOf('\n');
+						       }
+								out.print("<li><b>Commento:<br></b> "+ text.toString() +"</li>");
 							}
 							%>
 						</ul>

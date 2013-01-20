@@ -29,6 +29,7 @@
 			response.sendRedirect("/Swimv2-Client/error.jsp");
 			return;
 		}
+
 	  %>
 	<div class="header">
 		<div class="content">
@@ -37,7 +38,7 @@
 	  		</a>
 	  		
 	  		<span class="page_title">
-					New Message
+					New Feedback
 		  	</span> 		
   		</div>
  	</div> 	
@@ -62,22 +63,35 @@
 
 			<div class="box margintop">
 		  			<div class="box_title">
-						Messaggio
+						Crea feedback
 					</div>
 	 		
 					<div class="box_contents">
 					
 	
-						<form class="form" action="/Swimv2-Client/MessaggiServlet" method="post">
+						<form class="form" action="/Swimv2-Client/FeedbackServlet" method="post">
+							
 							<input type="hidden" name="destinatario" value="<%out.print(user.getId());%>">
 							<div class="form_center_textarea">
 								<p><b class="red_color">Destinatario: </b><%out.print(user.getCognome() + " " + user.getNome()); %></p>
 								<br>
-								<textarea name="messaggio"></textarea>
+
+								<label>Voto: </label>
+								<select name="stelle" >
+										<option selected="selected" value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+								</select>
+								<br>
+								<br>
+
+								<textarea name="commento"></textarea>
 								<br>
 							</div>
 							
-							<p class="link_right_align"> <input type="submit" value="Invia"> </p>
+							<p class="link_right_align"> <input type="submit" value="Crea"> </p>
 						</form>		
 					</div> 
 	 		</div>
