@@ -4,10 +4,8 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import SE2.Swimv2.Entity.Messaggio;
@@ -25,51 +23,64 @@ public class GestoreRichiesteAiuto implements GestoreRichiesteAiutoRemote {
 
 	@Override
 	public void inviaRichiestaAiuto(long mittente, long destinatario, Skill skill, String testo) throws MessaggiException {
+
+		User userMittente = database.find(User.class, mittente);
+		User UserDestinatario = database.find(User.class, destinatario);
+		
+		if(skill==null){
+			throw new MessaggiException("La skill è null");
+		}
 		
 		if (mittente != destinatario) {
-			User userMittente = database.find(User.class, mittente);
-			User UserDestinatario = database.find(User.class, destinatario);
 			Messaggio nuovoMessaggio= new Messaggio(userMittente, UserDestinatario, skill, true, testo);
 			database.persist(nuovoMessaggio);
 		}
 		else {
 			throw new MessaggiException("Mittente e destinario coincidenti!");
 		}
+		
 	}
 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Messaggio> elencoRichiesteAiuto(long user) throws MessaggiException {
+	public List<Messaggio> elencoRichiesteAiuto(long user){
+		
 		User userCercato = database.find(User.class, user);
 		Query q = database.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario ORDER BY m.dataInvio desc, m.isMessaggioLetto desc");
 		q.setParameter("userDestinatario", userCercato);
-		try {
-			List<Messaggio> elenco = (List<Messaggio>) q.getResultList();
-			return elenco;
-		} catch (EntityNotFoundException e) {
-		} catch (NoResultException e) {
-		} catch (NonUniqueResultException e) {
-		}
-		throw new MessaggiException("Non esistono messaggi!");
+
+		List<Messaggio> elenco = (List<Messaggio>) q.getResultList();
+		return elenco;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Boolean verificaNuoveRichiesteAiuto(long user) {
+	public int verificaNuoveRichiesteAiuto(long user) {
+		
 		User userCercato = database.find(User.class, user);
 		Query q = database.createQuery("FROM Messaggio m WHERE m.destinatario=:userDestinatario AND m.isMessaggioLetto='false'");
 		q.setParameter("userDestinatario", userCercato);
 		List<Messaggio> elenco = (List<Messaggio>) q.getResultList();
-		if (elenco.size()!=0)
-			return true;
-		return false;
+
+		return elenco.size();
+		
 	}
 
 	@Override
-	public void settaRichiestaLetta(long messaggio) {
+	public void settaRichiestaLetta(long messaggio) throws MessaggiException {
+		
 		Messaggio messaggioLetto = database.find(Messaggio.class, messaggio);
-		messaggioLetto.setMessaggioLetto(true);		
+	
+		try{	
+		messaggioLetto.setMessaggioLetto(true);
+		database.flush();
+		return;
+		} catch (NullPointerException e) {
+		} catch (PersistenceException e) {
+		} catch (IllegalStateException e) {
+		}
+		throw new MessaggiException("Errore, dati non modificati");
 	}
 
 	@Override

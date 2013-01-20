@@ -15,8 +15,8 @@ import SE2.Swimv2.Exceptions.MessaggiException;
 public interface GestoreRichiesteAiutoRemote {
 
 	public void inviaRichiestaAiuto(long mittente, long destinatario,Skill skill, String testo) throws MessaggiException;
-	public List<Messaggio> elencoRichiesteAiuto(long user) throws MessaggiException;
-	public Boolean verificaNuoveRichiesteAiuto(long user);
-	public void settaRichiestaLetta(long messaggio);
+	public List<Messaggio> elencoRichiesteAiuto(long user);
+	public int verificaNuoveRichiesteAiuto(long user);
+	public void settaRichiestaLetta(long messaggio)throws MessaggiException;
 	public Messaggio getById(long id);
 }
