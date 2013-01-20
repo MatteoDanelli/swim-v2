@@ -98,7 +98,7 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
         String parameterId = request.getParameter(ID_RICHIESTA);
         Long idSkill = Long.parseLong(parameterId);
         
-        if(parameterChoice==ACCETTA) {
+        if(parameterChoice.equals(ACCETTA)) {
 				try {
 					gestoreRichieste.accettaRichiesta(idSkill);
 					response.sendRedirect(AGGIUNTA_SERVLET);
@@ -108,7 +108,7 @@ public class RichiesteAggiuntaSkillServlet extends HttpServlet {
 				}
 		}
 		
-        else if(parameterChoice==RIFIUTA) {
+        else if(parameterChoice.equals(RIFIUTA)) {
 				try {
 					gestoreRichieste.rifiutaRichiesta(idSkill);
 					response.sendRedirect(AGGIUNTA_SERVLET);
