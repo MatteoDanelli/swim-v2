@@ -199,4 +199,14 @@
     <servlet-name>FeedbackServlet</servlet-name>
     <url-pattern>/FeedbackServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RichiediAmiciziaServlet</display-name>
+    <servlet-name>RichiediAmiciziaServlet</servlet-name>
+    <servlet-class>SE2.Swimv2.Servlet.UserServlet.RichiediAmiciziaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RichiediAmiciziaServlet</servlet-name>
+    <url-pattern>/RichiediAmiciziaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
