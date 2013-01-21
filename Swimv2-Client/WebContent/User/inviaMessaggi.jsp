@@ -68,7 +68,13 @@
 					<div class="box_contents">
 					
 	
-						<form class="form" action="/Swimv2-Client/MessaggiServlet" method="post">
+						<form class="form" action="/Swimv2-Client/MessaggiServlet
+						<%
+							if(request.getParameter("risposta")!=null){
+								out.print("?risposta="+request.getParameter("risposta"));
+							}
+						%>" method="post">
+						
 							<input type="hidden" name="destinatario" value="<%out.print(user.getId());%>">
 							<div class="form_center_textarea">
 								<p><b class="red_color">Destinatario: </b><%out.print(user.getCognome() + " " + user.getNome()); %></p>
