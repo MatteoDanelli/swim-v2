@@ -23,6 +23,7 @@ public class VisualizzaMessaggiServlet extends HttpServlet {
 	//nomi attributi
 	private static final String ERROR = "Errore";
 	private static final String MESSAGGI= "elencoMessaggi";
+	private static final String MESSAGGIO= "singoloMessaggio";
 	private static final String USER_ID= "userId";
 	
 	//valori attributi
@@ -35,6 +36,7 @@ public class VisualizzaMessaggiServlet extends HttpServlet {
 	private static final String HOME_PAGE = "index.jsp";
 	private static final String ERROR_PAGE = "error.jsp";
 	private static final String ELENCO_MESSAGGI = "User/elencoMessaggi.jsp";
+	private static final String DETTAGIO_MESSAGGIO = "User/dettaglioMessaggio.jsp";
 	
 
 	private RemoteManager remoteManager= new RemoteManager();
@@ -70,6 +72,8 @@ public class VisualizzaMessaggiServlet extends HttpServlet {
 		
 		String idMessaggio= request.getParameter(ID_MEX);
 	
+		//se idMessaggio!=null visualizzo il singolo messaggio, altrimenti
+		//visualizzo l' elenco dei messaggi
 		if(idMessaggio!=null){
 			long idMex;
 			try{
@@ -86,6 +90,16 @@ public class VisualizzaMessaggiServlet extends HttpServlet {
 				return;
 			}
 			
+			Messaggio messaggio;
+			try {
+				messaggio= gestoreMessaggi.getSingleMessage(id, idMex);
+			} catch (MessaggiException e) {
+				response.sendRedirect(ERROR_PAGE);
+				return;
+			}
+			
+			request.setAttribute(MESSAGGIO, messaggio);
+			request.getRequestDispatcher(DETTAGIO_MESSAGGIO).forward(request, response);
 			
 		}else{
 			//Setto lista messaggi
@@ -94,7 +108,6 @@ public class VisualizzaMessaggiServlet extends HttpServlet {
 
 			request.getRequestDispatcher(ELENCO_MESSAGGI).forward(request, response);			
 		}
-		
 
 	}
 

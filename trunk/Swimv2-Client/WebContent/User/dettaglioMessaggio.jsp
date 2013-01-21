@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="SE2.Swimv2.Entity.*"%>
-<%@ page import="java.util.List"%>
 <%@ page import="java.util.Calendar"%>
 <!DOCTYPE html>
 <html>
@@ -23,6 +22,13 @@
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 		return;
 	}
+	
+	//se risultati non/liota amici non è settato esco
+	Messaggio messaggio= (Messaggio) request.getAttribute("singoloMessaggio");
+	if(messaggio== null) {
+		response.sendRedirect("/Swimv2-Client/UserServlet");
+		return;
+	}
   %>
 	<div class="header">
 		<div class="content">
@@ -31,7 +37,7 @@
 	  		</a>
 	  		
 	  		<span class="page_title">
-					Messages
+					Message
 		  	</span>
 	  		
   		</div>
@@ -55,61 +61,42 @@
  		
  	<div class="wrapper">
 	  <div class="margintop content">
-	   	<div class="box">
+	  
+	  
+	  	<p><a href="/Swimv2-Client/VisualizzaMessaggiServlet">Visualizza tutti i messaggi</a></p>
+		<br>	 
+		 <div class="box">
   			<div class="box_title">
-				Messaggi
+				Messaggio
 			</div>
 		
 	  		<div class="box_contents">
-	  <%
-		//se risultati non/lista amici non è settato esco
-		@SuppressWarnings("unchecked")
-		List<Messaggio> messaggi= (List<Messaggio>) request.getAttribute("elencoMessaggi");
-		if(messaggi== null) {
-			response.sendRedirect("/Swimv2-Client/UserServlet");
-			return;
-		}
-		
-		
-		if(messaggi!=null){
-
-			for(Messaggio mess:messaggi){
 				
-				%>
-
-				<div class="elenco">
-					<%
-						if(mess.isMessaggioLetto()==false){
-							%><p class="red_color">Nuovo!</p><%
-						}
-					%>
-					<ul>
-						<li><b>Mittente:</b> <% out.println(mess.getMittente().getCognome() + " " +mess.getMittente().getNome());%></li>
-						<li><b>Data:</b> <% out.println(mess.getDataInvio().get(Calendar.DAY_OF_MONTH) +"/"+(mess.getDataInvio().get(Calendar.MONTH)+1) +"/"+mess.getDataInvio().get(Calendar.YEAR));%></li>
-						<li><b>Testo:</b> <% 
-											if(mess.getTesto().length()>15){
-												out.println(mess.getTesto().substring(0, 15)+"...");
-											}else{
-												out.println(mess.getTesto());
-											}
-											%>
-											</li>
-					</ul>
-					<p class="link_right_align"><a href="<% out.println("/Swimv2-Client/VisualizzaMessaggiServlet?idMex="+mess.getId());%>">Visualizza Messaggio</a></p>
-				</div>
+					<p><b>Mittente:</b> <% out.println(messaggio.getMittente().getCognome() + " " +messaggio.getMittente().getNome());%></p>
+					<p><b>Data:</b> <% out.println(messaggio.getDataInvio().get(Calendar.DAY_OF_MONTH) +"/"+(messaggio.getDataInvio().get(Calendar.MONTH)+1) +"/"+messaggio.getDataInvio().get(Calendar.YEAR));%></p>
+					
+					<div class="elenco">
+						<%
+						StringBuffer text = new StringBuffer(messaggio.getTesto());
+						  
+				        int loc = (new String(text)).indexOf('\n');
+				        while(loc > 0){
+				            text.replace(loc, loc+1, "<br>");
+				            loc = (new String(text)).indexOf('\n');
+				       }
+						
+						out.println(text.toString());
+						%>
+					</div>
+					<br>
+					<p class="link_right_align"><a href="/Swimv2-Client/MessaggiServlet?destinatario=<%out.print(messaggio.getMittente().getId());%>">Rispondi</a></p>
+					
 				
-				<%
-				
-			}
-		}
-		
-		if(messaggi.size()==0){
-			out.println("<br><p>Non ci sono messaggi</p>");
-		}
-				
-			%>
-	  		</div>
+			</div>
 		</div>
+				
+				
+
 	  </div>
 	</div>
   
