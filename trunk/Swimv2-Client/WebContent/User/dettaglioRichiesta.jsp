@@ -24,8 +24,8 @@
 	}
 	
 	//se risultati non/liota amici non è settato esco
-	Messaggio messaggio= (Messaggio) request.getAttribute("singoloMessaggio");
-	if(messaggio== null) {
+	Messaggio richiesta= (Messaggio) request.getAttribute("singolaRichiesta");
+	if(richiesta== null) {
 		response.sendRedirect("/Swimv2-Client/UserServlet");
 		return;
 	}
@@ -37,7 +37,7 @@
 	  		</a>
 	  		
 	  		<span class="page_title">
-					Message
+					Request
 		  	</span>
 	  		
   		</div>
@@ -67,17 +67,18 @@
 		<br>	 
 		 <div class="box">
   			<div class="box_title">
-				Messaggio
+				Richiesta
 			</div>
 		
 	  		<div class="box_contents">
 				
-					<p><b>Mittente:</b> <% out.println(messaggio.getMittente().getCognome() + " " +messaggio.getMittente().getNome());%></p>
-					<p><b>Data:</b> <% out.println(messaggio.getDataInvio().get(Calendar.DAY_OF_MONTH) +"/"+(messaggio.getDataInvio().get(Calendar.MONTH)+1) +"/"+messaggio.getDataInvio().get(Calendar.YEAR));%></p>
+					<p><b>Mittente:</b> <% out.println(richiesta.getMittente().getCognome() + " " +richiesta.getMittente().getNome());%></p>
+					<p><b>Data:</b> <% out.println(richiesta.getDataInvio().get(Calendar.DAY_OF_MONTH) +"/"+(richiesta.getDataInvio().get(Calendar.MONTH)+1) +"/"+richiesta.getDataInvio().get(Calendar.YEAR));%></p>
+					<p><b>Skill:</b> <% out.println(richiesta.getSkillRichiesta().getNome());%></p>
 					
 					<div class="elenco">
 						<%
-						StringBuffer text = new StringBuffer(messaggio.getTesto());
+						StringBuffer text = new StringBuffer(richiesta.getTesto());
 						  
 				        int loc = (new String(text)).indexOf('\n');
 				        while(loc > 0){
@@ -89,7 +90,7 @@
 						%>
 					</div>
 					<br>
-					<p class="link_right_align"><a href="/Swimv2-Client/MessaggiServlet?destinatario=<%out.print(messaggio.getMittente().getId());%>&risposta=mex">Rispondi</a></p>
+					<p class="link_right_align"><a href="/Swimv2-Client/MessaggiServlet?destinatario=<%out.print(richiesta.getMittente().getId());%>&risposta=ric">Rispondi</a></p>
 					
 				
 			</div>

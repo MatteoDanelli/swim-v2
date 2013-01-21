@@ -24,6 +24,11 @@ public class MessaggiServlet extends HttpServlet {
 	private static final String ERROR = "Errore";
 	private static final String MESSAGGIO = "messaggio";
 	private static final String DESTINATARIO = "destinatario";
+	private static final String RISPOSTA="risposta";
+	
+	//valori Parametri
+	private static final String RISPOSTA_RICHIESTA="ric";
+	private static final String RISPOSTA_MESSAGGIO="mex";
 	
 	//nomi attributi
 	private static final String USER= "user";
@@ -39,6 +44,8 @@ public class MessaggiServlet extends HttpServlet {
 	
 	//servlet
 	private static final String PROFILO_SERVLET = "/Swimv2-Client/ProfiloServlet"; 
+	private static final String VISUALIZZA_MESSAGGI_SERVLET = "/Swimv2-Client/VisualizzaMessaggiServlet";
+	private static final String VISUALIZZA_RICHIESTE_SERVLET = "/Swimv2-Client/VisualizzaRichiesteAiutoServlet";
 	
 	private RemoteManager remoteManager= new RemoteManager();
 	private GestoreMessaggiRemote gestoreMessaggi;
@@ -126,7 +133,19 @@ public class MessaggiServlet extends HttpServlet {
 			return;
 		}
 		
-		response.sendRedirect(PROFILO_SERVLET+"?"+USER_PROFILE+"="+destinatario);
+		String risposta= request.getParameter(RISPOSTA);
+		
+		//decido dove reindirizzare la richiesta
+		if(risposta==null){
+			response.sendRedirect(PROFILO_SERVLET+"?"+USER_PROFILE+"="+destinatario);
+		}else if(risposta.equals(RISPOSTA_RICHIESTA)){
+			response.sendRedirect(VISUALIZZA_RICHIESTE_SERVLET);
+		}else if(risposta.equals(RISPOSTA_MESSAGGIO)){
+			response.sendRedirect(VISUALIZZA_MESSAGGI_SERVLET);
+		}else{
+			response.sendRedirect(ERROR_PAGE);
+		}
+			
 	}
 
 }
