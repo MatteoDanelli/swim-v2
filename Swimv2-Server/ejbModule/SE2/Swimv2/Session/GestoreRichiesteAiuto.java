@@ -88,6 +88,18 @@ public class GestoreRichiesteAiuto implements GestoreRichiesteAiutoRemote {
 		}
 		throw new MessaggiException("Errore, dati non modificati");
 	}
+	
+	@Override
+	public Messaggio getSingleRequest(long dest, long idMex)throws MessaggiException{
+		Messaggio messaggioCercato = database.find(Messaggio.class, idMex);
+		try{
+			if(messaggioCercato.getDestinatario().getId()==dest){
+				return messaggioCercato;
+			}
+		}catch (NullPointerException e) {
+		}
+		throw new MessaggiException("Errore, accesso negato");
+	}
 
 	@Override
 	public Messaggio getById(long id) {

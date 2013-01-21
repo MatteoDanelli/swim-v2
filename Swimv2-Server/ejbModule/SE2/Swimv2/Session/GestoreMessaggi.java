@@ -89,6 +89,19 @@ public class GestoreMessaggi implements GestoreMessaggiRemote {
 	}
 
 	@Override
+	public Messaggio getSingleMessage(long dest, long idMex)throws MessaggiException{
+		Messaggio messaggioCercato = database.find(Messaggio.class, idMex);
+		try{
+			if(messaggioCercato.getDestinatario().getId()==dest){
+				return messaggioCercato;
+			}
+		}catch (NullPointerException e) {
+		}
+		throw new MessaggiException("Errore, accesso negato");
+	}
+	
+	
+	@Override
 	public Messaggio getById(long id) {
 		Messaggio messaggioCercato = database.find(Messaggio.class, id);
 		return messaggioCercato;

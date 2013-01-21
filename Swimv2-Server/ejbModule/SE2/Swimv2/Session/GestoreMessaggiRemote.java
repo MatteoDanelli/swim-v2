@@ -17,5 +17,6 @@ public interface GestoreMessaggiRemote {
 	public List<Messaggio> elencoMessaggi(long user);
 	public int verificaNuoviMessaggi(long user);
 	public void settaMessaggioLetto(long messaggio)throws MessaggiException;
+	public Messaggio getSingleMessage(long dest, long idMex)throws MessaggiException;
 	public Messaggio getById(long id);
 }
