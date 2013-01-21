@@ -18,5 +18,6 @@ public interface GestoreRichiesteAiutoRemote {
 	public List<Messaggio> elencoRichiesteAiuto(long user);
 	public int verificaNuoveRichiesteAiuto(long user);
 	public void settaRichiestaLetta(long messaggio)throws MessaggiException;
+	public Messaggio getSingleRequest(long dest, long idMex)throws MessaggiException;
 	public Messaggio getById(long id);
 }
