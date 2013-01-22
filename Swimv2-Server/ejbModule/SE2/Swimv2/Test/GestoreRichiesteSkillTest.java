@@ -7,11 +7,7 @@ import java.util.Hashtable;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-
-import org.junit.BeforeClass;
 import org.junit.Test;
-
-import SE2.Swimv2.Session.GestoreRichiesteAmiciziaRemote;
 import SE2.Swimv2.Session.GestoreRichiesteSkillRemote;
 /**
  * @author Matteo Danelli
@@ -21,7 +17,7 @@ import SE2.Swimv2.Session.GestoreRichiesteSkillRemote;
 public class GestoreRichiesteSkillTest {
 	
 	static private Context jndiContext;
-	static private GestoreRichiesteSkillRemote richiesteSkillRemote;	
+	private GestoreRichiesteSkillRemote richiesteSkillRemote;	
 	
 	public GestoreRichiesteSkillTest() throws Exception {
 		jndiContext= getInitialContext();

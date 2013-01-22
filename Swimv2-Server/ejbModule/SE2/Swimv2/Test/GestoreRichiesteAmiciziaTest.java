@@ -9,7 +9,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import SE2.Swimv2.Exceptions.AmiciException;
