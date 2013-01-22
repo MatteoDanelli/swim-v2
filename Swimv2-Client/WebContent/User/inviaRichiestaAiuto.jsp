@@ -14,6 +14,17 @@
 	</style>
 	</head>
 
+<script type="text/javascript">
+function validateSkill()
+{
+var skill=document.forms["form"]["skill"];
+if (skill.value==-1)
+  {
+  alert("Skill da richiedere non selezionata!");
+  return false;
+  }
+}</script>
+
   <body>
 	  <% 
 		//verifico sessione
@@ -31,7 +42,7 @@
 			return;
 		}
 		
-		//ottengo skillset, se l' attributo non esiste redirigo sull user page
+		//ottengo skillset, se l'attributo non esiste redirigo sull user page
 		@SuppressWarnings("unchecked")
 		List<Skill> skillSet = (List<Skill>) request.getAttribute("skillSet");
 		if(skillSet== null) {
@@ -77,7 +88,7 @@
 					<div class="box_contents">
 					
 	
-						<form class="form" action="/Swimv2-Client/RichiesteAiutoServlet" method="post">
+						<form name="form" class="form" action="/Swimv2-Client/RichiesteAiutoServlet" method="post" onsubmit="return validateSkill();">
 							
 							<input type="hidden" name="destinatario" value="<%out.print(user.getId());%>">
 							<div class="form_center_textarea">
@@ -100,7 +111,7 @@
 								<br>
 							</div>
 							
-							<p class="link_right_align"> <input type="submit" value="Invia"> </p>
+							<p class="link_right_align"> <input type="submit" value="Invia" > </p>
 						</form>		
 					</div> 
 	 		</div>
