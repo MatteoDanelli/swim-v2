@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
-import javax.persistence.Query;
 
 import SE2.Swimv2.Entity.Admin;
 import SE2.Swimv2.Exceptions.AdminException;
@@ -39,11 +38,24 @@ public class GestoreAdmin implements GestoreAdminRemote {
 	 * Consente la modifica della password dell'admin. E' necessaria l'email.
 	 */	
 	@Override
-	public void modificaPassword(String email, String nuovaPassword) {
-		Query q = database.createQuery("UPDATE Admin a SET a.password=:password WHERE a.email=:email");
-		q.setParameter("email", email);
-		q.setParameter("password", nuovaPassword);
-		q.executeUpdate();
+	public void modificaPassword(long adminId, String nuovaPassword)throws AdminException {
+
+		if(nuovaPassword.equals("")){
+			throw new AdminException("La Password non può essere vuota");
+		}
+
+		Admin admin = database.find(Admin.class, adminId);
+		try {
+			admin.setPassword(nuovaPassword);
+			database.flush();
+			return;
+		} catch (NullPointerException e) {
+		} catch (PersistenceException e) {
+		} catch (IllegalStateException e) {
+		}
+		throw new AdminException("Errore, dati non modificati");
+		
+		
 		}
 
 	/**

@@ -57,7 +57,12 @@ public class GestoreAdminTest {
 		} catch (AdminException e) {
 		}
 		
-		adminRemote.modificaPassword("admin", "nuovaPassword");
+		try {
+			adminRemote.modificaPassword(idAdmin, "nuovaPassword");
+		} catch (AdminException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Admin a = adminRemote.getAdmin(idAdmin);
 			assertEquals("nuovaPassword", a.getPassword());
 	}

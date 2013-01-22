@@ -34,6 +34,10 @@ public class GestoreRichiesteSkill implements GestoreRichiesteSkillRemote {
 			throw new RichiesteSkillException("Errore, richiesta non effettuats");
 		}
 		
+		if(skillRichiesta.equals("")){
+			throw new RichiesteSkillException("Errore, skill non specificata");
+		}
+		
 		User userMittente = database.find(User.class, userCheLaRichiede);
 		try {			
 			RichiestaSkill nuovaRichiesta = new RichiestaSkill(userMittente, skillRichiesta);
