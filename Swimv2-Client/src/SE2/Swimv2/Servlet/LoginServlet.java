@@ -25,6 +25,7 @@ public class LoginServlet extends HttpServlet {
 	private static final String USER_ID= "userId";
 	private static final String ADMIN_ID= "adminId";
 	private static final String EMAIL= "email";
+	private static final String ADMIN_NAME= "username";
 	private static final String PSW= "password";
 	
 	//nomi Paramentri
@@ -103,11 +104,11 @@ public class LoginServlet extends HttpServlet {
 	
 	private void loginAdmin(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 			long id;
-			String email = request.getParameter(EMAIL);
+			String username = request.getParameter(ADMIN_NAME);
 			String password = request.getParameter(PSW);
 			
 				try{
-					id=gestoreLogin.loginAdmin(email, password);
+					id=gestoreLogin.loginAdmin(username, password);
 					request.getSession().setAttribute(ADMIN_ID, id);
 					response.sendRedirect(ADMIN_SERVLET);
 				}
