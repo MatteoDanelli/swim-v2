@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import SE2.Swimv2.Exceptions.LoginException;
 import SE2.Swimv2.Exceptions.UserException;
-import SE2.Swimv2.Session.GestoreLogin;
 import SE2.Swimv2.Session.GestoreLoginRemote;
 import SE2.Swimv2.Session.GestoreUserRemote;
 import SE2.Swimv2.Util.RemoteManager;

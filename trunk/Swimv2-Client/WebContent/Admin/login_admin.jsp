@@ -95,8 +95,8 @@
 								out.println("<p class=\"message\">LOGOUT ESEGUITO CORRETTAMENTE!</p>");
 							}
 						%>
-						<label>E-Mail: </label> 
-						<input type="text" name="email"> 
+						<label>Admin Name: </label> 
+						<input type="text" name="username"> 
 						<label>Password:</label> 
 						<input type="password" name="password"> 
 						<p class="link_right_align"> <input type="submit" value="Accedi"> </p>
