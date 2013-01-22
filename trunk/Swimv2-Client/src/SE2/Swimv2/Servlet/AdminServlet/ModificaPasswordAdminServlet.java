@@ -60,7 +60,7 @@ public class ModificaPasswordAdminServlet extends HttpServlet {
 		//Inserisco nella request l'Admin come parametro
 		try {
 			gestoreAdmin = remoteManager.getGestoreAdminRemote();
-			Admin admin = gestoreAdmin.getAdmin();
+			Admin admin = gestoreAdmin.getAdmin(id);
 			request.setAttribute(ADMIN, admin);
 		} catch (NamingException e) {
 			response.sendRedirect(ERROR_PAGE);
@@ -92,7 +92,7 @@ public class ModificaPasswordAdminServlet extends HttpServlet {
 		}
 
 		try {
-			gestoreAdmin.modificaPassword(gestoreAdmin.getAdmin().getEmail(),nuovaPassword);
+			gestoreAdmin.modificaPassword(gestoreAdmin.getAdmin(id).getEmail(),nuovaPassword);
 		} catch (Exception e) {
 			response.sendRedirect(ERROR_PAGE);
 			return;

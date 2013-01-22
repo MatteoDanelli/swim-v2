@@ -70,7 +70,7 @@ public class AdminServlet extends HttpServlet {
 			}
 			
 			//Imposto l'attributo Admin da passare alla homePage
-			Admin admin = gestoreAdmin.getAdmin();
+			Admin admin = gestoreAdmin.getAdmin(id);
 			request.setAttribute(ADMIN, admin);
 			
 			Integer numRichiesteSkill= (Integer)gestoreRichiesteSkill.elencoRichieste().size();
