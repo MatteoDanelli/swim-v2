@@ -126,7 +126,7 @@
    
   <div class="footer">
   		<div class="line1">
-  			2013 Swimv2 - Cantoni Daniel & Danelli Matteo - <a href="http://code.google.com/p/swim-v2">Here on Google Code</a>
+  			2013 Swimv2 - Cantoni Daniel - Danelli Matteo<a href="http://code.google.com/p/swim-v2">Here on Google Code</a>
   		</div>
   		<div class="line2">
   		</div>

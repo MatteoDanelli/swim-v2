@@ -54,6 +54,7 @@
 		}
 	  
 	  //Controlla se la lista ottenuta dalla servlet è nulla
+	  	@SuppressWarnings("unchecked")
 		List<RichiestaSkill> elenco = (List<RichiestaSkill>)request.getAttribute("richieste");
 		if(elenco== null) {
 			response.sendRedirect("/Swimv2-Client/error.jsp");
@@ -66,27 +67,37 @@
 						</div>
 	  		
 				  		<div class="box_contents">
-				  		<div class="elenco">
+				  		
 							<% for (RichiestaSkill richiesta : elenco) { 
-								out.println(richiesta.getSkillRichiesta());
 								long idRichiesta =richiesta.getId();
+								%>
+								<div class="elenco">
+								<%
+								out.println("<p><b>Skill proposta: </b>"+richiesta.getSkillRichiesta()+"</p>");
 								%> 
 						
-							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet" method="post">
-							<input type="hidden" name="scelta" value="a" >
-							<input type="hidden" name="id" value="<%out.print(idRichiesta); %>">
-							<input type="submit" value="Accetta!">
-    						</form> 
-							
-							<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet" method="post">
-							<input type="hidden" name="scelta" value="r">
-							<input type="hidden" name="id" value="<%out.print(idRichiesta); %>">
-							<input type="submit" value="Rifiuta!">
-							</form> <br> 					
+									<div class="link_right_align">
+										<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet" method="post">
+											<input type="hidden" name="scelta" value="a" >
+											<input type="hidden" name="id" value="<%out.print(idRichiesta); %>">
+											<input type="submit" value="Accetta!">
+			    						</form> 
+										
+										<form class="form" action="/Swimv2-Client/RichiesteAggiuntaSkillServlet" method="post">
+											<input type="hidden" name="scelta" value="r">
+											<input type="hidden" name="id" value="<%out.print(idRichiesta); %>">
+											<input type="submit" value="Rifiuta!">
+										</form>
+									</div> 
+								</div> 					
 								<%
 							}
+							
+							if(elenco.size()==0){
+								out.println("<br><p>Non ci sono richieste</p>");
+							}
 							%> 
-							</div> 
+							
 	  					</div>
 	  				</div>
 			</div>
