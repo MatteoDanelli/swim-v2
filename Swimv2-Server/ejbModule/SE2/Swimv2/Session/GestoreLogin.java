@@ -55,10 +55,10 @@ public class GestoreLogin implements GestoreLoginRemote {
 	 * @exception NonUniqueResultException se il risultato non è unico
 	 */
 	@Override
-	public long loginAdmin(String email, String password) throws LoginException {
+	public long loginAdmin(String username, String password) throws LoginException {
 		try {
-			Query q = database.createQuery("FROM Admin a WHERE a.email=:email AND a.password=:password");
-			q.setParameter("email", email);
+			Query q = database.createQuery("FROM Admin a WHERE a.username=:username AND a.password=:password");
+			q.setParameter("username", username);
 			q.setParameter("password", password);
 			Admin result = (Admin) q.getSingleResult();
 			return result.getId();
