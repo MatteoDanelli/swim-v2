@@ -92,7 +92,7 @@ public class ModificaPasswordAdminServlet extends HttpServlet {
 		}
 
 		try {
-			gestoreAdmin.modificaPassword(gestoreAdmin.getAdmin(id).getEmail(),nuovaPassword);
+			gestoreAdmin.modificaPassword(id,nuovaPassword);
 		} catch (Exception e) {
 			response.sendRedirect(ERROR_PAGE);
 			return;
