@@ -21,8 +21,8 @@ public class Admin implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID_ADMIN")
 	private long id;
-	@Column(name="EMAIL",unique=true,nullable=false)
-	private String email;
+	@Column(name="USERNAME",unique=true,nullable=false)
+	private String username;
 	@Column(name="PASSWORD",unique=true,nullable=false)
 	private String password;
 	
@@ -31,14 +31,14 @@ public class Admin implements Serializable{
 	public Admin () {		
 	}
 	
-	public Admin(String email, String password) {
-		this.email=email;
+	public Admin(String username, String password) {
+		this.username=username;
 		this.password=password;
 	}
 	
 	//Getters
 	public String getEmail() {
-		return email;
+		return username;
 	}
 
 	public String getPassword() {

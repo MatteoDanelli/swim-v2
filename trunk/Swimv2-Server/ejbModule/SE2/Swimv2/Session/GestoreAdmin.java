@@ -22,8 +22,8 @@ public class GestoreAdmin implements GestoreAdminRemote {
 
 	//Crea l'admin con la mail e la password dati come parametri
 	@Override
-	public long createAdmin(String email, String password) throws AdminException {
-		Admin admin=new Admin(email, password);
+	public long createAdmin(String username, String password) throws AdminException {
+		Admin admin=new Admin(username, password);
 		try {
 			database.persist(admin);
 			return admin.getId();
