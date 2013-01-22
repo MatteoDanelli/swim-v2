@@ -164,8 +164,8 @@ public class GestoreUser implements GestoreUserRemote {
 	public List<User> cercaPerNome(String nome) {
 
 		Query q = database
-				.createQuery("FROM User u WHERE u.nome = :nome ORDER BY u.nome asc, u.cognome asc");
-		q.setParameter("nome", nome);
+				.createQuery("FROM User u WHERE u.nome LIKE :nome ORDER BY u.nome asc, u.cognome asc");
+		q.setParameter("nome", "%"+nome+"%");
 
 		List<User> result = (List<User>) q.getResultList();
 		return result;
@@ -180,8 +180,8 @@ public class GestoreUser implements GestoreUserRemote {
 	public List<User> cercaPerCognome(String cognome) {
 
 		Query q = database
-				.createQuery("FROM User u WHERE u.cognome = :cognome ORDER BY u.cognome asc, u.nome asc");
-		q.setParameter("cognome", cognome);
+				.createQuery("FROM User u WHERE u.cognome LIKE :cognome ORDER BY u.cognome asc, u.nome asc");
+		q.setParameter("cognome", "%"+cognome+"%");
 
 		List<User> result = (List<User>) q.getResultList();
 		return result;
@@ -196,9 +196,9 @@ public class GestoreUser implements GestoreUserRemote {
 	public List<User> cercaPerNomeCognome(String nome, String cognome) {
 
 		Query q = database
-				.createQuery("FROM User u WHERE u.cognome = :cognome and u.nome = :nome ORDER BY u.cognome asc, u.nome asc");
-		q.setParameter("cognome", cognome);
-		q.setParameter("nome", nome);
+				.createQuery("FROM User u WHERE u.cognome LIKE :cognome and u.nome LIKE :nome ORDER BY u.cognome asc, u.nome asc");
+		q.setParameter("cognome", "%"+cognome+"%");
+		q.setParameter("nome", "%"+nome+"%");
 
 		List<User> result = (List<User>) q.getResultList();
 		return result;
@@ -229,9 +229,9 @@ public class GestoreUser implements GestoreUserRemote {
 
 		Query q = database
 				.createQuery("SELECT u FROM Skill s, User u "
-						+ "WHERE s.nome=:nome and u in elements(s.UserCheLaPossiedono) "
+						+ "WHERE s.nome LIKE :nome and u in elements(s.UserCheLaPossiedono) "
 						+ "ORDER BY u.cognome asc,u.nome asc ");
-		q.setParameter("nome", nome);
+		q.setParameter("nome", "%"+nome+"%");
 
 		List<User> result = (List<User>) q.getResultList();
 		return result;
@@ -254,8 +254,8 @@ public class GestoreUser implements GestoreUserRemote {
 		}
 
 		Query q = database
-				.createQuery("FROM User u WHERE u.nome = :nome and u in (:amici) ORDER BY u.nome asc, u.cognome asc");
-		q.setParameter("nome", nome);
+				.createQuery("FROM User u WHERE u.nome LIKE :nome and u in (:amici) ORDER BY u.nome asc, u.cognome asc");
+		q.setParameter("nome", "%"+nome+"%");
 		q.setParameter("amici", amici);
 
 		List<User> result = (List<User>) q.getResultList();
@@ -278,8 +278,8 @@ public class GestoreUser implements GestoreUserRemote {
 		}
 
 		Query q = database
-				.createQuery("FROM User u WHERE u.cognome = :cognome and u in (:amici) ORDER BY u.cognome asc,u.nome asc");
-		q.setParameter("cognome", cognome);
+				.createQuery("FROM User u WHERE u.cognome LIKE :cognome and u in (:amici) ORDER BY u.cognome asc,u.nome asc");
+		q.setParameter("cognome", "%"+cognome+"%");
 		q.setParameter("amici", amici);
 
 		List<User> result = (List<User>) q.getResultList();
@@ -304,10 +304,10 @@ public class GestoreUser implements GestoreUserRemote {
 		}
 
 		Query q = database
-				.createQuery("FROM User u WHERE u.cognome = :cognome and u.nome = :nome "
+				.createQuery("FROM User u WHERE u.cognome LIKE :cognome and u.nome LIKE :nome "
 						+ "and u in (:amici) ORDER BY u.cognome asc,u.nome asc");
-		q.setParameter("nome", nome);
-		q.setParameter("cognome", cognome);
+		q.setParameter("nome", "%"+nome+"%");
+		q.setParameter("cognome", "%"+cognome+"%");
 		q.setParameter("amici", amici);
 
 		List<User> result = (List<User>) q.getResultList();
@@ -347,10 +347,10 @@ public class GestoreUser implements GestoreUserRemote {
 
 		Query q = database
 				.createQuery("SELECT u FROM Skill s, User u "
-						+ "WHERE s.nome=:nome and u in elements(s.UserCheLaPossiedono) "
+						+ "WHERE s.nome LIKE :nome and u in elements(s.UserCheLaPossiedono) "
 						+ "and u in (:amici) "
 						+ "ORDER BY u.cognome asc,u.nome asc ");
-		q.setParameter("nome", nome);
+		q.setParameter("nome", "%"+nome+"%");
 		q.setParameter("amici", amici);
 
 		List<User> result = (List<User>) q.getResultList();
