@@ -25,7 +25,7 @@ import SE2.Swimv2.Exceptions.AdminException;
 public class GestoreAdminTest {
 
 	static private Context jndiContext;
-	static private GestoreAdminRemote adminRemote;	
+	static private GestoreAdminRemote adminRemote;
 	
 	public GestoreAdminTest() throws Exception {
 		jndiContext= getInitialContext();
@@ -38,12 +38,12 @@ public class GestoreAdminTest {
 	 */
 	@Test
 	public void testCreateAdmin() {
+		long idAdmin=0;
 			try {
-				adminRemote.createAdmin("prova@mail.test", "prova");
+				idAdmin=adminRemote.createAdmin("prova@mail.test", "prova");
 			} catch (AdminException e) {
-				e.printStackTrace();
 			}
-			assertEquals("prova@mail.test", adminRemote.getAdmin().getEmail());
+			assertEquals("prova@mail.test", adminRemote.getAdmin(idAdmin).getEmail());
 		}
 
 	/**
@@ -51,8 +51,14 @@ public class GestoreAdminTest {
 	 */
 	@Test
 	public void testModificaPassword() {
-		adminRemote.modificaPassword("prova@mail.test", "nuovaPassword");
-		Admin a = adminRemote.getAdmin();
+		long idAdmin=0;
+		try {
+			idAdmin=adminRemote.createAdmin("admin", "admin");
+		} catch (AdminException e) {
+		}
+		
+		adminRemote.modificaPassword("admin", "nuovaPassword");
+		Admin a = adminRemote.getAdmin(idAdmin);
 			assertEquals("nuovaPassword", a.getPassword());
 	}
 

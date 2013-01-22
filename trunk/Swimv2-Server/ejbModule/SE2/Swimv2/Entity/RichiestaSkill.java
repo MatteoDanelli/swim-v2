@@ -5,10 +5,6 @@ package SE2.Swimv2.Entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.*;
 
 /**
@@ -54,6 +50,24 @@ public class RichiestaSkill implements Serializable {
 
 	public long getId() {
 		return id;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (obj instanceof RichiestaSkill) {
+			RichiestaSkill other= (RichiestaSkill)obj;
+			if(this.getId()==other.getId()){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		String idStr= String.valueOf(this.getId());
+		return idStr.hashCode();
 	}
 
 }

@@ -48,12 +48,6 @@ public class Skill implements Serializable {
 	public Set<User> getUserCheLaPossiedono() {
 		return UserCheLaPossiedono;
 	}
-
-	@Override
-	public int hashCode() {
-		// TODO Auto-generated method stub
-		return super.hashCode();
-	}
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -67,4 +61,9 @@ public class Skill implements Serializable {
 		return false;
 	}
 
+	@Override
+	public int hashCode() {
+		String idStr= String.valueOf(this.getId());
+		return idStr.hashCode();
+	}
 }

@@ -123,5 +123,22 @@ public class Messaggio implements Serializable {
 
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (obj instanceof Messaggio) {
+			Messaggio other= (Messaggio)obj;
+			if(this.getId()==other.getId()){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		String idStr= String.valueOf(this.getId());
+		return idStr.hashCode();
+	}
 
 }

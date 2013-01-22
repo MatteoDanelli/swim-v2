@@ -23,9 +23,11 @@ public class GestoreAdmin implements GestoreAdminRemote {
 
 	//Crea l'admin con la mail e la password dati come parametri
 	@Override
-	public void createAdmin(String email, String password) throws AdminException {
+	public long createAdmin(String email, String password) throws AdminException {
+		Admin admin=new Admin(email, password);
 		try {
-			database.persist(new Admin(email, password));
+			database.persist(admin);
+			return admin.getId();
 		}
 		catch (PersistenceException e)
 		{
@@ -44,10 +46,12 @@ public class GestoreAdmin implements GestoreAdminRemote {
 		q.executeUpdate();
 		}
 
+	/**
+	 * Dato l'id dell'mministratore, restituisce l' admin
+	 */
 	@Override
-	public Admin getAdmin() {
-		Query q = database.createQuery("FROM Admin");
-		Admin adminTrovato = (Admin) q.getSingleResult();
+	public Admin getAdmin(long adminId) {
+		Admin adminTrovato = database.find(Admin.class, adminId);
 		return adminTrovato;
 	}
 	

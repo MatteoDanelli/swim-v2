@@ -224,4 +224,9 @@ public class User implements Serializable {
 		return false;
 	}
 
+	@Override
+	public int hashCode() {
+		String idStr= String.valueOf(this.getId());
+		return idStr.hashCode();
+	}
 }

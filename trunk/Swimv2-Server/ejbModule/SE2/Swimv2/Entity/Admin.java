@@ -53,5 +53,23 @@ public class Admin implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (obj instanceof Admin) {
+			Admin other= (Admin)obj;
+			if(this.getId()==other.getId()){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		String idStr= String.valueOf(this.getId());
+		return idStr.hashCode();
+	}
 }
 
