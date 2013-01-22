@@ -84,4 +84,21 @@ public class Feedback implements Serializable {
 		return destinatario;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (obj instanceof Feedback) {
+			Feedback other= (Feedback)obj;
+			if(this.getId()==other.getId()){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		String idStr= String.valueOf(this.getId());
+		return idStr.hashCode();
+	}
 }
