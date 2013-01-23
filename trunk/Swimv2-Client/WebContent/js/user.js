@@ -56,3 +56,29 @@ function validateFormSkill() {
 
 	return true;
 }
+
+
+function validateFormCercaNominativo() {
+
+	var nome = document.forms["form1"]["nome"].value;
+	var cognome = document.forms["form1"]["cognome"].value;
+	
+	if ((nome == null || nome == "")&&(cognome == null || cognome == "")) {
+		alert("I campi nome e cognome non possono essere entrambi nulli");
+		return false;
+	}
+
+	return true;
+}
+
+function validateFormCercaSkill() {
+
+	var skill = document.forms["form2"]["skill"].value;
+	
+	if (skill == null || skill == "") {
+		alert("Campo Skill non può essere nullo");
+		return false;
+	}
+
+	return true;
+}
