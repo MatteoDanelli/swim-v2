@@ -11,6 +11,7 @@
 		@import url(/Swimv2-Client/css/form.css);
 		
 	</style>
+	<script type="text/javascript" src="/Swimv2-Client/js/user.js"></script>
 	</head>
 
   <body>
@@ -59,7 +60,7 @@
 					</div>
 	 		
 					<div class="box_contents">
-						<form class="form" action="/Swimv2-Client/ProponiAbilitaServlet" method="post">
+						<form class="form" name="form" action="/Swimv2-Client/ProponiAbilitaServlet" method="post" onsubmit="return validateFormSkill();">
 							
 							<div class="form_center_contents">
 								<label>Skill proposta: </label>

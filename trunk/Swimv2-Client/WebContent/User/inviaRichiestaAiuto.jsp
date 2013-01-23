@@ -12,18 +12,9 @@
 		@import url(/Swimv2-Client/css/form.css);
 		
 	</style>
+	<script type="text/javascript" src="/Swimv2-Client/js/user.js"></script>
 	</head>
 
-<script type="text/javascript">
-function validateSkill()
-{
-var skill=document.forms["form"]["skill"];
-if (skill.value==-1)
-  {
-  alert("Skill da richiedere non selezionata!");
-  return false;
-  }
-}</script>
 
   <body>
 	  <% 
@@ -88,7 +79,7 @@ if (skill.value==-1)
 					<div class="box_contents">
 					
 	
-						<form name="form" class="form" action="/Swimv2-Client/RichiesteAiutoServlet" method="post" onsubmit="return validateSkill();">
+						<form name="form" class="form" action="/Swimv2-Client/RichiesteAiutoServlet" method="post" onsubmit="return validateFormRichiestaAiuto();">
 							
 							<input type="hidden" name="destinatario" value="<%out.print(user.getId());%>">
 							<div class="form_center_textarea">

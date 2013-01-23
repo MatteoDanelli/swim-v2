@@ -11,6 +11,8 @@
 		@import url(/Swimv2-Client/css/form.css);
 		
 	</style>
+	<script type="text/javascript" src="/Swimv2-Client/js/user.js"></script>
+	
 	</head>
 
   <body>
@@ -68,12 +70,12 @@
 					<div class="box_contents">
 					
 	
-						<form class="form" action="/Swimv2-Client/MessaggiServlet
+						<form class="form" name="form" action="/Swimv2-Client/MessaggiServlet
 						<%
 							if(request.getParameter("risposta")!=null){
 								out.print("?risposta="+request.getParameter("risposta"));
 							}
-						%>" method="post">
+						%>" method="post" onsubmit="return validateFormInviaMessaggio();">
 						
 							<input type="hidden" name="destinatario" value="<%out.print(user.getId());%>">
 							<div class="form_center_textarea">

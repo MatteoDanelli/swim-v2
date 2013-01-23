@@ -13,20 +13,7 @@
 	</style>
 	</head>
 	
-<script type="text/javascript">
-function validateForm()
-{
-var mail=document.forms["form"]["email"].value;
-var password=document.forms["form"]["password"].value;
-var nome=document.forms["form"]["nome"].value;
-var cognome=document.forms["form"]["cognome"].value;
-if (mail==null || mail=="" || password==null || password=="" || nome==null || nome=="" || cognome=="" || cognome==null)
-  {
-  alert("Campi obbligatori non compilati!");
-  return false;
-  }
-}</script>
-
+ 	<script type="text/javascript" src="/Swimv2-Client/js/guest.js"></script>
 
   <body>
 
