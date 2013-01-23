@@ -18,6 +18,7 @@ import javax.persistence.Query;
 import SE2.Swimv2.Entity.Skill;
 import SE2.Swimv2.Entity.User;
 import SE2.Swimv2.Exceptions.UserException;
+import SE2.Swimv2.Util.EmailRegex;
 
 /**
  * @author Daniel Cantoni, Matteo Danelli Session Bean che implementa
@@ -29,6 +30,7 @@ public class GestoreUser implements GestoreUserRemote {
 	EntityManager database;
 	@EJB
 	private GestoreAmiciLocal gestoreAmici;
+	private EmailRegex emailregex = new EmailRegex();
 
 	/**
 	 * Inserisce un nuovo utente, assegnandoli tutti i suoi attributi.
@@ -65,7 +67,7 @@ public class GestoreUser implements GestoreUserRemote {
 	public void modificaEmail(long userId, String email) throws UserException {
 
 		if (!this.verificaCorrettezzaEmail(email)) {
-			throw new UserException("Errore, dati non modificat");
+			throw new UserException("Errore, dati non modificati");
 		}
 
 		User user = database.find(User.class, userId);
@@ -415,10 +417,10 @@ public class GestoreUser implements GestoreUserRemote {
 	}
 
 	private boolean verificaCorrettezzaEmail(String email) {
-		if (email == null || email.equals("")) {
-			return false;
+		if (email !=null && emailregex.isValidEmail(email)) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	private boolean verificaCorrettezzapassword(String password) {
