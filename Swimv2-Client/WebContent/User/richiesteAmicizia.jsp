@@ -82,8 +82,8 @@
 									<%}%>
 								</ul>
 								<p class="link_right_align">
-									<a href="<% out.println("/Swimv2-Client/ProfiloServlet?userId="+ric.getMittente().getId());%>">Visualizza Profilo</a>&nbsp&nbsp
-									<a href="<% out.println("/Swimv2-Client/RichiesteAmiciziaServlet?idRic="+ric.getId());%>&accetta=1">Accetta</a>&nbsp&nbsp
+									<a href="<% out.println("/Swimv2-Client/ProfiloServlet?userId="+ric.getMittente().getId());%>">Visualizza Profilo</a>  
+									<a href="<% out.println("/Swimv2-Client/RichiesteAmiciziaServlet?idRic="+ric.getId());%>&accetta=1">Accetta</a>  
 									<a href="<% out.println("/Swimv2-Client/RichiesteAmiciziaServlet?idRic="+ric.getId());%>&accetta=0">Rifiuta</a>
 								</p>
 							</div>

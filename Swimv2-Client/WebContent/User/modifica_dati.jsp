@@ -12,6 +12,7 @@
 		@import url(/Swimv2-Client/css/form.css);
 
 	</style>
+	<script type="text/javascript" src="/Swimv2-Client/js/user.js"></script>
 	</head>
 
   <body>
@@ -69,7 +70,7 @@
 						</div>
 	  		
 				  		<div class="box_contents">
-							<form class="form" action="/Swimv2-Client/ModificaDatiServlet" method="post">
+							<form class="form" name="form" action="/Swimv2-Client/ModificaDatiServlet" method="post" onsubmit="return validateFormModificaDati();">
 								
 								<div class="form_center_contents">
 									<label>E-Mail: </label>
