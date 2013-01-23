@@ -59,8 +59,10 @@
 	
 	<div class="wrapper">
 	  <div class="margintop content">
-
-		<div class="box margintop">
+	  
+		<p><a href="/Swimv2-Client/UserServlet">Home</a></p>
+		<br>
+		<div class="box">
 	  			<div class="box_title">
 					Richieste Amicizia
 				</div>

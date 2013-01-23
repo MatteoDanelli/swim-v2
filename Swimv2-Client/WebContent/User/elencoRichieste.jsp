@@ -55,6 +55,9 @@
  		
  	<div class="wrapper">
 	  <div class="margintop content">
+
+		<p><a href="/Swimv2-Client/UserServlet">Home</a></p>
+		<br>
 	   	<div class="box">
   			<div class="box_title">
 				Richieste d'aiuto
@@ -87,14 +90,19 @@
 						<li><b>Mittente:</b> <% out.println(req.getMittente().getCognome() + " " +req.getMittente().getNome());%></li>
 						<li><b>Data:</b> <% out.println(req.getDataInvio().get(Calendar.DAY_OF_MONTH) +"/"+(req.getDataInvio().get(Calendar.MONTH)+1) +"/"+req.getDataInvio().get(Calendar.YEAR));%></li>
 						<li><b>Skill:</b> <% out.println(req.getSkillRichiesta().getNome());%></li>
-						<li><b>Testo:</b> <% 
-											if(req.getTesto().length()>15){
-												out.println(req.getTesto().substring(0, 15)+"...");
-											}else{
-												out.println(req.getTesto());
-											}
-											%>
-											</li>
+						 <%
+							if(!req.getTesto().equals("")){
+								out.print("<li><b>Testo:</b>");
+								
+								if(req.getTesto().length()>15){
+									out.println(req.getTesto().substring(0, 15)+"...");
+								}else{
+									out.println(req.getTesto());
+								}
+								out.print("</li>");
+							}
+						%>
+											
 					</ul>
 					<p class="link_right_align"><a href="<% out.println("/Swimv2-Client/VisualizzaRichiesteAiutoServlet?idRichiesta="+req.getId());%>">Visualizza Richiesta</a></p>
 				</div>
