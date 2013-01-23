@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.jboss.security.auth.spi.Util;
+
 
 /**
  * 
@@ -102,7 +104,7 @@ public class User implements Serializable {
 		this.email=mail;
 		this.nome=nome;
 		this.cognome=cognome;
-		this.password=password;
+		this.password=Util.createPasswordHash("MD5",Util.BASE16_ENCODING, null, null, password);
 		this.provincia=provincia;
 		this.sesso=sesso;
 		this.dataDiNascita=data;
@@ -180,7 +182,7 @@ public class User implements Serializable {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = Util.createPasswordHash("MD5",Util.BASE16_ENCODING, null, null, password);
 	}
 
 	public void setNome(String nome) {

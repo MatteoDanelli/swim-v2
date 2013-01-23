@@ -8,6 +8,8 @@ import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.jboss.security.auth.spi.Util;
+
 import SE2.Swimv2.Entity.Admin;
 import SE2.Swimv2.Entity.User;
 import SE2.Swimv2.Exceptions.LoginException;
@@ -32,10 +34,11 @@ public class GestoreLogin implements GestoreLoginRemote {
 	 */
 	@Override
 	public long loginUser(String email, String password) throws LoginException {
+		String passwordMD5= Util.createPasswordHash("MD5",Util.BASE16_ENCODING, null, null, password);
 		try {
 			Query q = database.createQuery("FROM User u WHERE u.email=:email AND u.password=:password");
 			q.setParameter("email", email);
-			q.setParameter("password", password);
+			q.setParameter("password", passwordMD5);
 			User result = (User) q.getSingleResult();
 			return result.getId();
 		} catch (EntityNotFoundException e) {
@@ -56,10 +59,11 @@ public class GestoreLogin implements GestoreLoginRemote {
 	 */
 	@Override
 	public long loginAdmin(String username, String password) throws LoginException {
+		String passwordMD5= Util.createPasswordHash("MD5",Util.BASE16_ENCODING, null, null, password);
 		try {
 			Query q = database.createQuery("FROM Admin a WHERE a.username=:username AND a.password=:password");
 			q.setParameter("username", username);
-			q.setParameter("password", password);
+			q.setParameter("password", passwordMD5);
 			Admin result = (Admin) q.getSingleResult();
 			return result.getId();
 		} catch (EntityNotFoundException e) {

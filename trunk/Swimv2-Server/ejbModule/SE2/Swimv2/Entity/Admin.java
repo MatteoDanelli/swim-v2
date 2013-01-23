@@ -3,6 +3,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.jboss.security.auth.spi.Util;
+
 /**
  * @author Matteo Danelli
  * Questa classe modella l'entità relativa all'admin del sistema.
@@ -23,7 +25,7 @@ public class Admin implements Serializable{
 	private long id;
 	@Column(name="USERNAME",unique=true,nullable=false)
 	private String username;
-	@Column(name="PASSWORD",unique=true,nullable=false)
+	@Column(name="PASSWORD",nullable=false)
 	private String password;
 	
 	
@@ -33,7 +35,7 @@ public class Admin implements Serializable{
 	
 	public Admin(String username, String password) {
 		this.username=username;
-		this.password=password;
+		this.password=Util.createPasswordHash("MD5",Util.BASE16_ENCODING, null, null, password);
 	}
 	
 	//Getters
@@ -51,7 +53,7 @@ public class Admin implements Serializable{
 	
 	//Setters
 	public void setPassword(String password) {
-		this.password = password;
+		this.password=Util.createPasswordHash("MD5",Util.BASE16_ENCODING, null, null, password);
 	}
 	
 	@Override
