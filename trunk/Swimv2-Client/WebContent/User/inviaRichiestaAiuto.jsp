@@ -71,7 +71,10 @@
 	<div class="wrapper">
 	  <div class="margintop content">
 
-			<div class="box margintop">
+	  		<p><a href="javascript:history.back()">Indietro</a></p>
+			<br>
+	  	
+			<div class="box">
 		  			<div class="box_title">
 						Richiesta Aiuto
 					</div>

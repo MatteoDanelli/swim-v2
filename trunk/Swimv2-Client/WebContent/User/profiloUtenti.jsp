@@ -189,7 +189,7 @@
 							<li><b>Data Pubblicazione:</b> <% out.println(f.getDataPubblicazione().get(Calendar.DAY_OF_MONTH) +"/"+(f.getDataPubblicazione().get(Calendar.MONTH)+1) +"/"+f.getDataPubblicazione().get(Calendar.YEAR));%></li>
 							<li><b>Stelle:</b> <% out.println(f.getStelleAssegnate());%></li>
 							<%
-							if(f.getCommento()!=null){
+							if(f.getCommento()!=null && !f.getCommento().equals("")){
 								
 								StringBuffer text = new StringBuffer(f.getCommento());
 								  
@@ -198,7 +198,7 @@
 						            text.replace(loc, loc+1, "<br>");
 						            loc = (new String(text)).indexOf('\n');
 						       }
-								out.print("<li><b>Commento:<br></b> "+ text.toString() +"</li>");
+							   out.print("<li><b>Commento:<br></b> "+ text.toString() +"</li>");
 							}
 							%>
 						</ul>

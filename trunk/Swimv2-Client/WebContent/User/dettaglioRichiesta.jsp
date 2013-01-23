@@ -63,7 +63,7 @@
 	  <div class="margintop content">
 	  
 	  
-	  	<p><a href="/Swimv2-Client/VisualizzaMessaggiServlet">Visualizza tutti i messaggi</a></p>
+	  	<p><a href="/Swimv2-Client/VisualizzaRichiesteAiutoServlet">Visualizza tutte le richieste</a></p>
 		<br>	 
 		 <div class="box">
   			<div class="box_title">
@@ -76,19 +76,24 @@
 					<p><b>Data:</b> <% out.println(richiesta.getDataInvio().get(Calendar.DAY_OF_MONTH) +"/"+(richiesta.getDataInvio().get(Calendar.MONTH)+1) +"/"+richiesta.getDataInvio().get(Calendar.YEAR));%></p>
 					<p><b>Skill:</b> <% out.println(richiesta.getSkillRichiesta().getNome());%></p>
 					
-					<div class="elenco">
-						<%
+					<%
+					if(richiesta.getTesto()!=null && !richiesta.getTesto().equals("")){
+						out.println("<div class=\"elenco\">");
+
 						StringBuffer text = new StringBuffer(richiesta.getTesto());
 						  
 				        int loc = (new String(text)).indexOf('\n');
 				        while(loc > 0){
 				            text.replace(loc, loc+1, "<br>");
 				            loc = (new String(text)).indexOf('\n');
-				       }
+				        }
 						
 						out.println(text.toString());
+						out.println("</div>");
+					}
+						
 						%>
-					</div>
+					
 					<br>
 					<p class="link_right_align"><a href="/Swimv2-Client/MessaggiServlet?destinatario=<%out.print(richiesta.getMittente().getId());%>&risposta=ric">Rispondi</a></p>
 					
