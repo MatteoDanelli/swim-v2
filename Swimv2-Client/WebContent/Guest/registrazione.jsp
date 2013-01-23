@@ -9,11 +9,12 @@
 	 
 	<style type="text/css">
 		@import url(/Swimv2-Client/css/main.css);
-		@import url(/Swimv2-Client/css/form.css);
+		@import url(/Swimv2-Client/css/form.css);		
 	</style>
+	<script type="text/javascript" src="/Swimv2-Client/js/guest.js"></script>
 	</head>
 	
- 	<script type="text/javascript" src="/Swimv2-Client/js/guest.js"></script>
+ 	
 
   <body>
 

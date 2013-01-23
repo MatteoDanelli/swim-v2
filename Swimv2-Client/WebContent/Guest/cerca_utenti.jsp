@@ -11,6 +11,7 @@
 		@import url(/Swimv2-Client/css/main.css);
 		@import url(/Swimv2-Client/css/form.css);
 	</style>
+	<script type="text/javascript" src="/Swimv2-Client/js/guest.js"></script>
 	</head>
 
   <body>
@@ -40,7 +41,7 @@
 		  		<div class="box_contents">
 		  			<div class="elenco">
 		  				<h3>Ricerca per Nominativo:</h3>
-						<form class="form" action="/Swimv2-Client/RicercaUtentiGuestServlet?type=nominativo" method="post">
+						<form class="form" name="form1" action="/Swimv2-Client/RicercaUtentiGuestServlet?type=nominativo" method="post" onsubmit="return validateFormCercaNominativo();">
 							<label>Nome: </label>
 							<input type="text" name="nome">
 							<br>
@@ -52,7 +53,7 @@
 
 		  			<div class="elenco">
 		  				<h3>Ricerca per Skill:</h3>
-						<form class="form" action="/Swimv2-Client/RicercaUtentiGuestServlet?type=skill" method="post">
+						<form class="form" name="form2" action="/Swimv2-Client/RicercaUtentiGuestServlet?type=skill" method="post" onsubmit="return validateFormCercaSkill();">
 							<label>Skill: </label>
 							<input type="text" name="skill">
 							<p class="link_right_align"> <input type="submit" value="Cerca"></p>
