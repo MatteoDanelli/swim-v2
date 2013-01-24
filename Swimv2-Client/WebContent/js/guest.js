@@ -1,3 +1,25 @@
+function isValidDate(giorno, mese,anno){
+	 mese++;
+	 
+	 if(giorno==""||mese==""||anno==""){
+		 return true;
+	 }
+	 
+	 var bisestile= (((anno % 4) == 0) && ((anno % 100) != 0) || ((anno % 400) == 0));
+	 var ok= true;
+	 
+        if (mese == 2) {  
+       	 ok = bisestile ? giorno <= 29 : giorno <= 28;
+        } 
+        else if ((mese == 4) || (mese == 6) || (mese == 9) || (mese == 11)) {
+           	 ok = giorno <= 30;
+        }
+        else {
+           	 ok = giorno <= 31;
+        }
+        
+    return ok;
+}
 function validateForm() {
 
 	//caratteri espressione regolare e mail
@@ -7,6 +29,9 @@ function validateForm() {
 	var password = document.forms["form"]["password"].value;
 	var nome = document.forms["form"]["nome"].value;
 	var cognome = document.forms["form"]["cognome"].value;
+	var giorno = document.forms["form"]["giornoNascita"].value;
+	var mese = document.forms["form"]["meseNascita"].value;
+	var anno = document.forms["form"]["annoNascita"].value;
 	
 	if (!mail_char.test(mail) || mail == null || mail == "") {
 		alert("Campo E-Mail non valido");
@@ -25,6 +50,11 @@ function validateForm() {
 
 	if (cognome == "" || cognome == null) {
 		alert("Campo Cognome non valido");
+		return false;
+	}
+	
+	if (!isValidDate(giorno, mese,anno)) {
+		alert("La Data non esiste");
 		return false;
 	}
 
